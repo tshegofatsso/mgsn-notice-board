@@ -33,17 +33,19 @@
 
 <script>
 const notices = [
+  { id:"agm-notice", category:"Meetings", title:"📋 Mandatory Decision Session — 29 April 2026", body:"Ref: MGSN-SEC-2026-006 | Wed 29 Apr 2026 | 10:00–13:00 SAST | Block C, Elias Mokale's Garden (main shade structure). OR join via WhatsApp video call / Serona Virtual Platform. Written votes accepted by 09:00 on 29 April only if live attendance is impossible. Quorum = 3 of 5 active directors.\n\n8 Agenda Items (each requires a decision):\n1. Opening & Quorum\n2. Board updates & resignations\n3. CIPC & SARS compliance — final confirmation\n4. Membership register review\n5. UP relationship & way forward (before 30 April workshop)\n6. Strategic direction — next 90 days\n7. River Custodianship briefing 🔒 (board-confidential)\n8. AOB & Closing\n\n⚠️ Item 7 is board-confidential — no content from that session to be shared outside the board.", date:"28 April 2026", author:"T. Sepeng — Secretary", color:"#C41E1E" },
+  { id:"22apr-update", category:"News", title:"22 April Meeting — Partial Resolutions Passed", body:"The 22 April meeting was partially held — some resolutions passed. Two critical resolutions (Fiduciary Shield + Operational DNA) and two documents (Annexure C + D) still need to be finalised. These are on the agenda for 29 April 2026.", date:"27 April 2026", author:"Bra Tshego — MGSN", color:"#1B7A7A" },
   { id:"solar", category:"News", title:"Solar Floodlights Installed at Block M Waterfall Park", body:"Two 12-metre timber poles have been installed with solar-powered floodlights and security caging. Each pole carries a solar panel and an IK10-rated vandal-resistant LED floodlight at the crown. The park is now lit after dark, improving safety for community members.", date:"25 April 2026", author:"Bra Tshego — MGSN", color:"#1B7A7A" },
   { id:"volunteer", category:"Notices", title:"Volunteer Registration Now Open — Earn Rewards", body:"Register to join the Clean-Up Team-Up group. Volunteers earn points redeemable for vouchers from local businesses including Shoprite, Cashbuild, and food vendors. 5 sessions = R50 grocery voucher. 8 sessions = R100 partner voucher. Available roles: Session Lead, Grass Cutter, Beds Keeper, Compost Sorter, Shelter Steward, and General Volunteer.", date:"24 April 2026", author:"MGSN Management", color:"#2D8B3A" },
-  { id:"meeting", category:"Meetings", title:"Committee Meeting Minutes — April 2026", body:"The fortnightly volunteer schedule was formally adopted starting Freedom Day, 27 April 2026, with a minimum of 3 volunteers required per session. The volunteer rewards programme was approved in principle. The UP Architecture partnership was acknowledged. Next committee meeting scheduled for 14 May 2026.", date:"20 April 2026", author:"Thomas Mathiba — Chairperson", color:"#1565C0" },
   { id:"up", category:"News", title:"UP Architecture Partnership Confirmed for Green Corridor Design", body:"The University of Pretoria Department of Architecture has formally confirmed its partnership with MGSN for the design of the Block M green corridor and integrated stormwater management project. This partnership positions MGSN's work as technically credible urban infrastructure.", date:"15 April 2026", author:"MGSN Board", color:"#1B7A7A" },
 ];
 
 const events = [
-  { day: "14", mo: "MAY", title: "MGSN Committee Meeting", meta: "18:00 · TBC · Thomas Mathiba (Chair)", badge: "Meeting", badgeColor: "#E3F0FF", textColor: "#1565C0" },
-  { day: "09", mo: "MAY", title: "Session 2 — May Clean-Up", meta: "08:00–11:00 · Block M Waterfall", badge: "Open", badgeColor: "#E8F5EA", textColor: "#1E6028" },
-  { day: "23", mo: "MAY", title: "Session 3 — May Clean-Up", meta: "08:00–11:00 · Block M Waterfall", badge: "Open", badgeColor: "#E8F5EA", textColor: "#1E6028" },
-  { day: "06", mo: "JUN", title: "Session 4 — June Clean-Up", meta: "08:00–11:00 · Block M Waterfall", badge: "Open", badgeColor: "#E8F5EA", textColor: "#1E6028" },
+  { day:"29", mo:"APR", title:"Mandatory Decision Session", meta:"10:00–13:00 SAST · Block C, Elias Mokale's Garden", badge:"Urgent", badgeColor:"#FFECEC", textColor:"#C41E1E" },
+  { day:"30", mo:"APR", title:"UP Architecture Workshop", meta:"09:00 · TBC · University of Pretoria", badge:"Workshop", badgeColor:"#E3F0FF", textColor:"#1565C0" },
+  { day:"09", mo:"MAY", title:"Session 5 — May Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
+  { day:"23", mo:"MAY", title:"Session 6 — May Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
+  { day:"06", mo:"JUN", title:"Session 7 — June Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
 ];
 
 const categoryColors = { News:"bg-teal-600", Notices:"bg-green-600", Urgent:"bg-red-600", Meetings:"bg-blue-600", Events:"bg-orange-500" };
@@ -163,13 +165,13 @@ function render() {
     <div class="max-w-2xl mx-auto px-4 py-5 pb-20 space-y-5">
 
       ${(activeTab==="All"||activeTab==="Urgent")?`
-      <div class="bg-gradient-to-br from-orange-500 to-orange-700 rounded-xl p-4 flex items-start gap-3 shadow-lg shadow-orange-500/20">
-        <span class="text-2xl mt-0.5">📍</span>
+      <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-xl p-4 flex items-start gap-3 shadow-lg shadow-red-500/20">
+        <span class="text-2xl mt-0.5">📋</span>
         <div>
-          <p class="text-orange-200 text-[9px] font-bold tracking-widest uppercase mb-0.5">📍 Pinned — Urgent</p>
-          <p class="text-white font-bold text-base leading-tight">Freedom Day Launch — Monday 27 April 2026</p>
-          <p class="text-orange-100 text-xs mt-1 leading-relaxed">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C, 0mm rain. Meet at the timber shelter at 08:00. Minimum 3 volunteers needed — confirm in WhatsApp group by Sunday evening.</p>
-          <p class="text-orange-300/60 text-[10px] mt-2">Posted 26 April 2026 — MGSN Management</p>
+          <p class="text-red-200 text-[9px] font-bold tracking-widest uppercase mb-0.5">⚠️ Board Meeting — 29 April 2026</p>
+          <p class="text-white font-bold text-base leading-tight">Mandatory Decision Session | Ref: MGSN-SEC-2026-006</p>
+          <p class="text-red-100 text-xs mt-1 leading-relaxed">10:00–13:00 SAST · Block C, Elias Mokale's Garden · Quorum = 3 of 5 active directors. Virtual attendance via WhatsApp or Serona available. Written votes due by 09:00.</p>
+          <p class="text-red-300/60 text-[10px] mt-2">Issued 28 April 2026 — T. Sepeng, Secretary</p>
         </div>
       </div>`:``}
 
