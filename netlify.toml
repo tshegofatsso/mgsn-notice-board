@@ -1,0 +1,36 @@
+[build]
+  command = ""
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[context.production]
+  command = ""
+  publish = "public"
+
+[context.deploy-preview]
+  command = ""
+  publish = "public"
+
+[context.branch-deploy]
+  command = ""
+  publish = "public"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
