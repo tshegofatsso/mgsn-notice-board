@@ -1,21 +1,21 @@
 [build]
   command = ""
-  publish = "public"
+  publish = "docs"
 
 [build.environment]
   NODE_VERSION = "18"
 
 [context.production]
   command = ""
-  publish = "public"
+  publish = "docs"
 
 [context.deploy-preview]
   command = ""
-  publish = "public"
+  publish = "docs"
 
 [context.branch-deploy]
   command = ""
-  publish = "public"
+  publish = "docs"
 
 [[headers]]
   for = "/*"
