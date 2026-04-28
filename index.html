@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MGSN — Volunteer Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#1B7A7A;--teal-dk:#0D5050;--teal-lt:#E8F5F5;
+  --orange:#F07A1A;--gold:#EDB810;--green:#2D8B3A;
+  --ink:#1A3D4A;--cream:#F5F0E8;--white:#fff;
+  --border:#D8E8E8;--err:#C0392B;
+}
+html{background:linear-gradient(150deg,#0A3A3A 0%,#0D4A3A 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 16px 60px;font-family:'Barlow',sans-serif}
+body{width:100%;max-width:520px}
+
+/* HEADER CARD */
+.hdr{background:var(--teal-dk);border-radius:18px 18px 0 0;padding:28px 28px 24px;text-align:center;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(255,255,255,.04);border-radius:50%}
+.hdr::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;background:rgba(255,255,255,.03);border-radius:50%}
+.logo-wrap{width:100px;margin:0 auto 16px;background:#fff;border-radius:10px;padding:8px;box-shadow:0 4px 16px rgba(0,0,0,.2);position:relative;z-index:1}
+.logo-wrap img{width:100%;display:block}
+.hdr-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff;line-height:1;margin-bottom:6px;position:relative;z-index:1}
+.hdr-title span{color:var(--gold)}
+.hdr-sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px;position:relative;z-index:1}
+.stripe{height:4px;background:linear-gradient(90deg,var(--orange),var(--gold),var(--green));border-radius:2px;margin:0 auto;width:80%;position:relative;z-index:1}
+
+/* FORM CARD */
+.form-card{background:#fff;border-radius:0 0 18px 18px;padding:28px;box-shadow:0 8px 40px rgba(0,0,0,.2)}
+
+/* SECTION LABELS */
+.sec-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:22px 0 12px;display:flex;align-items:center;gap:8px}
+.sec-title::after{content:'';flex:1;height:1.5px;background:var(--border)}
+.sec-title:first-of-type{margin-top:0}
+
+/* FIELDS */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:5px;letter-spacing:.3px}
+.field label span{color:var(--orange);margin-left:2px}
+.field input,.field select,.field textarea{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--border);
+  border-radius:9px;font-size:14px;
+  font-family:'Barlow',sans-serif;
+  color:var(--ink);background:#fff;
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(27,122,122,.1);
+}
+.field textarea{resize:vertical;min-height:80px}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231A3D4A' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ROLES CHECKBOXES */
+.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.role-chip{position:relative}
+.role-chip input{position:absolute;opacity:0;width:0;height:0}
+.role-chip label{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 12px;border-radius:8px;
+  border:1.5px solid var(--border);cursor:pointer;
+  font-size:12px;font-weight:600;color:#555;
+  transition:all .18s;
+}
+.role-chip label .rc-icon{font-size:16px;flex-shrink:0}
+.role-chip input:checked + label{
+  border-color:var(--teal);background:var(--teal-lt);color:var(--teal-dk);
+}
+
+/* SESSIONS CHECKBOXES */
+.sessions-list{display:grid;gap:7px}
+.sess-chip{position:relative}
+.sess-chip input{position:absolute;opacity:0;width:0;height:0}
+.sess-chip label{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:8px;
+  border:1.5px solid var(--border);cursor:pointer;
+  font-size:13px;color:#444;transition:all .18s;
+}
+.sess-chip input:checked + label{border-color:var(--orange);background:#FEF5EC;color:var(--ink)}
+.sess-day{font-weight:700;color:var(--teal-dk);min-width:32px}
+
+/* CONSENT */
+.consent{background:var(--teal-lt);border-radius:10px;padding:14px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start}
+.consent input{margin-top:2px;accent-color:var(--teal);flex-shrink:0;width:16px;height:16px}
+.consent p{font-size:12px;color:#555;line-height:1.6}
+.consent strong{color:var(--ink)}
+
+/* SUBMIT */
+.submit-btn{
+  width:100%;padding:16px;border:none;border-radius:11px;
+  background:linear-gradient(130deg,var(--teal-dk),var(--teal));
+  color:#fff;font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;cursor:pointer;
+  box-shadow:0 4px 18px rgba(27,122,122,.3);
+  transition:all .2s;
+}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(27,122,122,.38)}
+.submit-btn:active{transform:scale(.98)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* ERROR MSG */
+.error-msg{background:#FDECEA;color:var(--err);border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
+.error-msg.show{display:block}
+
+/* SUCCESS STATE */
+.success{display:none;text-align:center;padding:32px 20px}
+.success.show{display:block}
+.form-inner.hide{display:none}
+.success-icon{font-size:56px;margin-bottom:16px}
+.success h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--teal-dk);margin-bottom:8px}
+.success p{font-size:14px;color:#666;line-height:1.6}
+.success .setswana{margin-top:12px;font-size:13px;color:var(--teal);font-weight:600}
+
+/* FOOTER */
+.form-footer{text-align:center;margin-top:20px;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.5px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="logo-wrap">
+    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='58' height='58' viewBox='0 0 58 58'><rect width='58' height='58' fill='%231B7A7A' rx='8'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='18'>MGSN</text></svg>" alt="Mabopane Green Space Network"/>
+  </div>
+  <h1 class="hdr-title">Join the <span>Green Team</span></h1>
+  <p class="hdr-sub">Community-Owned, Community-Led &middot; NPC Reg. 2025/422818/08</p>
+  <div class="stripe"></div>
+</div>
+
+<div class="form-card">
+  <!-- Honeypot: hidden from humans, bots fill it -->
+  <input type="text" name="website_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" />
+
+  <div class="form-inner" id="formInner">
+    <div class="error-msg" id="errorMsg"></div>
+
+    <div class="sec-title">Personal Details</div>
+
+    <div class="row">
+      <div class="field">
+        <label>First Name <span>*</span></label>
+        <input type="text" id="fname" name="first_name" placeholder="e.g. Refilwe" required/>
+      </div>
+      <div class="field">
+        <label>Surname <span>*</span></label>
+        <input type="text" id="lname" name="last_name" placeholder="e.g. Sithole" required/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>WhatsApp Number <span>*</span></label>
+      <input type="tel" id="phone" name="whatsapp" placeholder="+27 XX XXX XXXX" required/>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Ward / Block <span>*</span></label>
+        <select id="block" name="block" required>
+          <option value="">Select block</option>
+          <option value="Ward20">Ward 20 (Block M)</option>
+          <option value="Block A">Block A</option>
+          <option value="Block B">Block B</option>
+          <option value="Block C">Block C</option>
+          <option value="Block D">Block D</option>
+          <option value="Block E">Block E</option>
+          <option value="Block F">Block F</option>
+          <option value="Block G">Block G</option>
+          <option value="Block H">Block H</option>
+          <option value="Block J">Block J</option>
+          <option value="Block N">Block N</option>
+          <option value="Block P">Block P</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Age Group <span>*</span></label>
+        <select id="age" name="age_group" required>
+          <option value="">Select</option>
+          <option value="Under 18">Under 18</option>
+          <option value="18–25">18–25</option>
+          <option value="26–35">26–35</option>
+          <option value="36–50">36–50</option>
+          <option value="50+">50+</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sec-title">Availability &amp; Sessions</div>
+
+    <div class="field">
+      <label>Select sessions you can attend <span>*</span></label>
+      <div class="sessions-list">
+        <div class="sess-chip">
+          <input type="checkbox" id="s1" name="sessions" value="27 Apr"/>
+          <label for="s1"><span class="sess-day">27 Apr</span>Freedom Day Launch — Trial Run · 08:00–11:00</label>
+        </div>
+        <div class="sess-chip">
+          <input type="checkbox" id="s2" name="sessions" value="9 May"/>
+          <label for="s2"><span class="sess-day">9 May</span>Session 2 — May Clean-Up · 08:00–11:00</label>
+        </div>
+        <div class="sess-chip">
+          <input type="checkbox" id="s3" name="sessions" value="23 May"/>
+          <label for="s3"><span class="sess-day">23 May</span>Session 3 — May Clean-Up · 08:00–11:00</label>
+        </div>
+        <div class="sess-chip">
+          <input type="checkbox" id="s4" name="sessions" value="6 Jun"/>
+          <label for="s4"><span class="sess-day">6 Jun</span>Session 4 — June Clean-Up · 08:00–11:00</label>
+        </div>
+        <div class="sess-chip">
+          <input type="checkbox" id="s5" name="sessions" value="20 Jun"/>
+          <label for="s5"><span class="sess-day">20 Jun</span>Session 5 — June Clean-Up · 08:00–11:00</label>
+        </div>
+        <div class="sess-chip">
+          <input type="checkbox" id="sall" name="sessions" value="All"/>
+          <label for="sall"><span class="sess-day">ALL</span>I'm available for all sessions</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">Your Role Preferences</div>
+    <div class="field">
+      <label>Select roles you'd like to take on</label>
+      <div class="roles-grid">
+        <div class="role-chip">
+          <input type="checkbox" id="r1" name="roles" value="Session Lead"/>
+          <label for="r1"><span class="rc-icon">📋</span>Zone Champion / Session Lead</label>
+        </div>
+        <div class="role-chip">
+          <input type="checkbox" id="r2" name="roles" value="Grass Cutter"/>
+          <label for="r2"><span class="rc-icon">🌿</span>Grass Clearer</label>
+        </div>
+        <div class="role-chip">
+          <input type="checkbox" id="r3" name="roles" value="Beds Keeper"/>
+          <label for="r3"><span class="rc-icon">🌸</span>Beds Keeper</label>
+        </div>
+        <div class="role-chip">
+          <input type="checkbox" id="r4" name="roles" value="Compost"/>
+          <label for="r4"><span class="rc-icon">♻️</span>Composting Lead</label>
+        </div>
+        <div class="role-chip">
+          <input type="checkbox" id="r5" name="roles" value="Shelter Steward"/>
+          <label for="r5"><span class="rc-icon">🪵</span>Shelter Steward</label>
+        </div>
+        <div class="role-chip">
+          <input type="checkbox" id="r6" name="roles" value="Structural"/>
+          <label for="r6"><span class="rc-icon">🔩</span>Structural / Repair</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">Additional Info</div>
+    <div class="field">
+      <label>Do you have any skills, tools or equipment you can bring?</label>
+      <textarea id="skills" name="skills" placeholder="e.g. I own a lawnmower / I can weld / I have a bakkie..."></textarea>
+    </div>
+    <div class="field">
+      <label>How did you hear about MGSN?</label>
+      <select id="source" name="source">
+        <option value="">Select</option>
+        <option value="WhatsApp Group">WhatsApp Group</option>
+        <option value="Neighbour / Word of mouth">Neighbour / Word of mouth</option>
+        <option value="Poster / Flyer">Poster / Flyer</option>
+        <option value="Social Media">Social Media</option>
+        <option value="Community Meeting">Community Meeting</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="consent">
+      <input type="checkbox" id="consent" name="consent" required/>
+      <p><strong>POPIA Consent:</strong> I agree to my details being securely stored by MGSN for volunteer coordination and community development purposes. My information will never be shared with third parties.</p>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">🌿 Join the Green Team</button>
+  </div>
+
+  <div class="success" id="successMsg">
+    <div class="success-icon">🌳</div>
+    <h2>You're In!</h2>
+    <p>Thank you for registering with the Mabopane Green Space Network. Your details have been securely recorded. Our Session Lead will add you to the <strong>Clean-Up Team-Up WhatsApp group</strong> shortly.</p>
+    <p style="margin-top:10px;font-size:13px;color:#888">First session: <strong>Monday 27 April 2026 · 08:00</strong><br>Block M · By the Waterfall · Mabopane</p>
+    <p class="setswana">Kea leboga 🙏🏾 — MGSN</p>
+  </div>
+</div>
+
+<p class="form-footer">MGSN · NPC Reg. 2025/422818/08 · Mabopane, City of Tshwane</p>
+
+<script>
+const API_BASE = 'https://mgsn-api-tshego.zocomputer.io';
+
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+function clearError() {
+  document.getElementById('errorMsg').classList.remove('show');
+}
+
+async function submitForm() {
+  clearError();
+  const btn = document.getElementById('submitBtn');
+
+  const firstName = document.getElementById('fname').value.trim();
+  const lastName  = document.getElementById('lname').value.trim();
+  const whatsapp  = document.getElementById('phone').value.trim();
+  const block     = document.getElementById('block').value;
+  const ageGroup  = document.getElementById('age').value;
+  const consent   = document.getElementById('consent').checked;
+  const sessions  = [...document.querySelectorAll('input[name="sessions"]:checked')].map(c => c.value);
+  const roles     = [...document.querySelectorAll('input[name="roles"]:checked')].map(c => c.value);
+  const skills    = document.getElementById('skills').value.trim();
+  const source    = document.getElementById('source').value;
+  const honeypot  = document.querySelector('input[name="website_url"]').value.trim();
+
+  // Client-side validation
+  if (!firstName || !lastName) { showError('Please enter your full name.'); return; }
+  if (!whatsapp)               { showError('Please enter your WhatsApp number.'); return; }
+  if (!block || !ageGroup)     { showError('Please complete all required fields.'); return; }
+  if (!consent)                { showError('Please accept the consent statement to continue.'); return; }
+  if (!sessions.length)        { showError('Please select at least one session.'); return; }
+
+  // Build payload
+  const payload = {
+    first_name: firstName,
+    last_name:  lastName,
+    whatsapp:   whatsapp,
+    block:      block,
+    age_group:  ageGroup,
+    sessions,
+    roles,
+    skills,
+    source,
+    website_url: honeypot  // honeypot — included in payload
+  };
+
+  btn.disabled = true;
+  btn.textContent = '🌱 Registering...';
+
+  try {
+    const res = await fetch(`${API_BASE}/api/volunteer`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(data.error || 'Registration failed. Please try again.');
+      btn.disabled = false;
+      btn.textContent = '🌿 Join the Green Team';
+      return;
+    }
+
+    document.getElementById('formInner').classList.add('hide');
+    document.getElementById('successMsg').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (e) {
+    showError('Network error. Please check your connection and try again.');
+    btn.disabled = false;
+    btn.textContent = '🌿 Join the Green Team';
+  }
+}
+
+// All sessions toggle
+document.getElementById('sall').addEventListener('change', function () {
+  document.querySelectorAll('input[name="sessions"]:not(#sall)').forEach(c => {
+    c.checked = this.checked;
+  });
+});
+</script>
+</body>
+</html>
