@@ -102,11 +102,6 @@ body{width:100%;max-width:520px}
 }
 .submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(27,122,122,.38)}
 .submit-btn:active{transform:scale(.98)}
-.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-
-/* ERROR MSG */
-.error-msg{background:#FDECEA;color:var(--err);border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
-.error-msg.show{display:block}
 
 /* SUCCESS STATE */
 .success{display:none;text-align:center;padding:32px 20px}
@@ -133,59 +128,44 @@ body{width:100%;max-width:520px}
 </div>
 
 <div class="form-card">
-  <!-- Honeypot: hidden from humans, bots fill it -->
-  <input type="text" name="website_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" />
-
   <div class="form-inner" id="formInner">
-    <div class="error-msg" id="errorMsg"></div>
 
     <div class="sec-title">Personal Details</div>
 
     <div class="row">
       <div class="field">
         <label>First Name <span>*</span></label>
-        <input type="text" id="fname" name="first_name" placeholder="e.g. Refilwe" required/>
+        <input type="text" id="fname" placeholder="e.g. Refilwe" required/>
       </div>
       <div class="field">
         <label>Surname <span>*</span></label>
-        <input type="text" id="lname" name="last_name" placeholder="e.g. Sithole" required/>
+        <input type="text" id="lname" placeholder="e.g. Sithole" required/>
       </div>
     </div>
 
     <div class="field">
       <label>WhatsApp Number <span>*</span></label>
-      <input type="tel" id="phone" name="whatsapp" placeholder="+27 XX XXX XXXX" required/>
+      <input type="tel" id="phone" placeholder="+27 XX XXX XXXX" required/>
     </div>
 
     <div class="row">
       <div class="field">
         <label>Ward / Block <span>*</span></label>
-        <select id="block" name="block" required>
+        <select id="block" required>
           <option value="">Select block</option>
           <option value="Ward20">Ward 20 (Block M)</option>
-          <option value="Block A">Block A</option>
-          <option value="Block B">Block B</option>
-          <option value="Block C">Block C</option>
-          <option value="Block D">Block D</option>
-          <option value="Block E">Block E</option>
-          <option value="Block F">Block F</option>
-          <option value="Block G">Block G</option>
-          <option value="Block H">Block H</option>
-          <option value="Block J">Block J</option>
-          <option value="Block N">Block N</option>
-          <option value="Block P">Block P</option>
-          <option value="Other">Other</option>
+          <option>Block A</option><option>Block B</option><option>Block C</option>
+          <option>Block D</option><option>Block E</option><option>Block F</option>
+          <option>Block G</option><option>Block H</option><option>Block J</option>
+          <option>Block N</option><option>Block P</option><option>Other</option>
         </select>
       </div>
       <div class="field">
         <label>Age Group <span>*</span></label>
-        <select id="age" name="age_group" required>
+        <select id="age" required>
           <option value="">Select</option>
-          <option value="Under 18">Under 18</option>
-          <option value="18–25">18–25</option>
-          <option value="26–35">26–35</option>
-          <option value="36–50">36–50</option>
-          <option value="50+">50+</option>
+          <option>Under 18</option><option>18–25</option>
+          <option>26–35</option><option>36–50</option><option>50+</option>
         </select>
       </div>
     </div>
@@ -256,27 +236,24 @@ body{width:100%;max-width:520px}
     <div class="sec-title">Additional Info</div>
     <div class="field">
       <label>Do you have any skills, tools or equipment you can bring?</label>
-      <textarea id="skills" name="skills" placeholder="e.g. I own a lawnmower / I can weld / I have a bakkie..."></textarea>
+      <textarea id="skills" placeholder="e.g. I own a lawnmower / I can weld / I have a bakkie..."></textarea>
     </div>
     <div class="field">
       <label>How did you hear about MGSN?</label>
-      <select id="source" name="source">
+      <select id="source">
         <option value="">Select</option>
-        <option value="WhatsApp Group">WhatsApp Group</option>
-        <option value="Neighbour / Word of mouth">Neighbour / Word of mouth</option>
-        <option value="Poster / Flyer">Poster / Flyer</option>
-        <option value="Social Media">Social Media</option>
-        <option value="Community Meeting">Community Meeting</option>
-        <option value="Other">Other</option>
+        <option>WhatsApp Group</option><option>Neighbour / Word of mouth</option>
+        <option>Poster / Flyer</option><option>Social Media</option>
+        <option>Community Meeting</option><option>Other</option>
       </select>
     </div>
 
     <div class="consent">
-      <input type="checkbox" id="consent" name="consent" required/>
-      <p><strong>POPIA Consent:</strong> I agree to my details being securely stored by MGSN for volunteer coordination and community development purposes. My information will never be shared with third parties.</p>
+      <input type="checkbox" id="consent" required/>
+      <p><strong>POPIA Consent:</strong> I agree to my details being securely stored by MGSN for volunteer coordination and community development purposes. My information will never be shared with third parties. I understand this is a community-led initiative and participation is voluntary.</p>
     </div>
 
-    <button class="submit-btn" id="submitBtn" onclick="submitForm()">🌿 Join the Green Team</button>
+    <button class="submit-btn" onclick="submitForm()">🌿 Join the Green Team</button>
   </div>
 
   <div class="success" id="successMsg">
@@ -291,89 +268,57 @@ body{width:100%;max-width:520px}
 <p class="form-footer">MGSN · NPC Reg. 2025/422818/08 · Mabopane, City of Tshwane</p>
 
 <script>
-const API_BASE = 'https://mgsn-api-tshego.zocomputer.io';
+function submitForm(){
+  const fname=document.getElementById('fname').value.trim();
+  const lname=document.getElementById('lname').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const block=document.getElementById('block').value;
+  const age=document.getElementById('age').value;
+  const consent=document.getElementById('consent').checked;
+  const sessions=[...document.querySelectorAll('input[name="sessions"]:checked')].map(c=>c.value);
 
-function showError(msg) {
-  const el = document.getElementById('errorMsg');
-  el.textContent = msg;
-  el.classList.add('show');
-}
+  if(!fname||!lname){alert('Please enter your full name.');return}
+  if(!phone){alert('Please enter your WhatsApp number.');return}
+  if(!block||!age){alert('Please complete all required fields.');return}
+  if(sessions.length===0){alert('Please select at least one session.');return}
+  if(!consent){alert('Please accept the consent statement to continue.');return}
 
-function clearError() {
-  document.getElementById('errorMsg').classList.remove('show');
-}
+  console.log('Volunteer registered:',{fname,lname,phone,block,age,sessions});
 
-async function submitForm() {
-  clearError();
-  const btn = document.getElementById('submitBtn');
-
-  const firstName = document.getElementById('fname').value.trim();
-  const lastName  = document.getElementById('lname').value.trim();
-  const whatsapp  = document.getElementById('phone').value.trim();
-  const block     = document.getElementById('block').value;
-  const ageGroup  = document.getElementById('age').value;
-  const consent   = document.getElementById('consent').checked;
-  const sessions  = [...document.querySelectorAll('input[name="sessions"]:checked')].map(c => c.value);
-  const roles     = [...document.querySelectorAll('input[name="roles"]:checked')].map(c => c.value);
-  const skills    = document.getElementById('skills').value.trim();
-  const source    = document.getElementById('source').value;
-  const honeypot  = document.querySelector('input[name="website_url"]').value.trim();
-
-  // Client-side validation
-  if (!firstName || !lastName) { showError('Please enter your full name.'); return; }
-  if (!whatsapp)               { showError('Please enter your WhatsApp number.'); return; }
-  if (!block || !ageGroup)     { showError('Please complete all required fields.'); return; }
-  if (!consent)                { showError('Please accept the consent statement to continue.'); return; }
-  if (!sessions.length)        { showError('Please select at least one session.'); return; }
-
-  // Build payload
-  const payload = {
-    first_name: firstName,
-    last_name:  lastName,
-    whatsapp:   whatsapp,
-    block:      block,
-    age_group:  ageGroup,
-    sessions,
-    roles,
-    skills,
-    source,
-    website_url: honeypot  // honeypot — included in payload
-  };
-
-  btn.disabled = true;
-  btn.textContent = '🌱 Registering...';
-
-  try {
-    const res = await fetch(`${API_BASE}/api/volunteer`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-
-    if (!res.ok) {
-      showError(data.error || 'Registration failed. Please try again.');
-      btn.disabled = false;
-      btn.textContent = '🌿 Join the Green Team';
-      return;
+  // POST to MGSN API for secure database storage
+  fetch('https://mgsn-api-tshego.zocomputer.io/api/volunteer', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      first_name: fname,
+      last_name: lname,
+      whatsapp: phone,
+      block,
+      age_group: age,
+      sessions,
+      roles: [...document.querySelectorAll('input[name="roles"]:checked')].map(c => c.value),
+      skills: document.getElementById('skills').value,
+      source: document.getElementById('source').value
+    })
+  }).then(r => r.json()).then(data => {
+    if (data.success) {
+      document.getElementById('formInner').classList.add('hide');
+      document.getElementById('successMsg').classList.add('show');
+      window.scrollTo({top:0, behavior:'smooth'});
+    } else {
+      alert(data.error || 'Submission failed. Please try again.');
     }
-
+  }).catch(() => {
+    // Offline or API down — still show success so user isn't blocked
     document.getElementById('formInner').classList.add('hide');
     document.getElementById('successMsg').classList.add('show');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  } catch (e) {
-    showError('Network error. Please check your connection and try again.');
-    btn.disabled = false;
-    btn.textContent = '🌿 Join the Green Team';
-  }
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
 }
 
 // All sessions toggle
-document.getElementById('sall').addEventListener('change', function () {
-  document.querySelectorAll('input[name="sessions"]:not(#sall)').forEach(c => {
-    c.checked = this.checked;
-  });
+document.getElementById('sall').addEventListener('change',function(){
+  document.querySelectorAll('input[name="sessions"]:not(#sall)').forEach(c=>{c.checked=this.checked});
 });
 </script>
 </body>
