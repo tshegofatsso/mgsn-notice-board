@@ -54,7 +54,7 @@ let activeTab = "All";
 let modal = null;
 let heroImg = 0;
 
-const heroImages = ["././images/cleanup-april27-1.jpg","././images/cleanup-april27-2.jpg","././images/cleanup-april27-3.jpg"];
+const heroImages = ["/public/images/cleanup-april27-1.jpg","/public/images/cleanup-april27-2.jpg","/public/images/cleanup-april27-3.jpg"];
 const WHATSAPP_LINK = "https://chat.whatsapp.com/Kfw4KEr9V1C6XX5gMEgAG7";
 const VOLUNTEER_LINK = "./volunteer/index.html";
 
@@ -125,7 +125,7 @@ function render() {
       <div class="h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-green-500"></div>
       <div class="max-w-2xl mx-auto flex items-center justify-between px-5 py-3">
         <div class="flex items-center gap-3">
-          <img src="././images/mgsn-logo-dark.png" alt="MGSN" class="h-11 bg-white rounded-lg px-2 py-1 shadow">
+          <img src="/public/images/mgsn-logo-dark.png" alt="MGSN" class="h-11 bg-white rounded-lg px-2 py-1 shadow">
           <div>
             <div class="text-yellow-400 font-bold text-xs tracking-widest uppercase leading-tight">Mabopane Green Space Network</div>
             <div class="text-white/40 text-[9px] tracking-wider uppercase">NPC Reg. 2025/422818/08 · City of Tshwane</div>
@@ -212,7 +212,7 @@ function render() {
           <p class="text-teal-500/60 text-[10px] font-bold tracking-widest uppercase">27 April — Freedom Day Launch</p>
         </div>
         <div class="grid grid-cols-3 gap-2">
-          ${[["././images/cleanup-april27-1.jpg","Team at work"],["././images/cleanup-april27-2.jpg","Site overview"],["././images/cleanup-april27-3.jpg","Timber shelter"]].map(([src,label])=>`
+          ${[["/public/images/cleanup-april27-1.jpg","Team at work"],["/public/images/cleanup-april27-2.jpg","Site overview"],["/public/images/cleanup-april27-3.jpg","Timber shelter"]].map(([src,label])=>`
           <div class="relative rounded-xl overflow-hidden aspect-square">
             <img src="${src}" alt="${label}" class="w-full h-full object-cover">
             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
@@ -259,7 +259,7 @@ function render() {
         <p class="text-green-800 font-bold text-base mb-1">💬 Join the WhatsApp Volunteer Group</p>
         <p class="text-green-700 text-sm mb-4">Scan the QR code below to join MGSN's Clean-Up Team-Up group and get session updates directly.</p>
         <div class="flex justify-center mb-3">
-          <img src="././images/whatsapp-qr.jpg" alt="WhatsApp QR Code" class="rounded-lg border-2 border-green-300 bg-white">
+          <img src="/public/images/whatsapp-qr.jpg" alt="WhatsApp QR Code" class="rounded-lg border-2 border-green-300 bg-white">
         </div>
         <a href="${WHATSAPP_LINK}" target="_blank" class="inline-block bg-green-600 text-white text-sm font-bold px-5 py-2.5 rounded-full hover:bg-green-700 transition-colors">
           Join WhatsApp Group →
@@ -271,7 +271,7 @@ function render() {
     ${renderModal()}
 
     <footer class="bg-teal-900 text-center px-6 py-8 mt-8">
-      <img src="././images/mgsn-logo-light.png" alt="MGSN" class="h-10 bg-white rounded-lg px-2 py-1 mx-auto mb-4 inline-block">
+      <img src="/public/images/mgsn-logo-light.png" alt="MGSN" class="h-10 bg-white rounded-lg px-2 py-1 mx-auto mb-4 inline-block">
       <div class="flex justify-center gap-5 mb-4">
         <a href="#" class="text-white/50 text-[11px] font-bold tracking-widest uppercase hover:text-yellow-400 transition-colors">Notice Board</a>
         <a href="${VOLUNTEER_LINK}" class="text-white/50 text-[11px] font-bold tracking-widest uppercase hover:text-yellow-400 transition-colors">Register</a>
