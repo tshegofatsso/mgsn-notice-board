@@ -154,18 +154,18 @@ body{width:100%;max-width:520px}
         <select id="block" required>
           <option value="">Select block</option>
           <option value="Ward20">Ward 20 (Block M)</option>
-          <option>Block A</option><option>Block B</option><option>Block C</option>
-          <option>Block D</option><option>Block E</option><option>Block F</option>
-          <option>Block G</option><option>Block H</option><option>Block J</option>
-          <option>Block N</option><option>Block P</option><option>Other</option>
+          <option value="Block A">Block A</option><option value="Block B">Block B</option><option value="Block C">Block C</option>
+          <option value="Block D">Block D</option><option value="Block E">Block E</option><option value="Block F">Block F</option>
+          <option value="Block G">Block G</option><option value="Block H">Block H</option><option value="Block J">Block J</option>
+          <option value="Block N">Block N</option><option value="Block P">Block P</option><option value="Other">Other</option>
         </select>
       </div>
       <div class="field">
         <label>Age Group <span>*</span></label>
         <select id="age" required>
           <option value="">Select</option>
-          <option>Under 18</option><option>18–25</option>
-          <option>26–35</option><option>36–50</option><option>50+</option>
+          <option value="Under 18">Under 18</option><option value="18-25">18–25</option>
+          <option value="26-35">26–35</option><option value="36-50">36–50</option><option value="50+">50+</option>
         </select>
       </div>
     </div>
@@ -242,9 +242,9 @@ body{width:100%;max-width:520px}
       <label>How did you hear about MGSN?</label>
       <select id="source">
         <option value="">Select</option>
-        <option>WhatsApp Group</option><option>Neighbour / Word of mouth</option>
-        <option>Poster / Flyer</option><option>Social Media</option>
-        <option>Community Meeting</option><option>Other</option>
+        <option value="WhatsApp Group">WhatsApp Group</option><option value="Neighbour / Word of mouth">Neighbour / Word of mouth</option>
+        <option value="Poster / Flyer">Poster / Flyer</option><option value="Social Media">Social Media</option>
+        <option value="Community Meeting">Community Meeting</option><option value="Other">Other</option>
       </select>
     </div>
 
@@ -272,6 +272,7 @@ function submitForm(){
   const fname=document.getElementById('fname').value.trim();
   const lname=document.getElementById('lname').value.trim();
   const phone=document.getElementById('phone').value.trim();
+  const whatsapp=phone;
   const block=document.getElementById('block').value;
   const age=document.getElementById('age').value;
   const consent=document.getElementById('consent').checked;
