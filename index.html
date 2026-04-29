@@ -33,18 +33,19 @@
 
 <script>
 const notices = [
+  { id:"agm-notice", category:"Meetings", title:"📋 Mandatory Decision Session — 29 April 2026", body:"Ref: MGSN-SEC-2026-006 | Wed 29 Apr 2026 | 10:00–13:00 SAST | Block C, Elias Mokale's Garden (main shade structure). OR join via WhatsApp video call / Serona Virtual Platform. Written votes accepted by 09:00 on 29 April only if live attendance is impossible. Quorum = 3 of 5 active directors.\n\n8 Agenda Items (each requires a decision):\n1. Opening & Quorum\n2. Board updates & resignations\n3. CIPC & SARS compliance — final confirmation\n4. Membership register review\n5. UP relationship & way forward (before 30 April workshop)\n6. Strategic direction — next 90 days\n7. River Custodianship briefing 🔒 (board-confidential)\n8. AOB & Closing\n\n⚠️ Item 7 is board-confidential — no content from that session to be shared outside the board.", date:"28 April 2026", author:"T. Sepeng — Secretary", color:"#C41E1E" },
+  { id:"22apr-update", category:"News", title:"22 April Meeting — Partial Resolutions Passed", body:"The 22 April meeting was partially held — some resolutions passed. Two critical resolutions (Fiduciary Shield + Operational DNA) and two documents (Annexure C + D) still need to be finalised. These are on the agenda for 29 April 2026.", date:"27 April 2026", author:"Bra Tshego — MGSN", color:"#1B7A7A" },
   { id:"solar", category:"News", title:"Solar Floodlights Installed at Block M Waterfall Park", body:"Two 12-metre timber poles have been installed with solar-powered floodlights and security caging. Each pole carries a solar panel and an IK10-rated vandal-resistant LED floodlight at the crown. The park is now lit after dark, improving safety for community members.", date:"25 April 2026", author:"Bra Tshego — MGSN", color:"#1B7A7A" },
   { id:"volunteer", category:"Notices", title:"Volunteer Registration Now Open — Earn Rewards", body:"Register to join the Clean-Up Team-Up group. Volunteers earn points redeemable for vouchers from local businesses including Shoprite, Cashbuild, and food vendors. 5 sessions = R50 grocery voucher. 8 sessions = R100 partner voucher. Available roles: Session Lead, Grass Cutter, Beds Keeper, Compost Sorter, Shelter Steward, and General Volunteer.", date:"24 April 2026", author:"MGSN Management", color:"#2D8B3A" },
-  { id:"meeting", category:"Meetings", title:"Committee Meeting Minutes — April 2026", body:"The fortnightly volunteer schedule was formally adopted starting Freedom Day, 27 April 2026, with a minimum of 3 volunteers required per session. The volunteer rewards programme was approved in principle. The UP Architecture partnership was acknowledged. Next committee meeting scheduled for 14 May 2026.", date:"20 April 2026", author:"Thomas Mathiba — Chairperson", color:"#1565C0" },
   { id:"up", category:"News", title:"UP Architecture Partnership Confirmed for Green Corridor Design", body:"The University of Pretoria Department of Architecture has formally confirmed its partnership with MGSN for the design of the Block M green corridor and integrated stormwater management project. This partnership positions MGSN's work as technically credible urban infrastructure.", date:"15 April 2026", author:"MGSN Board", color:"#1B7A7A" },
 ];
 
 const events = [
-  { day:"27", mo:"APR", title:"Freedom Day Launch — Trial Run", meta:"08:00–11:00 · Block M Waterfall Timber Shelter", badge:"Today", badgeColor:"#FEF3EC", textColor:"#C4611A" },
-  { day:"09", mo:"MAY", title:"Session 2 — May Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
-  { day:"23", mo:"MAY", title:"Session 3 — May Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
-  { day:"06", mo:"JUN", title:"Session 4 — June Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
-  { day:"14", mo:"MAY", title:"MGSN Committee Meeting", meta:"18:00 · TBC · Thomas Mathiba (Chair)", badge:"Meeting", badgeColor:"#E3F0FF", textColor:"#1565C0" },
+  { day:"29", mo:"APR", title:"Mandatory Decision Session", meta:"10:00–13:00 SAST · Block C, Elias Mokale's Garden", badge:"Urgent", badgeColor:"#FFECEC", textColor:"#C41E1E" },
+  { day:"30", mo:"APR", title:"UP Architecture Workshop", meta:"09:00 · TBC · University of Pretoria", badge:"Workshop", badgeColor:"#E3F0FF", textColor:"#1565C0" },
+  { day:"09", mo:"MAY", title:"Session 5 — May Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
+  { day:"23", mo:"MAY", title:"Session 6 — May Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
+  { day:"06", mo:"JUN", title:"Session 7 — June Clean-Up", meta:"08:00–11:00 · Block M Waterfall", badge:"Open", badgeColor:"#E8F5EA", textColor:"#1E6028" },
 ];
 
 const categoryColors = { News:"bg-teal-600", Notices:"bg-green-600", Urgent:"bg-red-600", Meetings:"bg-blue-600", Events:"bg-orange-500" };
@@ -53,9 +54,9 @@ let activeTab = "All";
 let modal = null;
 let heroImg = 0;
 
-const heroImages = ["/images/cleanup-april27-1.jpg","/images/cleanup-april27-2.jpg","/images/cleanup-april27-3.jpg"];
+const heroImages = ["././images/cleanup-april27-1.jpg","././images/cleanup-april27-2.jpg","././images/cleanup-april27-3.jpg"];
 const WHATSAPP_LINK = "https://chat.whatsapp.com/Kfw4KEr9V1C6XX5gMEgAG7";
-const VOLUNTEER_LINK = "https://chimerical-sawine-8d8ce8.netlify.app";
+const VOLUNTEER_LINK = "./volunteer/index.html";
 
 function renderHeroDots() {
   return heroImages.map((_,i) =>
@@ -66,7 +67,7 @@ function renderHeroDots() {
 function renderFilterTabs() {
   const tabs = ["All","News","Events","Notices","Urgent","Meetings"];
   return tabs.map(tab =>
-    `<button onclick="activeTab='${tab}'+'';render()" class="flex-shrink-0 px-4 py-3 text-[11px] font-bold tracking-widest uppercase border-b-2 transition-colors ${activeTab===tab?'text-teal-700 border-teal-600':'text-teal-400/60 border-transparent hover:text-teal-600 hover:bg-teal-50'}">${tab}</button>`
+    `<button onclick="activeTab='${tab}';render()" class="flex-shrink-0 px-4 py-3 text-[11px] font-bold tracking-widest uppercase border-b-2 transition-colors ${activeTab===tab?'text-teal-700 border-teal-600':'text-teal-400/60 border-transparent hover:text-teal-600 hover:bg-teal-50'}">${tab}</button>`
   ).join('');
 }
 
@@ -120,12 +121,11 @@ function render() {
   ).join('');
 
   document.getElementById('app').innerHTML = `
-    <!-- HEADER -->
     <header class="sticky top-0 z-50 bg-teal-900 shadow-lg">
       <div class="h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-green-500"></div>
       <div class="max-w-2xl mx-auto flex items-center justify-between px-5 py-3">
         <div class="flex items-center gap-3">
-          <img src="/images/mgsn-logo-dark.png" alt="MGSN" class="h-11 bg-white rounded-lg px-2 py-1 shadow">
+          <img src="././images/mgsn-logo-dark.png" alt="MGSN" class="h-11 bg-white rounded-lg px-2 py-1 shadow">
           <div>
             <div class="text-yellow-400 font-bold text-xs tracking-widest uppercase leading-tight">Mabopane Green Space Network</div>
             <div class="text-white/40 text-[9px] tracking-wider uppercase">NPC Reg. 2025/422818/08 · City of Tshwane</div>
@@ -138,7 +138,6 @@ function render() {
       </div>
     </header>
 
-    <!-- HERO -->
     <div class="bg-teal-800 relative overflow-hidden">
       <div class="flex transition-transform duration-500" style="transform:translateX(-${heroImg*100}%)">
         ${heroSlides}
@@ -159,26 +158,23 @@ function render() {
       </div>
     </div>
 
-    <!-- FILTER TABS -->
     <div class="sticky top-[68px] z-40 bg-white border-b border-teal-100 flex overflow-x-auto scrollbar-hide">
       ${renderFilterTabs()}
     </div>
 
     <div class="max-w-2xl mx-auto px-4 py-5 pb-20 space-y-5">
 
-      <!-- PINNED URGENT -->
       ${(activeTab==="All"||activeTab==="Urgent")?`
-      <div class="bg-gradient-to-br from-orange-500 to-orange-700 rounded-xl p-4 flex items-start gap-3 shadow-lg shadow-orange-500/20">
-        <span class="text-2xl mt-0.5">📍</span>
+      <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-xl p-4 flex items-start gap-3 shadow-lg shadow-red-500/20">
+        <span class="text-2xl mt-0.5">📋</span>
         <div>
-          <p class="text-orange-200 text-[9px] font-bold tracking-widest uppercase mb-0.5">📍 Pinned — Urgent</p>
-          <p class="text-white font-bold text-base leading-tight">Freedom Day Launch — Monday 27 April 2026</p>
-          <p class="text-orange-100 text-xs mt-1 leading-relaxed">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C, 0mm rain. Meet at the timber shelter at 08:00. Minimum 3 volunteers needed — confirm in WhatsApp group by Sunday evening.</p>
-          <p class="text-orange-300/60 text-[10px] mt-2">Posted 26 April 2026 — MGSN Management</p>
+          <p class="text-red-200 text-[9px] font-bold tracking-widest uppercase mb-0.5">⚠️ Board Meeting — 29 April 2026</p>
+          <p class="text-white font-bold text-base leading-tight">Mandatory Decision Session | Ref: MGSN-SEC-2026-006</p>
+          <p class="text-red-100 text-xs mt-1 leading-relaxed">10:00–13:00 SAST · Block C, Elias Mokale's Garden · Quorum = 3 of 5 active directors. Virtual attendance via WhatsApp or Serona available. Written votes due by 09:00.</p>
+          <p class="text-red-300/60 text-[10px] mt-2">Issued 28 April 2026 — T. Sepeng, Secretary</p>
         </div>
       </div>`:``}
 
-      <!-- UPCOMING SESSIONS -->
       ${(activeTab==="All"||activeTab==="Events")?`
       <div>
         <div class="flex items-center justify-between mb-3">
@@ -201,7 +197,6 @@ function render() {
         </div>
       </div>`:``}
 
-      <!-- LATEST POSTS -->
       <div>
         <div class="flex items-center justify-between mb-3">
           <p class="text-teal-500/60 text-[10px] font-bold tracking-widest uppercase">Latest Posts</p>
@@ -212,13 +207,12 @@ function render() {
         </div>
       </div>
 
-      <!-- PHOTO GALLERY -->
       <div>
         <div class="flex items-center justify-between mb-3">
           <p class="text-teal-500/60 text-[10px] font-bold tracking-widest uppercase">27 April — Freedom Day Launch</p>
         </div>
         <div class="grid grid-cols-3 gap-2">
-          ${[["/images/cleanup-april27-1.jpg","Team at work"],["/images/cleanup-april27-2.jpg","Site overview"],["/images/cleanup-april27-3.jpg","Timber shelter"]].map(([src,label])=>`
+          ${[["././images/cleanup-april27-1.jpg","Team at work"],["././images/cleanup-april27-2.jpg","Site overview"],["././images/cleanup-april27-3.jpg","Timber shelter"]].map(([src,label])=>`
           <div class="relative rounded-xl overflow-hidden aspect-square">
             <img src="${src}" alt="${label}" class="w-full h-full object-cover">
             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
@@ -229,7 +223,6 @@ function render() {
         <p class="text-stone-400 text-xs text-center mt-2">Block M Waterfall Park · Mabopane · 27 April 2026</p>
       </div>
 
-      <!-- QUICK LINKS -->
       <div>
         <div class="flex items-center justify-between mb-3">
           <p class="text-teal-500/60 text-[10px] font-bold tracking-widest uppercase">Quick Links</p>
@@ -262,12 +255,11 @@ function render() {
         </div>
       </div>
 
-      <!-- WHATSAPP QR -->
       <div id="whatsapp" class="bg-green-50 border-2 border-green-200 rounded-xl p-5 text-center">
         <p class="text-green-800 font-bold text-base mb-1">💬 Join the WhatsApp Volunteer Group</p>
         <p class="text-green-700 text-sm mb-4">Scan the QR code below to join MGSN's Clean-Up Team-Up group and get session updates directly.</p>
         <div class="flex justify-center mb-3">
-          <img src="/images/whatsapp-qr.png" alt="WhatsApp QR Code" class="w-40 h-40 object-contain rounded-lg border-2 border-green-300 bg-white">
+          <img src="././images/whatsapp-qr.jpg" alt="WhatsApp QR Code" class="rounded-lg border-2 border-green-300 bg-white">
         </div>
         <a href="${WHATSAPP_LINK}" target="_blank" class="inline-block bg-green-600 text-white text-sm font-bold px-5 py-2.5 rounded-full hover:bg-green-700 transition-colors">
           Join WhatsApp Group →
@@ -278,9 +270,8 @@ function render() {
 
     ${renderModal()}
 
-    <!-- FOOTER -->
     <footer class="bg-teal-900 text-center px-6 py-8 mt-8">
-      <img src="/images/mgsn-logo-light.png" alt="MGSN" class="h-10 bg-white rounded-lg px-2 py-1 mx-auto mb-4 inline-block">
+      <img src="././images/mgsn-logo-light.png" alt="MGSN" class="h-10 bg-white rounded-lg px-2 py-1 mx-auto mb-4 inline-block">
       <div class="flex justify-center gap-5 mb-4">
         <a href="#" class="text-white/50 text-[11px] font-bold tracking-widest uppercase hover:text-yellow-400 transition-colors">Notice Board</a>
         <a href="${VOLUNTEER_LINK}" class="text-white/50 text-[11px] font-bold tracking-widest uppercase hover:text-yellow-400 transition-colors">Register</a>
