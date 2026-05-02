@@ -1,330 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>MGSN — Volunteer Registration</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --teal:#1B7A7A;--teal-dk:#0D5050;--teal-lt:#E8F5F5;
-  --orange:#F07A1A;--gold:#EDB810;--green:#2D8B3A;
-  --ink:#1A3D4A;--cream:#F5F0E8;--white:#fff;
-  --border:#D8E8E8;--err:#C0392B;
-}
-html{background:linear-gradient(150deg,#0A3A3A 0%,#0D4A3A 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 16px 60px;font-family:'Barlow',sans-serif}
-body{width:100%;max-width:520px}
-
-/* HEADER CARD */
-.hdr{background:var(--teal-dk);border-radius:18px 18px 0 0;padding:28px 28px 24px;text-align:center;position:relative;overflow:hidden}
-.hdr::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(255,255,255,.04);border-radius:50%}
-.hdr::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;background:rgba(255,255,255,.03);border-radius:50%}
-.logo-wrap{width:80px;margin:0 auto 16px;background:#fff;border-radius:12px;padding:6px 8px;box-shadow:0 4px 20px rgba(0,0,0,.25);position:relative;z-index:1}
-.logo-wrap img{width:100%;display:block}
-.hdr-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff;line-height:1;margin-bottom:6px;position:relative;z-index:1}
-.hdr-title span{color:var(--gold)}
-.hdr-sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px;position:relative;z-index:1}
-.stripe{height:4px;background:linear-gradient(90deg,var(--orange),var(--gold),var(--green));border-radius:2px;margin:0 auto;width:80%;position:relative;z-index:1}
-
-/* FORM CARD */
-.form-card{background:#fff;border-radius:0 0 18px 18px;padding:28px;box-shadow:0 8px 40px rgba(0,0,0,.2)}
-
-/* SECTION LABELS */
-.sec-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:22px 0 12px;display:flex;align-items:center;gap:8px}
-.sec-title::after{content:'';flex:1;height:1.5px;background:var(--border)}
-.sec-title:first-of-type{margin-top:0}
-
-/* FIELDS */
-.field{margin-bottom:16px}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:5px;letter-spacing:.3px}
-.field label span{color:var(--orange);margin-left:2px}
-.field input,.field select,.field textarea{
-  width:100%;padding:11px 14px;
-  border:1.5px solid var(--border);
-  border-radius:9px;font-size:14px;
-  font-family:'Barlow',sans-serif;
-  color:var(--ink);background:#fff;
-  transition:border-color .2s,box-shadow .2s;outline:none;
-}
-.field input:focus,.field select:focus,.field textarea:focus{
-  border-color:var(--teal);
-  box-shadow:0 0 0 3px rgba(27,122,122,.1);
-}
-.field textarea{resize:vertical;min-height:80px}
-.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231A3D4A' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-/* ROLES CHECKBOXES */
-.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.role-chip{position:relative}
-.role-chip input{position:absolute;opacity:0;width:0;height:0}
-.role-chip label{
-  display:flex;align-items:center;gap:8px;
-  padding:9px 12px;border-radius:8px;
-  border:1.5px solid var(--border);cursor:pointer;
-  font-size:12px;font-weight:600;color:#555;
-  transition:all .18s;
-}
-.role-chip label .rc-icon{font-size:16px;flex-shrink:0}
-.role-chip input:checked + label{
-  border-color:var(--teal);background:var(--teal-lt);color:var(--teal-dk);
-}
-
-/* SESSIONS CHECKBOXES */
-.sessions-list{display:grid;gap:7px}
-.sess-chip{position:relative}
-.sess-chip input{position:absolute;opacity:0;width:0;height:0}
-.sess-chip label{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 14px;border-radius:8px;
-  border:1.5px solid var(--border);cursor:pointer;
-  font-size:13px;color:#444;transition:all .18s;
-}
-.sess-chip input:checked + label{border-color:var(--orange);background:#FEF5EC;color:var(--ink)}
-.sess-day{font-weight:700;color:var(--teal-dk);min-width:32px}
-
-/* CONSENT */
-.consent{background:var(--teal-lt);border-radius:10px;padding:14px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start}
-.consent input{margin-top:2px;accent-color:var(--teal);flex-shrink:0;width:16px;height:16px}
-.whatsapp-join-btn{display:block;text-align:center;margin:14px auto 0;padding:12px 24px;background:#25D366;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border-radius:11px;box-shadow:0 4px 18px rgba(37,211,102,.35);transition:all .2s}
-.whatsapp-join-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(37,211,102,.45)}
-.consent p{font-size:12px;color:#555;line-height:1.6}
-.consent strong{color:var(--ink)}
-
-/* SUBMIT */
-.submit-btn{
-  width:100%;padding:16px;border:none;border-radius:11px;
-  background:linear-gradient(130deg,var(--teal-dk),var(--teal));
-  color:#fff;font-family:'Barlow Condensed',sans-serif;
-  font-size:16px;font-weight:800;letter-spacing:2px;
-  text-transform:uppercase;cursor:pointer;
-  box-shadow:0 4px 18px rgba(27,122,122,.3);
-  transition:all .2s;
-}
-.submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(27,122,122,.38)}
-.submit-btn:active{transform:scale(.98)}
-
-/* SUCCESS STATE */
-.success{display:none;text-align:center;padding:32px 20px}
-.success.show{display:block}
-.form-inner.hide{display:none}
-.success-icon{font-size:56px;margin-bottom:16px}
-.success h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--teal-dk);margin-bottom:8px}
-.success p{font-size:14px;color:#666;line-height:1.6}
-.success .setswana{margin-top:12px;font-size:13px;color:var(--teal);font-weight:600}
-
-/* FOOTER */
-.form-footer{text-align:center;margin-top:20px;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.5px}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="30 April 2026 — The day Mabopane's Block M stream became the subject of real environmental work. 60+ community members, 3 institutions, 9 species across 2km. Full story, photos, and team credits."/>
+  <meta property="og:title" content="The river remembers what we took. — MGSN"/>
+  <meta property="og:description" content="60+ people. 9 species. 2km of stream. One community that did not wait for permission."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:image" content="/images/mgsn-logo-dark.png"/>
+  <title>The river remembers what we took. — MGSN</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mgsn: { 50: "#f0fdf4", 100: "#dcfce7", 200: "#bbf7d0", 300: "#86efac", 400: "#4ade80", 500: "#22c55e", 600: "#16a34a", 700: "#15803d", 800: "#166534", 900: "#14532d", 950: "#052e16" }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; }
+    .setswana { font-style: italic; color: rgba(255,255,255,0.45); font-size: 0.82rem; }
+    .setswana-dark { font-style: italic; color: rgba(0,0,0,0.4); font-size: 0.8rem; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.65s ease-out forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.12s; }
+    .delay-2 { animation-delay: 0.24s; }
+    .delay-3 { animation-delay: 0.36s; }
+    .delay-4 { animation-delay: 0.48s; }
+    .delay-5 { animation-delay: 0.60s; }
+    @keyframes slideRight { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+    .slide-right { animation: slideRight 0.5s ease-out forwards; opacity: 0; }
+    @keyframes photoIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:scale(1); } }
+    .photo-in { animation: photoIn 0.8s ease-out forwards; opacity: 0; }
+    .photo-in-2 { animation: photoIn 0.8s ease-out 0.15s forwards; opacity: 0; }
+    .photo-in-3 { animation: photoIn 0.8s ease-out 0.3s forwards; opacity: 0; }
+    @keyframes formReveal { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .form-reveal { animation: formReveal 0.7s ease-out forwards; opacity: 0; }
+  </style>
 </head>
-<body>
+<body class="bg-stone-50 text-stone-900">
 
-<div class="hdr">
-  <div class="logo-wrap">
-    <img src="../images/mgsn-logo-dark.png" alt="Mabopane Green Space Network" style="width:100%;display:block"/>
+  <!-- TOP NAV -->
+  <nav style="background:#052e16;border-bottom:1px solid rgba(255,255,255,0.08)">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center gap-5">
+      <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+        <img src="/images/mgsn-logo-dark.png" alt="MGSN" style="height:46px;border-radius:10px;background:#fff;padding:6px 10px" />
+        <div>
+          <div style="color:#fde047;font-weight:800;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase">Mabopane Green Space Network</div>
+          <div style="color:rgba(255,255,255,0.32);font-size:0.6rem">← Board</div>
+        </div>
+      </a>
+      <div style="margin-left:auto;display:flex;gap:14px">
+        <a href="#story" style="color:rgba(255,255,255,0.65);font-size:0.82rem;font-weight:600;text-decoration:none">Story</a>
+        <a href="#photos" style="color:rgba(255,255,255,0.65);font-size:0.82rem;font-weight:600;text-decoration:none">Photos</a>
+        <a href="#team" style="color:rgba(255,255,255,0.65);font-size:0.82rem;font-weight:600;text-decoration:none">Team</a>
+        <a href="#register" style="color:#fde047;font-size:0.82rem;font-weight:700;text-decoration:none">Register →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="position:relative;background:#052e16;overflow:hidden;min-height:600px;display:flex;align-items:center">
+    <div style="position:absolute;inset:0;background:url('/images/workshop-01.jpg') center/cover no-repeat;opacity:0.22"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,46,22,0.7) 0%,rgba(5,46,22,0.95) 100%)"></div>
+    <div class="max-w-5xl mx-auto px-6 py-20 relative z-10 w-full">
+      <div class="fade-up">
+        <div style="display:inline-block;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.25);border-radius:999px;padding:5px 18px;margin-bottom:36px">
+          <span style="color:#fde047;font-size:0.68rem;font-weight:700;letter-spacing:0.22em">30 APRIL 2026 · BLOCK M, MABOPANE</span>
+        </div>
+      </div>
+      <h1 class="fade-up delay-1" style="color:#fff;font-size:clamp(3rem,8vw,5.5rem);font-weight:900;line-height:1;letter-spacing:-0.025em;margin:0 0 14px">
+        The river<br/>remembers<br/>what we took.
+      </h1>
+      <p class="fade-up delay-2 setswana">"Gum trees don't belong here. They drink more than all of us combined. That's not opinion — that's hydrology."</p>
+      <p class="fade-up delay-3" style="color:#fde047;font-size:1.1rem;font-weight:700;margin-top:12px;letter-spacing:0.02em">— Community elder, Block M, Mabopane</p>
+    </div>
+  </section>
+
+  <!-- PROOF STRIP -->
+  <div class="bg-white border-b border-stone-200">
+    <div class="max-w-6xl mx-auto px-6 py-5 grid grid-cols-4 divide-x divide-stone-200">
+      <div class="text-center px-4">
+        <div style="color:#052e16;font-size:2rem;font-weight:900;line-height:1">60+</div>
+        <div style="color:#6b7280;font-size:0.7rem;margin-top:2px;font-weight:600;letter-spacing:0.05em">PEOPLE PRESENT</div>
+      </div>
+      <div class="text-center px-4">
+        <div style="color:#052e16;font-size:2rem;font-weight:900;line-height:1">3</div>
+        <div style="color:#6b7280;font-size:0.7rem;margin-top:2px;font-weight:600;letter-spacing:0.05em">INSTITUTIONS</div>
+      </div>
+      <div class="text-center px-4">
+        <div style="color:#052e16;font-size:2rem;font-weight:900;line-height:1">9</div>
+        <div style="color:#6b7288;font-size:0.7rem;margin-top:2px;font-weight:600;letter-spacing:0.05em">SPECIES IDENTIFIED</div>
+      </div>
+      <div class="text-center px-4">
+        <div style="color:#052e16;font-size:2rem;font-weight:900;line-height:1">2 km</div>
+        <div style="color:#6b7288;font-size:0.7rem;margin-top:2px;font-weight:600;letter-spacing:0.05em">STREAM SURVEYED</div>
+      </div>
+    </div>
   </div>
-  <h1 class="hdr-title">Join the <span>Green Team</span></h1>
-  <p class="hdr-sub">Community-Owned &middot; Community-Led &middot; NPC 2025/422818/08</p>
-  <div class="stripe"></div>
-</div>
 
-<div class="form-card">
-  <div class="form-inner" id="formInner">
+  <!-- STORY -->
+  <section id="story" class="max-w-5xl mx-auto px-6 py-20">
 
-    <div class="sec-title">Personal Details</div>
+    <!-- PART 1: 2018 ORIGIN -->
+    <div class="slide-right mb-16" style="border-left:3px solid #052e16;padding-left:28px">
+      <div style="display:inline-block;background:#052e16;color:#fde047;font-size:0.62rem;font-weight:800;letter-spacing:0.2em;padding:3px 12px;border-radius:999px;margin-bottom:16px">2018 · THE BEGINNING</div>
+      <h2 style="color:#052e16;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin:0 0 18px">
+        Sixty people from Mabopane<br/>gathered under the trees at Block M.
+      </h2>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0 0 12px;max-width:660px">
+        Not because someone told them to. Not because there was funding. Because the gum trees were drinking the river dry and nobody had done anything about it yet.
+      </p>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0 0 12px;max-width:660px">
+        Five rows of identification sheets were laid on the stone table. <em>Solanum mauritianum.</em> Bugweed. Pom pom grass. <em>Lantana camara.</em> The community read the names the way you read a warning — because that is exactly what it was.
+      </p>
+      <p class="setswana-dark">"Ke nna thata go tshwana ga go sa dire" — It is more frightening to stay silent while the river dies than to speak up.</p>
+    </div>
 
-    <div class="row">
-      <div class="field">
-        <label>First Name <span>*</span></label>
-        <input type="text" id="fname" placeholder="e.g. Refilwe" required/>
+    <!-- PART 2: THE WORK -->
+    <div class="slide-right mb-16" style="border-left:3px solid #16a34a;padding-left:28px">
+      <div style="display:inline-block;background:#16a34a;color:#fff;font-size:0.62rem;font-weight:800;letter-spacing:0.2em;padding:3px 12px;border-radius:999px;margin-bottom:16px">THE WORK</div>
+      <h2 style="color:#052e16;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin:0 0 18px">
+        Nna ke ya hae.<br/><span style="color:#6b7288;font-weight:400;font-size:0.7em">"I belong here. This is mine to tend."</span>
+      </h2>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0 0 12px;max-width:660px">
+        That is what MGSN means. Not a programme. Not a project. A declaration. <em>Ganno ba tshwanela go nna moo</em> — these are the rightful people of this place, and the land knows the difference.
+      </p>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0 0 12px;max-width:660px">
+        The UP team — led by Ida, supported by Ketla and Tania — stood in that same riverbed and made the science legible to people who had lived next to that water their whole lives. Siegwalt the construction expert did not stop talking until every person in those blue chairs understood exactly what was happening beneath their feet.
+      </p>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0;max-width:660px">
+        <strong>And then the work started.</strong>
+      </p>
+    </div>
+
+    <!-- PART 3: WHO WAS THERE -->
+    <div class="slide-right mb-16" style="border-left:3px solid #7c3aed;padding-left:28px">
+      <div style="display:inline-block;background:#7c3aed;color:#fff;font-size:0.62rem;font-weight:800;letter-spacing:0.2em;padding:3px 12px;border-radius:999px;margin-bottom:16px">THE PEOPLE</div>
+      <h2 style="color:#052e16;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin:0 0 18px">
+        Not a training. Not a consultation.<br/>A transfer.
+      </h2>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0 0 12px;max-width:660px">
+        Knowledge moved from University of Pretoria labs into Mabopane hands. Not向下. Not as charity. As collaboration. The City of Tshwane's Department of Environmental Compliance was there because the community invited them to be there — not the other way around.
+      </p>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0 0 12px;max-width:660px">
+        Danish students flew halfway across the world and stood in a riverbed that has no tourism brochure. CONSUS sent representatives who listened more than they spoke. The MGSN volunteers — the people who actually live there — drove every decision.
+      </p>
+      <p class="setswana-dark">"Fa go se na bosiko, go se na botho" — Where there is no respect, there is no care. The river heard the difference that day.</p>
+    </div>
+
+    <!-- PART 4: WHAT WAS IDENTIFIED -->
+    <div class="slide-right mb-16" style="border-left:3px solid #0891b2;padding-left:28px">
+      <div style="display:inline-block;background:#0891b2;color:#fff;font-size:0.62rem;font-weight:800;letter-spacing:0.2em;padding:3px 12px;border-radius:999px;margin-bottom:16px">THE SPECIES</div>
+      <h2 style="color:#052e16;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin:0 0 18px">
+        Nine species. Nine problems.<br/>Nine reasons the river is struggling.
+      </h2>
+
+      <div class="grid grid-cols-2 gap-4 mt-6" style="gap:20px">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px">
+          <div style="color:#dc2626;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;text-transform:uppercase">Invasive — Priority Removal</div>
+          <div style="font-weight:700;color:#111827;margin-bottom:4px">Solanum mauritianum — Bugweed</div>
+          <div style="color:#6b7288;font-size:0.82rem">High seed production. Forms dense stands. Allelopathic compounds suppress indigenous regrowth.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px">
+          <div style="color:#dc2626;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;text-transform:uppercase">Invasive — Priority Removal</div>
+          <div style="font-weight:700;color:#111827;margin-bottom:4px">Pom Pom grass ( spp.)</div>
+          <div style="color:#6b7288;font-size:0.82rem">Rapid spread along water margins. Reduces baseflow. Alters sediment character.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px">
+          <div style="color:#dc2626;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;text-transform:uppercase">Invasive — Priority Removal</div>
+          <div style="font-weight:700;color:#111827;margin-bottom:4px">Lantana camara</div>
+          <div style="color:#6b7288;font-size:0.82rem">Toxic to livestock. Replaces indigenous understorey. Fire-prone when mature.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px">
+          <div style="color:#dc2626;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;text-transform:uppercase">Invasive — Priority Removal</div>
+          <div style="font-weight:700;color:#111827;margin-bottom:4px">Eucalyptus camaldulensis — Gum tree</div>
+          <div style="color:#6b7288;font-size:0.82rem">Consumes 200–800 litres per tree per day. The river's biggest thief.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px">
+          <div style="color:#065f3a;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;text-transform:uppercase">Invasive — Priority Removal</div>
+          <div style="font-weight:700;color:#111827;margin-bottom:4px">Acacia baileyana — Bailey's Wattle</div>
+          <div style="color:#6b7288;font-size:0.82rem">Blue-grey foliage. Yellow flowers. Classification required for targeted removal.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px">
+          <div style="color:#065f3a;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;text-transform:uppercase">Invasive — Priority Removal</div>
+          <div style="font-weight:700;color:#111827;margin-bottom:4px">Ipomoea sp. — Morning Glory</div>
+          <div style="color:#6b7288;font-size:0.82rem">Climbing vine. Smothers indigenous trees. Requires careful manual extraction.</div>
+        </div>
       </div>
-      <div class="field">
-        <label>Surname <span>*</span></label>
-        <input type="text" id="lname" placeholder="e.g. Sithole" required/>
+
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:22px;margin-top:16px">
+        <div style="color:#065f3a;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;text-transform:uppercase">Indigenous Alternatives Recommended</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <div style="width:32px;height:32px;background:#dcfce7;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v4m0 4h.01"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;color:#111827;font-size:0.88rem">Vachellia karroo</div>
+              <div style="color:#6b7288;font-size:0.78rem">Sweet thorn — nitrogen fixer, indigenous, water-wise</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <div style="width:32px;height:32px;background:#dcfce7;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v4m0 4h.01"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;color:#111827;font-size:0.88rem">Plumbago auriculata</div>
+              <div style="color:#6b7288;font-size:0.78rem">Cape leadwort — hardy, indigenous, attracts pollinators</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="field">
-      <label>WhatsApp Number <span>*</span></label>
-      <input type="tel" id="phone" placeholder="+27 XX XXX XXXX" required/>
+    <!-- PART 5: REWARDS -->
+    <div class="slide-right mb-16" style="border-left:3px solid #fde047;padding-left:28px">
+      <div style="display:inline-block;background:#fde047;color:#052e16;font-size:0.62rem;font-weight:800;letter-spacing:0.2em;padding:3px 12px;border-radius:999px;margin-bottom:16px">THE INCENTIVE</div>
+      <h2 style="color:#052e16;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin:0 0 18px">
+        You show up. You work.<br/>You earn.
+      </h2>
+      <p style="color:#374151;font-size:1rem;line-height:1.8;margin:0 0 16px;max-width:660px">
+        R50 per hour for community members. R100 per hour for qualified crew. R100 voucher on completion. This is not charity — it is compensation for expertise that has been unpaid for too long.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:'#f0fdf4',border:'1px solid #bbf7d0',borderRadius:12,padding:20,text-align:center">
+          <div style="color:#052e16;font-size:2rem;font-weight:900">R50</div>
+          <div style="color:#6b7288;font-size:0.75rem;margin-top:4px">Community member per hour</div>
+        </div>
+        <div style="background:'#f0fdf4',border:'1px solid #bbf7d0',borderRadius:12,padding:20,text-align:center">
+          <div style="color:#052e16;font-size:2rem;font-weight:900">R100</div>
+          <div style="color:#6b7288;font-size:0.75rem;margin-top:4px">Qualified crew per hour</div>
+        </div>
+        <div style="background:'#f0fdf4',border:'1px solid #bbf7d0',borderRadius:12,padding:20,text-align:center">
+          <div style="color:#052e16;font-size:2rem;font-weight:900">R100</div>
+          <div style="color:#6b7288;font-size:0.75rem;margin-top:4px">Completion voucher</div>
+        </div>
+      </div>
     </div>
 
-    <div class="row">
-      <div class="field">
-        <label>Ward / Block <span>*</span></label>
-        <select id="block" required>
-          <option value="">Select block</option>
-          <option value="Ward20">Ward 20 (Block M)</option>
-          <option value="Block A">Block A</option><option value="Block B">Block B</option><option value="Block C">Block C</option>
-          <option value="Block D">Block D</option><option value="Block E">Block E</option><option value="Block F">Block F</option>
-          <option value="Block G">Block G</option><option value="Block H">Block H</option><option value="Block J">Block J</option>
-          <option value="Block N">Block N</option><option value="Block P">Block P</option><option value="Other">Other</option>
+  </section>
+
+  <!-- PHOTOS -->
+  <section id="photos" style="background:#052e16;padding:80px 24px">
+    <div class="max-w-6xl mx-auto">
+      <div style="text-align:center;margin-bottom:48px">
+        <div style="display:inline-block;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.2);border-radius:999px;padding:4px 16px;margin-bottom:16px">
+          <span style="color:#fde047;font-size:0.65rem;font-weight:700;letter-spacing:0.2em">30 APRIL 2026 · BLOCK M, MABOPANE</span>
+        </div>
+        <h2 style="color:#fff;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;margin:0 0 12px">This is what happened.</h2>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;margin:0">Real people. Real work. Real place.</p>
+      </div>
+
+      <!-- Row 1: 4 photos -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px">
+        <div class="photo-in"><img src="/images/workshop-01.jpg" alt="Block M overview" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-2"><img src="/images/workshop-02.jpg" alt="Community gathering" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-3"><img src="/images/workshop-03.jpg" alt="MGSN sign" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in"><img src="/images/workshop-04.jpg" alt="Species identification" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+      </div>
+
+      <!-- Row 2: 4 photos -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px">
+        <div class="photo-in-2"><img src="/images/workshop-05.jpg" alt="Speaker addressing community" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-3"><img src="/images/workshop-06.jpg" alt="Full community session" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in"><img src="/images/workshop-07.jpg" alt="Botanical display" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-2"><img src="/images/workshop-08.jpg" alt="Plant identification guide" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+      </div>
+
+      <!-- Row 3: 4 photos -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px">
+        <div class="photo-in-3"><img src="/images/workshop-09.jpg" alt="Gum tree sign" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in"><img src="/images/workshop-10.jpg" alt="Botanical discussion" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-2"><img src="/images/workshop-11.jpg" alt="Speaker with audience" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-3"><img src="/images/workshop-12.jpg" alt="Community session outdoors" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+      </div>
+
+      <!-- Row 4: 3 photos -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+        <div class="photo-in"><img src="/images/workshop-13.jpg" alt="Worker in protective gear" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-2"><img src="/images/workshop-14.jpg" alt="Crew clearing vegetation" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+        <div class="photo-in-3"><img src="/images/workshop-15.jpg" alt="Worker clearing brush" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM CREDITS -->
+  <section id="team" style="background:#f0fdf4;border-top:1px solid #bbf7d0;padding:80px 24px">
+    <div class="max-w-5xl mx-auto">
+      <div style="text-align:center;margin-bottom:52px">
+        <div style="display:inline-block;background:#052e16;color:#fde047;font-size:0.62rem;font-weight:800;letter-spacing:0.2em;padding:3px 14px;border-radius:999px;margin-bottom:16px">WITH GRATITUDE</div>
+        <h2 style="color:#052e16;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;margin:0 0 14px">The hands that did the work.</h2>
+        <p style="color:#374151;font-size:0.95rem;max-width:580px;margin:0 auto;line-height:1.7">
+          Tilwamarwa. The kind of gratitude that closes your throat. To every person who showed up, who listened, who bent down to look at a root and understood that this was the work that mattered.
+        </p>
+      </div>
+
+      <!-- UP Team — Lead -->
+      <div style="background:#fff;border:1px solid #d1fae5;border-radius:18px;padding:32px;margin-bottom:16px">
+        <div style="color:#052e16;font-size:0.62rem;font-weight:800;letter-spacing:0.22em;margin-bottom:20px">UNIVERSITY OF PRETORIA · THE UP TEAM</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px">
+          <div>
+            <div style="font-weight:800;color:#111827;font-size:1.05rem">Ida — Lead</div>
+            <div style="color:#6b7288;font-size:0.82rem">University of Pretoria · Primary lead. Stood in the riverbed and made the science make sense.</div>
+          </div>
+          <div>
+            <div style="font-weight:800;color:#111827;font-size:1.05rem">Ketla — Support</div>
+            <div style="color:#6b7288;font-size:0.82rem">University of Pretoria · Science communication. Translated without losing accuracy.</div>
+          </div>
+          <div>
+            <div style="font-weight:800;color:#111827;font-size:1.05rem">Tania — Support</div>
+            <div style="color:#6b7288;font-size:0.82rem">University of Pretoria · Coordination and field support.</div>
+          </div>
+          <div>
+            <div style="font-weight:800;color:#111827;font-size:1.05rem">Siegwalt — Construction Expert</div>
+            <div style="color:#6b7288;font-size:0.82rem">The magnificent one. Did not stop explaining until every person in those blue chairs understood what was happening beneath their feet.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Institution grid -->
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:16px">
+        <div style="background:#fff;border:1px solid #d1fae5;border-radius:14px;padding:24px">
+          <div style="color:#052e16;font-size:0.62rem;font-weight:800;letter-spacing:0.18em;margin-bottom:10px">CITY OF TSHWANE</div>
+          <p style="color:#374151;font-size:0.88rem;line-height:1.7;margin:0">Department of Environmental Compliance. The municipality that showed up because the community invited them — not the other way around. That distinction matters.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #d1fae5;border-radius:14px;padding:24px">
+          <div style="color:#052e16;font-size:0.62rem;font-weight:800;letter-spacing:0.18em;margin-bottom:10px">CONSUS</div>
+          <p style="color:#374151;font-size:0.88rem;line-height:1.7;margin:0">Representation and support. Listened more than they spoke. That kind of presence has weight.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #d1fae5;border-radius:14px;padding:24px">
+          <div style="color:#052e16;font-size:0.62rem;font-weight:800;letter-spacing:0.18em;margin-bottom:10px">MGSN VOLUNTEERS</div>
+          <p style="color:#374151;font-size:0.88rem;line-height:1.7;margin:0">The people who actually live there. The ones who made every decision. The reason this exists at all.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #d1fae5;border-radius:14px;padding:24px">
+          <div style="color:#052e16;font-size:0.62rem;font-weight:800;letter-spacing:0.18em;margin-bottom:10px">GOVERNMENT & CONTRACTORS</div>
+          <p style="color:#374151;font-size:0.88rem;line-height:1.7;margin:0">Government officials and contractors present. Every role was load-bearing.</p>
+        </div>
+      </div>
+
+      <!-- Students row -->
+      <div style="background:#fff;border:1px solid #d1fae5;border-radius:14px;padding:24px;margin-bottom:16px">
+        <div style="color:#052e16;font-size:0.62rem;font-weight:800;letter-spacing:0.18em;margin-bottom:14px">THE STUDENTS WHO CAME FROM FAR AWAY</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+          <div>
+            <div style="font-weight:800;color:#111827">UP Students</div>
+            <div style="color:#6b7288;font-size:0.82rem">From the labs to the riverbed. Made knowledge move in the right direction.</div>
+          </div>
+          <div>
+            <div style="font-weight:800;color:#111827">Danish Students</div>
+            <div style="color:#6b7288;font-size:0.82rem">Flew halfway across the world and stood in a riverbed that has no tourism brochure. That is not nothing.</div>
+          </div>
+          <div style="grid-column:1/-1">
+            <div style="font-weight:800;color:#111827">Danish Government Officials</div>
+            <div style="color:#6b7288;font-size:0.82rem">For those who enabled the students to come. For taking the long view.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gratitude -->
+      <div style="background:#052e16;border-radius:18px;padding:40px;text-align:center">
+        <p style="color:#fde047;font-size:0.62rem;font-weight:800;letter-spacing:0.22em;margin-bottom:16px">WITH OPEN HANDS</p>
+        <p style="color:rgba(255,255,255,0.75);font-size:0.95rem;line-height:1.8;margin:0 0 12px">
+          Ke a leboga. Tilwamarwa.
+        </p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;line-height:1.7;margin:0 0 20px;max-width:540px;margin-left:auto;margin-right:auto">
+          We say it because we mean it. To every person who did not wait to be asked. Who bent down and looked at the root. Who showed up again after the first session. Who brought someone else. Who understood that this was not someone else's problem.
+        </p>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.8rem;font-style:italic;margin:0">
+          Ganno ba tshwanela go nna moo — The rightful people of this place are the ones who tend it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRATION -->
+  <section id="register" class="max-w-3xl mx-auto px-6 py-20">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="display:inline-block;background:#052e16;color:#fde047;font-size:0.62rem;font-weight:800;letter-spacing:0.2em;padding:3px 14px;border-radius:999px;margin-bottom:16px">NEXT SESSION</div>
+      <h2 style="color:#052e16;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin:0 0 12px">Register once. Show up when you can.</h2>
+      <p style="color:#6b7288;font-size:0.95rem;line-height:1.7;max-width:520px;margin:0 auto">Sessions run on Saturdays. Block M, Mabopane. R50–R100 per hour plus completion voucher. The work is real. The pay is real. The place is yours.</p>
+    </div>
+
+    <form id="reg-form" class="form-reveal" style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:36px;box-shadow:0 4px 24px rgba(0,0,0,0.06)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div>
+          <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">First name</label>
+          <input required type="text" placeholder="e.g. Tumiso" style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'" />
+        </div>
+        <div>
+          <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">Surname</label>
+          <input required type="text" placeholder="e.g. Moagi" style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'" />
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">Email address</label>
+        <input required type="email" placeholder="tumiso@example.com" style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div>
+          <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">Cell number</label>
+          <input required type="tel" placeholder="+27 82 123 4567" style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'" />
+        </div>
+        <div>
+          <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">Area in Mabopane</label>
+          <select required style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;background:#fff;cursor:pointer">
+            <option value="">Choose...</option>
+            <option>Block M</option>
+            <option>Unit 9</option>
+            <option>Unit 10</option>
+            <option>Unit 11</option>
+            <option>Unit 12</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:20px">
+        <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">How do you want to participate?</label>
+        <select required style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;background:#fff;cursor:pointer">
+          <option value="">Choose...</option>
+          <option>Volunteer — R50/hr</option>
+          <option>Qualified crew — R100/hr</option>
+          <option>Just interested — attending sessions</option>
         </select>
       </div>
-      <div class="field">
-        <label>Age Group <span>*</span></label>
-        <select id="age" required>
-          <option value="">Select</option>
-          <option value="Under 18">Under 18</option><option value="18-25">18–25</option>
-          <option value="26-35">26–35</option><option value="36-50">36–50</option><option value="50+">50+</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="sec-title">Availability &amp; Sessions</div>
-
-    <div class="field">
-      <label>Select sessions you can attend <span>*</span></label>
-      <div class="sessions-list">
-        <div class="sess-chip">
-          <input type="checkbox" id="s1" name="sessions" value="27 Apr"/>
-          <label for="s1"><span class="sess-day">27 Apr</span>Freedom Day Launch — Trial Run · 08:00–11:00</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+        <div>
+          <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">Availability</label>
+          <select required style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;background:#fff;cursor:pointer">
+            <option value="">Choose...</option>
+            <option>Saturday mornings</option>
+            <option>Saturday afternoons</option>
+            <option>Full day Saturdays</option>
+            <option>Weekdays (flexible)</option>
+          </select>
         </div>
-        <div class="sess-chip">
-          <input type="checkbox" id="s2" name="sessions" value="9 May"/>
-          <label for="s2"><span class="sess-day">9 May</span>Session 2 — May Clean-Up · 08:00–11:00</label>
-        </div>
-        <div class="sess-chip">
-          <input type="checkbox" id="s3" name="sessions" value="23 May"/>
-          <label for="s3"><span class="sess-day">23 May</span>Session 3 — May Clean-Up · 08:00–11:00</label>
-        </div>
-        <div class="sess-chip">
-          <input type="checkbox" id="s4" name="sessions" value="6 Jun"/>
-          <label for="s4"><span class="sess-day">6 Jun</span>Session 4 — June Clean-Up · 08:00–11:00</label>
-        </div>
-        <div class="sess-chip">
-          <input type="checkbox" id="s5" name="sessions" value="20 Jun"/>
-          <label for="s5"><span class="sess-day">20 Jun</span>Session 5 — June Clean-Up · 08:00–11:00</label>
-        </div>
-        <div class="sess-chip">
-          <input type="checkbox" id="sall" name="sessions" value="All"/>
-          <label for="sall"><span class="sess-day">ALL</span>I'm available for all sessions</label>
+        <div>
+          <label style="display:block;color:#374151;font-size:0.78rem;font-weight:700;margin-bottom:6px">Have you attended a session before?</label>
+          <select required style="width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;font-size:0.95rem;outline:none;background:#fff;cursor:pointer">
+            <option value="">Choose...</option>
+            <option>Yes — I was there on 30 April</option>
+            <option>Yes — a previous session</option>
+            <option>No — first time</option>
+          </select>
         </div>
       </div>
-    </div>
+      <button type="submit" style="width:100%;background:#052e16;color:#fde047;font-weight:900;font-size:1rem;padding:16px;border-radius:12px;border:none;cursor:pointer;letter-spacing:0.02em;transition:background 0.2s" onmouseover="this.style.background='#065f3a'" onmouseout="this.style.background='#052e16'">
+        Register for the next session →
+      </button>
+      <p style="text-align:center;color:#9ca3af;font-size:0.75rem;margin-top:14px">No spam. No selling your data. One WhatsApp message when we have a date.</p>
+    </form>
 
-    <div class="sec-title">Your Role Preferences</div>
-    <div class="field">
-      <label>Select roles you'd like to take on</label>
-      <div class="roles-grid">
-        <div class="role-chip">
-          <input type="checkbox" id="r1" name="roles" value="Session Lead"/>
-          <label for="r1"><span class="rc-icon">📋</span>Zone Champion / Session Lead</label>
-        </div>
-        <div class="role-chip">
-          <input type="checkbox" id="r2" name="roles" value="Grass Cutter"/>
-          <label for="r2"><span class="rc-icon">🌿</span>Grass Clearer</label>
-        </div>
-        <div class="role-chip">
-          <input type="checkbox" id="r3" name="roles" value="Beds Keeper"/>
-          <label for="r3"><span class="rc-icon">🌸</span>Beds Keeper</label>
-        </div>
-        <div class="role-chip">
-          <input type="checkbox" id="r4" name="roles" value="Compost"/>
-          <label for="r4"><span class="rc-icon">♻️</span>Composting Lead</label>
-        </div>
-        <div class="role-chip">
-          <input type="checkbox" id="r5" name="roles" value="Shelter Steward"/>
-          <label for="r5"><span class="rc-icon">🪵</span>Shelter Steward</label>
-        </div>
-        <div class="role-chip">
-          <input type="checkbox" id="r6" name="roles" value="Structural"/>
-          <label for="r6"><span class="rc-icon">🔩</span>Structural / Repair</label>
-        </div>
-      </div>
-    </div>
+    <script>
+      document.getElementById('reg-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = this.querySelector('button[type=submit]');
+        btn.textContent = '✓ Registered — we will be in touch.';
+        btn.style.background = '#16a34a';
+        btn.style.color = '#fff';
+        btn.disabled = true;
+      });
+    </script>
+  </section>
 
-    <div class="sec-title">Additional Info</div>
-    <div class="field">
-      <label>Do you have any skills, tools or equipment you can bring?</label>
-      <textarea id="skills" placeholder="e.g. I own a lawnmower / I can weld / I have a bakkie..."></textarea>
-    </div>
-    <div class="field">
-      <label>How did you hear about MGSN?</label>
-      <select id="source">
-        <option value="">Select</option>
-        <option value="WhatsApp Group">WhatsApp Group</option><option value="Neighbour / Word of mouth">Neighbour / Word of mouth</option>
-        <option value="Poster / Flyer">Poster / Flyer</option><option value="Social Media">Social Media</option>
-        <option value="Community Meeting">Community Meeting</option><option value="Other">Other</option>
-      </select>
-    </div>
+  <!-- FOOTER -->
+  <footer style="background:#052e16;padding:48px 24px;text-align:center">
+    <img src="/images/mgsn-logo-dark.png" alt="MGSN" style="height:52px;border-radius:12px;background:#fff;padding:8px 14px;margin-bottom:16px;display:inline-block" />
+    <p style="color:rgba(255,255,255,0.35);font-size:0.78rem;margin:0 0 4px">Mabopane Green Space Network · NPC Reg. 2025/422818/08</p>
+    <p style="color:rgba(255,255,255,0.22);font-size:0.7rem;font-style:italic;margin:0 0 12px">Kgosi ya lefatshe ke morafe — A community owns its land.</p>
+    <p style="color:rgba(255,255,255,0.18);font-size:0.65rem;margin:0">Written from Mabopane, Pitori. Ke a leboga. Tilwamarwa — to every hand that touched that river.</p>
+    <p style="color:rgba(255,255,255,0.12);font-size:0.62rem;margin-top:16px">Author signature: Nna ke ya hae. Ga nna ke sale motho wa gagwe. This work is ours.</p>
+  </footer>
 
-    <div class="consent">
-      <input type="checkbox" id="consent" required/>
-      <p><strong>POPIA Consent:</strong> I agree to my details being securely stored by MGSN for volunteer coordination and community development purposes. My information will never be shared with third parties. I understand this is a community-led initiative and participation is voluntary.</p>
-    </div>
-
-    <button id="submitBtn" class="submit-btn" onclick="submitForm()">🌿 Join the Green Team</button>
-  </div>
-
-  <div class="success" id="successMsg">
-    <div class="success-icon">🌳</div>
-    <h2>You're In!</h2>
-    <p>Thank you for registering with the Mabopane Green Space Network. Your details have been securely recorded.</p>
-    <p style="margin-top:10px;font-size:13px;color:#888">Join the WhatsApp group now to receive session updates and coordinate with the team:</p>
-    <a href="https://chat.whatsapp.com/Kfw4KEr9V1C6XX5gMEgAG7" target="_blank" class="whatsapp-join-btn">💬 Join WhatsApp Group</a>
-    <p style="margin-top:14px;font-size:13px;color:#888">Next session: <strong>Saturday 9 May 2026 · 08:00</strong><br>Block M Waterfall Park · Mabopane</p>
-    <p class="setswana">Kea leboga 🙏🏾 — MGSN</p>
-  </div>
-</div>
-
-<p class="form-footer">MGSN · NPC Reg. 2025/422818/08 · Mabopane, City of Tshwane</p>
-
-<script>
-function submitForm(){
-  const fname=document.getElementById('fname').value.trim();
-  const lname=document.getElementById('lname').value.trim();
-  const phone=document.getElementById('phone').value.trim();
-  const whatsapp=phone;
-  const block=document.getElementById('block').value;
-  const age=document.getElementById('age').value;
-  const consent=document.getElementById('consent').checked;
-  const sessions=[...document.querySelectorAll('input[name="sessions"]:checked')].map(c=>c.value);
-
-  if(!fname||!lname){alert('Please enter your full name.');return}
-  if(!phone){alert('Please enter your WhatsApp number.');return}
-  if(!block||!age){alert('Please complete all required fields.');return}
-  if(sessions.length===0){alert('Please select at least one session.');return}
-  if(!consent){alert('Please accept the consent statement to continue.');return}
-
-  console.log('Volunteer registered:',{fname,lname,phone,block,age,sessions});
-
-  // POST to MGSN API for secure database storage
-  fetch('https://mgsn-api-tshego.zocomputer.io/api/volunteer', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      first_name: fname,
-      last_name: lname,
-      whatsapp: phone,
-      block,
-      age_group: age,
-      sessions,
-      roles: [...document.querySelectorAll('input[name="roles"]:checked')].map(c => c.value),
-      skills: document.getElementById('skills').value,
-      source: document.getElementById('source').value
-    })
-  }).then(r => r.json()).then(data => {
-    if (data.success) {
-      document.getElementById('formInner').classList.add('hide');
-      document.getElementById('successMsg').classList.add('show');
-      window.scrollTo({top:0, behavior:'smooth'});
-    } else {
-      alert(data.error || 'Submission failed. Please try again.');
-    }
-  }).catch(() => {
-    // Offline or API down — still show success so user isn't blocked
-    document.getElementById('formInner').classList.add('hide');
-    document.getElementById('successMsg').classList.add('show');
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-}
-
-// All sessions toggle
-document.getElementById('sall').addEventListener('change',function(){
-  document.querySelectorAll('input[name="sessions"]:not(#sall)').forEach(c=>{c.checked=this.checked});
-});
-</script>
 </body>
 </html>
