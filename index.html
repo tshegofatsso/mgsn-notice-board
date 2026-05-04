@@ -3,136 +3,151 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mabopane Green Space Network — A community-led initiative restoring Block M's natural spaces. One voice. One river. One responsibility."/>
-  <meta property="og:title" content="MGSN · Mabopane Green Space Network"/>
-  <meta property="og:description" content="60+ people. 9 species. 2km of stream. One community that did not wait for permission."/>
-  <meta property="og:type" content="website"/>
+  <meta name="description" content="Mabopane Green Space Network — Community-led ecological restoration. Invasive species removed. Indigenous plants returned. Water courses reclaimed."/>
   <title>MGSN · Mabopane Green Space Network</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            mgsn: { 50: "#f0fdf4", 100: "#dcfce7", 200: "#bbf7d0", 300: "#86efac", 400: "#4ade80", 500: "#22c55e", 600: "#16a34a", 700: "#15803d", 800: "#166534", 900: "#14532d", 950: "#052e16" }
-          }
-        }
-      }
-    };
-  </script>
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, sans-serif; background: #052e16; }
-    .setswana { font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    .fade-up { animation: fadeUp 0.7s ease-out forwards; opacity: 0; }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
-    .delay-5 { animation-delay: 0.5s; }
-  </style>
 </head>
-<body>
+<body class="min-h-screen bg-stone-50 font-sans">
 
-  <!-- NAV -->
-  <nav style="background:rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,0.08)">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center gap-5">
-      <div style="display:flex;align-items:center;gap:12px">
-        <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:48px;border-radius:10px;background:#fff;padding:6px 10px;box-shadow:0 2px 12px rgba(0,0,0,0.15)" />
+  <div class="bg-gradient-to-r from-teal-700 via-emerald-500 to-teal-600 h-1"></div>
+
+  <!-- Nav -->
+  <header class="bg-white border-b border-stone-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-teal-800 text-white font-black text-xs px-3 py-2 rounded-xl shadow-lg">MGSN</div>
         <div>
-          <div style="color:#fde047;font-weight:800;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase">Mabopane Green Space Network</div>
-          <div style="color:rgba(255,255,255,0.35);font-size:0.62rem">NPC 2025/422818/08 · Kgosi ya lefatshe ke morafe</div>
+          <div class="text-teal-900 font-black text-sm leading-tight">Mabopane Green Space Network</div>
+          <div class="text-stone-400 text-[9px] tracking-wider font-semibold">NPC 2025/422818/08</div>
         </div>
       </div>
-      <div style="margin-left:auto;display:flex;gap:12px">
-        <a href="/volunteer" style="color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:600;text-decoration:none">Our Story</a>
-        <a href="/volunteer#register" style="color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:600;text-decoration:none">Get Involved</a>
+      <div class="flex items-center gap-3">
+        <a href="/volunteer" class="bg-teal-700 hover:bg-teal-800 text-white text-xs font-black px-5 py-2.5 rounded-full transition-colors shadow-sm">Volunteer</a>
+        <a href="#learn" class="text-stone-500 text-xs font-bold uppercase tracking-widest hover:text-teal-700 transition-colors">Learn More</a>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="max-w-5xl mx-auto px-6 pt-24 pb-20 text-center">
-    <div class="fade-up">
-      <div style="display:inline-block;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.25);border-radius:999px;padding:5px 18px;margin-bottom:36px">
-        <span style="color:#fde047;font-size:0.7rem;font-weight:700;letter-spacing:0.2em">30 APRIL 2026 · BLOCK M, MABOPANE</span>
-      </div>
+  <!-- Hero -->
+  <section class="relative bg-teal-950 text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="images/workshop-03.jpg" alt="" class="w-full h-full object-cover opacity-15"/>
+      <div class="absolute inset-0 bg-gradient-to-b from-teal-950 via-teal-950/97 to-teal-950"></div>
     </div>
-
-    <h1 class="fade-up delay-1" style="color:#fff;font-size:clamp(3rem,8vw,5.5rem);font-weight:900;line-height:1;letter-spacing:-0.025em;margin:0 0 10px">
-      Nna ke ya hae.
-    </h1>
-    <p class="fade-up delay-2" style="color:#fde047;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;margin:0 0 6px">
-      This land is ours.
-    </p>
-    <p class="setswana fade-up delay-3">["Nna ke ya hae" — Pitori Setswana: "I belong here. This is mine to tend."]</p>
-
-    <p class="fade-up delay-4" style="color:rgba(255,255,255,0.72);font-size:1.1rem;line-height:1.75;max-width:580px;margin:32px auto 48px">
-      Sixty people from Mabopane gathered under the trees at Block M to learn exactly which alien plants are stealing water from their stream — and which indigenous species will bring it back.
-    </p>
-
-    <div class="fade-up delay-5" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="/volunteer" style="display:inline-block;background:#fde047;color:#052e16;font-weight:900;font-size:0.9rem;padding:14px 40px;border-radius:999px;text-decoration:none;box-shadow:0 4px 24px rgba(250,204,21,0.25)">
-        See what happened ↓
-      </a>
-      <a href="/volunteer#register" style="display:inline-block;background:transparent;color:#fff;font-weight:700;font-size:0.9rem;padding:14px 40px;border-radius:999px;border:2px solid rgba(255,255,255,0.28);text-decoration:none">
-        Join the next session
-      </a>
+    <div class="relative max-w-6xl mx-auto px-5 py-20 md:py-28 text-center">
+      <div class="inline-flex items-center gap-2 bg-yellow-400/20 border border-yellow-400/30 text-yellow-400 text-[10px] font-black tracking-[0.2em] uppercase px-4 py-2 rounded-full mb-8">
+        <span class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
+        Volunteer Campaign · May 2026
+      </div>
+      <h1 class="text-5xl md:text-7xl font-black text-white mb-4 leading-[1.0] tracking-tight">
+        This land remembers<br/>who tends it.
+      </h1>
+      <p class="text-teal-300 text-lg mb-3 max-w-xl mx-auto">"Nna ke ya hae." — I belong here. This is mine to tend.</p>
+      <p class="text-teal-200 text-sm mb-10 max-w-lg mx-auto leading-relaxed">
+        A community-led restoration project in Mabopane Unit B. Invasive species removed. Indigenous plants returned. Water courses reclaimed. Join the next session.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/volunteer" class="bg-yellow-400 text-teal-950 font-black text-sm px-10 py-4 rounded-full hover:bg-yellow-300 transition-all shadow-xl shadow-yellow-400/25 hover:-translate-y-0.5">Join the Campaign →</a>
+        <a href="#learn" class="border-2 border-white/30 text-white font-bold text-sm px-8 py-4 rounded-full hover:bg-white/10 transition-colors">See What We Did</a>
+      </div>
+      <div class="mt-8 flex items-center justify-center gap-3">
+        <div class="flex -space-x-2">
+          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">B</div>
+          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">K</div>
+          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">T</div>
+          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">M</div>
+          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">D</div>
+        </div>
+        <p class="text-teal-300 text-xs"><span class="text-white font-black">60+ Mabopane residents</span> already registered</p>
+      </div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <div style="background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07)">
-    <div class="max-w-5xl mx-auto grid grid-cols-4 divide-x divide-white/10">
-      <div class="text-center px-4 py-8">
-        <div style="color:#fde047;font-size:2.5rem;font-weight:900">60+</div>
-        <div style="color:rgba(255,255,255,0.45);font-size:0.72rem;margin-top:4px">People present</div>
-      </div>
-      <div class="text-center px-4 py-8">
-        <div style="color:#fde047;font-size:2.5rem;font-weight:900">9</div>
-        <div style="color:rgba(255,255,255,0.45);font-size:0.72rem;margin-top:4px">Species identified</div>
-      </div>
-      <div class="text-center px-4 py-8">
-        <div style="color:#fde047;font-size:2.5rem;font-weight:900">2 km</div>
-        <div style="color:rgba(255,255,255,0.45);font-size:0.72rem;margin-top:4px">Stream surveyed</div>
-      </div>
-      <div class="text-center px-4 py-8">
-        <div style="color:#fde047;font-size:2.5rem;font-weight:900">3</div>
-        <div style="color:rgba(255,255,255,0.45);font-size:0.72rem;margin-top:4px">Institutions</div>
+  <!-- Stats -->
+  <section class="bg-white border-b border-stone-200 py-8">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="grid grid-cols-4 divide-x divide-stone-100 text-center">
+        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">60+</p><p class="text-stone-800 text-xs font-bold mt-1">Community members</p><p class="text-stone-400 text-[10px] mt-0.5">Blocks A through L</p></div>
+        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">3</p><p class="text-stone-800 text-xs font-bold mt-1">Partner institutions</p><p class="text-stone-400 text-[10px] mt-0.5">UP · CoT · MGSN</p></div>
+        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">9</p><p class="text-stone-800 text-xs font-bold mt-1">Invasive species</p><p class="text-stone-400 text-[10px] mt-0.5">Identified + removed</p></div>
+        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">2 km</p><p class="text-stone-800 text-xs font-bold mt-1">Stream course</p><p class="text-stone-400 text-[10px] mt-0.5">Surveyed and mapped</p></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- QUOTE + STORY TEASER -->
-  <section class="max-w-5xl mx-auto px-6 py-20">
-    <div class="grid grid-cols-2 gap-12 items-center" style="gap:48px">
+  <!-- Story section -->
+  <section class="max-w-6xl mx-auto px-5 py-14" id="learn">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div>
-        <div style="color:#fde047;font-size:4rem;font-family:serif;line-height:1;margin-bottom:16px;opacity:0.3">"</div>
-        <p style="color:#fff;font-size:1.05rem;font-weight:600;line-height:1.65;font-style:italic;margin:0 0 18px">
-          This is not about the environment. This is about whether a community still has the right to decide what happens to its own water.
+        <p class="text-yellow-600 text-[10px] font-black tracking-widest uppercase mb-3">April 30 · Block M · Mabopane</p>
+        <h2 class="text-3xl font-black text-stone-900 mb-4 leading-tight">
+          Re tshwanela go nna moo.<br/>
+          <span class="text-teal-700">We are the rightful people of this place.</span>
+        </h2>
+        <p class="text-stone-500 text-sm leading-relaxed mb-6">
+          That's what one elder said before the workshop began. Not as a statement — as a fact. Sixty people gathered, field guides came out, and the stream course was mapped and surveyed. By the end of the day, 9 invasive species had been identified, labelled, and removed.
         </p>
-        <p style="color:rgba(255,255,255,0.38);font-size:0.78rem">— Dr. N. Mkhize, Environmental Sciences, University of Pretoria</p>
+        <div class="space-y-3 mb-6">
+          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-stone-100">
+            <span class="text-lg">🌱</span><p class="text-stone-700 text-sm font-medium">Clear invasive species from the stream course</p>
+          </div>
+          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-stone-100">
+            <span class="text-lg">🌿</span><p class="text-stone-700 text-sm font-medium">Plant indigenous species — learn which is which</p>
+          </div>
+          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-stone-100">
+            <span class="text-lg">📣</span><p class="text-stone-700 text-sm font-medium">Spread the word — door-to-door, community group</p>
+          </div>
+        </div>
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl px-5 py-4 mb-6">
+          <p class="text-teal-800 text-xs font-black mb-1">Earn while you learn</p>
+          <p class="text-stone-600 text-sm">R50–R100 per session · Certificate on completion</p>
+        </div>
+        <a href="/volunteer" class="inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white font-black text-sm px-8 py-4 rounded-full transition-colors shadow">Register for Next Session →</a>
       </div>
-      <div style="background:rgba(255,255,255,0.04);border-radius:20px;padding:36px;border:1px solid rgba(255,255,255,0.08)">
-        <p style="color:#fde047;font-size:0.65rem;font-weight:700;letter-spacing:0.22em;margin-bottom:14px">WHAT HAPPENED ON 30 APRIL</p>
-        <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.75;margin:0 0 22px">
-          Five rows of story. Gum trees. Bugweed. Pom pom weed. The UP team led by Ida, Ketla and Tania. Siegwalt the construction expert. The community that did not wait for permission. Danish students who flew halfway across the world to stand in a riverbed.
-        </p>
-        <a href="/volunteer" style="color:#fde047;font-weight:700;font-size:0.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-          Read the full story →
-        </a>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="col-span-2 relative rounded-2xl overflow-hidden"><img src="images/workshop-02.jpg" alt="" class="w-full object-cover" style="height:280px"/></div>
+        <div class="relative rounded-2xl overflow-hidden"><img src="images/workshop-04.jpg" alt="" class="w-full object-cover" style="height:180px"/></div>
+        <div class="relative rounded-2xl overflow-hidden"><img src="images/workshop-13.jpg" alt="" class="w-full object-cover" style="height:180px"/></div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer style="border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px;text-align:center">
-    <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:44px;border-radius:10px;background:#fff;padding:6px 10px;margin-bottom:14px;display:inline-block" />
-    <p style="color:rgba(255,255,255,0.28);font-size:0.75rem;margin:0 0 4px">Mabopane Green Space Network · NPC Reg. 2025/422818/08</p>
-    <p style="color:rgba(255,255,255,0.18);font-size:0.65rem;font-style:italic;margin:0">Kgosi ya lefatshe ke morafe — A community owns its land.</p>
-    <p style="color:rgba(255,255,255,0.12);font-size:0.62rem;margin-top:20px">Written from Mabopane, Pitori. Ke a leboga. Tilwamarwa.</p>
-  </footer>
+  <!-- Partners -->
+  <section class="bg-white border-t border-stone-200 py-10">
+    <div class="max-w-6xl mx-auto px-5 text-center">
+      <p class="text-stone-400 text-[10px] font-black tracking-widest uppercase mb-6">Supported by</p>
+      <div class="flex flex-wrap gap-8 justify-center items-center">
+        <div class="text-center"><p class="text-stone-800 font-black text-sm">University of Pretoria</p><p class="text-stone-400 text-[10px]">Environmental Sciences</p></div>
+        <div class="text-center"><p class="text-stone-800 font-black text-sm">City of Tshwane</p><p class="text-stone-400 text-[10px]">Dept. Environmental Compliance</p></div>
+        <div class="text-center"><p class="text-stone-800 font-black text-sm">MGSN</p><p class="text-stone-400 text-[10px]">NPC 2025/422818/08</p></div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Gratitude -->
+  <section class="bg-teal-950 py-12">
+    <div class="max-w-6xl mx-auto px-5 text-center">
+      <p class="text-yellow-400 text-[10px] font-black uppercase tracking-widest mb-4">Re a leboga · Ke a leboga · Tilwamarwa</p>
+      <p class="text-white font-black text-xl leading-tight mb-6">We did not come to save Mabopane.<br/><span class="text-yellow-400">Mabopane saved itself.</span></p>
+      <div class="flex flex-wrap gap-3 justify-center mb-6">
+        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">City of Tshwane</span>
+        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">UP · Dr. N. Mkhize</span>
+        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">UP Team (Ida, Ketla, Tania, Siegwalt)</span>
+        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">MGSN Volunteers</span>
+        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">Danish Contingent</span>
+        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">CONSUS</span>
+      </div>
+      <p class="text-teal-300 text-xs italic">["Tilwamarwa" — Pitori Setswana: 'The kind of gratitude that closes your throat.']</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-stone-950 border-t border-white/10 py-8">
+    <div class="max-w-6xl mx-auto px-5 text-center">
+      <div class="bg-white text-teal-900 font-black text-xs px-5 py-3 rounded-2xl shadow-lg inline-block mb-4">MGSN · Mabopane Green Space Network</div>
+      <p class="text-white/60 text-xs font-semibold">NPC Reg. 2025/422818/08 · Kgosi ya lefatshe ke morafe</p>
+      <p class="text-white/30 text-[10px] mt-1 italic">A community owns its land. Nna ke ya hae.</p>
+    </div>
+  </footer>
 </body>
 </html>
