@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="MGSN Community Notice Board — News, events, meetings and announcements for Block M Waterfall Park."/>
+  <title>Notice Board · MGSN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Barlow', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .font-condensed { font-family: 'Barlow Condensed', sans-serif; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  </style>
+</head>
+<body class="min-h-screen" style="background:#F5F0E8">
+
+  <div style="height:4px;background:linear-gradient(90deg,#F07A1A 0%,#F07A1A 33%,#EDB810 33%,#EDB810 66%,#2D8B3A 66%,#2D8B3A 100%)"></div>
+
+  <header style="background:#072C2C;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.3)">
+    <div style="max-width:960px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:44px;background:#fff;border-radius:8px;padding:4px 7px"/>
+        <div>
+          <div class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#EDB810;line-height:1.2">Mabopane Green Space Network</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.38);letter-spacing:1px;margin-top:2px;text-transform:uppercase">NPC Reg. 2025/422818/08 · City of Tshwane</div>
+        </div>
+      </div>
+      <nav style="display:flex;gap:8px" class="hidden-mobile">
+        <a href="index.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">Home</a>
+        <a href="volunteer.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">Our Story</a>
+        <a href="register.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">Register</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div style="background:linear-gradient(135deg,#072C2C,#0D5050);padding:28px 20px 24px;position:relative;overflow:hidden">
+    <div style="max-width:960px;margin:0 auto;position:relative;z-index:1">
+      <p class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px">Community Notice Board</p>
+      <h1 class="font-display" style="font-size:clamp(26px,4vw,46px);font-weight:900;color:#fff;line-height:1.05;margin-bottom:6px">News, Notices <span style="color:#EDB810">&amp; Events</span></h1>
+      <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.55">Block M Waterfall Park · Mabopane · Stay informed, stay connected.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7);text-transform:uppercase">📍 Block M</div>
+        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7);text-transform:uppercase">🌿 Fortnightly Sessions</div>
+        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7);text-transform:uppercase">💬 WhatsApp Group</div>
+      </div>
+    </div>
+  </div>
+
+  <main style="max-width:960px;margin:0 auto;padding:20px 16px 60px">
+
+    <!-- Pinned Urgent -->
+    <div style="background:linear-gradient(130deg,#F07A1A,#C4611A);border-radius:14px;padding:16px 18px;margin-bottom:20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 4px 20px rgba(240,122,26,0.28)">
+      <div style="font-size:22px;flex-shrink:0;margin-top:1px">📍</div>
+      <div style="flex:1">
+        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:3px">Pinned — Urgent</div>
+        <div class="font-display" style="font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.2">Freedom Day Launch — Monday 27 April 2026</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.88);line-height:1.55">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C. Meet at the timber shelter at 08:00. All welcome.</div>
+      </div>
+    </div>
+
+    <!-- Upcoming Sessions -->
+    <h2 class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(26,61,74,0.45);margin:24px 0 12px">📅 Upcoming Sessions</h2>
+    <div style="display:grid;gap:10px;margin-bottom:24px">
+      <div style="background:#fff;border-radius:12px;display:flex;align-items:center;gap:14px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid rgba(26,61,74,0.08)">
+        <div style="width:46px;height:46px;min-width:46px;background:#072C2C;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div class="font-condensed" style="font-size:20px;font-weight:900;color:#EDB810;line-height:1">27</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:1px;text-transform:uppercase">APR</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:600;color:#1A3D4A;margin-bottom:2px">Freedom Day Launch — Trial Run</div>
+          <div style="font-size:11px;color:rgba(26,61,74,0.6)">08:00–11:00 · Block M Waterfall</div>
+        </div>
+        <div style="padding:4px 10px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#C0392B;color:#fff">Today</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;display:flex;align-items:center;gap:14px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid rgba(26,61,74,0.08)">
+        <div style="width:46px;height:46px;min-width:46px;background:#072C2C;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div class="font-condensed" style="font-size:20px;font-weight:900;color:#EDB810;line-height:1">09</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:1px;text-transform:uppercase">MAY</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:600;color:#1A3D4A;margin-bottom:2px">Session 2 — May Clean-Up</div>
+          <div style="font-size:11px;color:rgba(26,61,74,0.6)">08:00–11:00 · Block M Waterfall</div>
+        </div>
+        <div style="padding:4px 10px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E8F5EA;color:#1E6028">Open</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;display:flex;align-items:center;gap:14px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid rgba(26,61,74,0.08)">
+        <div style="width:46px;height:46px;min-width:46px;background:#072C2C;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div class="font-condensed" style="font-size:20px;font-weight:900;color:#EDB810;line-height:1">14</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:1px;text-transform:uppercase">MAY</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:600;color:#1A3D4A;margin-bottom:2px">MGSN Committee Meeting</div>
+          <div style="font-size:11px;color:rgba(26,61,74,0.6)">18:00 · TBC · Thomas Mathiba</div>
+        </div>
+        <div style="padding:4px 10px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E3F0FF;color:#1565C0">Meeting</div>
+      </div>
+    </div>
+
+    <!-- Latest Posts -->
+    <h2 class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(26,61,74,0.45);margin:24px 0 12px">Latest Posts</h2>
+
+    <!-- Urgent post -->
+    <div style="background:#fff;border-radius:14px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid rgba(26,61,74,0.08)">
+      <div style="height:3.5px;background:linear-gradient(90deg,#C0392B,#8B1C14)"></div>
+      <div style="padding:15px 16px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#FDECEA;color:#C0392B">Urgent</span>
+          <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">26 April 2026</span>
+        </div>
+        <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Freedom Day Launch — Monday 27 April 2026</h3>
+        <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C. Meet at the timber shelter at 08:00. All welcome.</p>
+      </div>
+    </div>
+
+    <!-- News post -->
+    <div style="background:#fff;border-radius:14px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid rgba(26,61,74,0.08)">
+      <div style="height:3.5px;background:linear-gradient(90deg,#1B7A7A,#0D5050)"></div>
+      <div style="padding:15px 16px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E6F4F4;color:#0D5050">News</span>
+          <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">25 April 2026</span>
+        </div>
+        <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Solar Floodlights Installed at Block M Waterfall Park</h3>
+        <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6">Two 12-metre timber poles with solar-powered IK10-rated floodlights installed. Park now lit after dark. Installation supervised by City of Tshwane Environmental Compliance.</p>
+      </div>
+    </div>
+
+    <!-- Notice post -->
+    <div style="background:#fff;border-radius:14px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid rgba(26,61,74,0.08)">
+      <div style="height:3.5px;background:linear-gradient(90deg,#2D8B3A,#1E6028)"></div>
+      <div style="padding:15px 16px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E8F5EA;color:#1E6028">Notice</span>
+          <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">24 April 2026</span>
+        </div>
+        <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Volunteer Registration Now Open — Earn Rewards</h3>
+        <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6">Register to join the Clean-Up Team-Up group. Volunteers earn points redeemable for vouchers from Shoprite, Cashbuild and food vendors. No experience needed.</p>
+        <a href="register.html" style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:#F07A1A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:100px;text-decoration:none">Register now →</a>
+      </div>
+    </div>
+
+    <!-- WhatsApp QR -->
+    <div style="background:linear-gradient(135deg,#072C2C,#0D5050);border-radius:16px;padding:28px 24px;display:flex;align-items:center;gap:24px;box-shadow:0 4px 24px rgba(7,44,44,0.3);margin-top:28px;flex-wrap:wrap">
+      <div style="flex-shrink:0;text-align:center">
+        <img src="images/whatsapp-qr-main.png" alt="MGSN WhatsApp" style="width:100px;height:100px;border-radius:10px;border:3px solid rgba(255,255,255,0.2);display:block"/>
+        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:6px">Scan to join</div>
+      </div>
+      <div style="flex:1">
+        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px">💬 Join the conversation</div>
+        <h2 class="font-display" style="font-size:20px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:8px">MGSN Clean-Up Team-Up<br><span style="color:#EDB810">WhatsApp Group</span></h2>
+        <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:12px">Get session updates, volunteer reminders, and community news delivered straight to your phone.</p>
+        <a href="register.html" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 18px;border-radius:100px;text-decoration:none">📱 Register to Join</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer style="background:#072C2C;padding:28px 20px;text-align:center">
+    <div style="max-width:960px;margin:0 auto">
+      <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:40px;background:#fff;border-radius:8px;padding:4px 8px;margin:0 auto 14px;display:block"/>
+      <div style="display:flex;justify-content:center;gap:24px;margin:12px 0 16px;flex-wrap:wrap">
+        <a href="index.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Home</a>
+        <a href="noticeboard.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Notice Board</a>
+        <a href="volunteer.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Our Story</a>
+        <a href="register.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Register</a>
+      </div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.3);line-height:1.7">Mabopane Green Space Network · NPC Reg. 2025/422818/08<br>Block M Waterfall Park · Mabopane, City of Tshwane</div>
+      <div style="height:3px;background:linear-gradient(90deg,#F07A1A,#EDB810,#2D8B3A);width:60px;margin:20px auto 0;border-radius:100px"></div>
+    </div>
+  </footer>
+
+  <style>@media(max-width:600px){.hidden-mobile{display:none!important}}</style>
+</body>
+</html>

@@ -3,151 +3,272 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mabopane Green Space Network — Community-led ecological restoration. Invasive species removed. Indigenous plants returned. Water courses reclaimed."/>
+  <meta name="description" content="Mabopane Green Space Network — Community-led ecological restoration. Block M Waterfall Park, Mabopane. NPC Reg. 2025/422818/08"/>
   <title>MGSN · Mabopane Green Space Network</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Barlow', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .font-condensed { font-family: 'Barlow Condensed', sans-serif; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); } 50% { box-shadow: 0 0 0 6px rgba(76,175,80,0); } }
+    .animate-pulse-green { animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+  </style>
 </head>
-<body class="min-h-screen bg-stone-50 font-sans">
+<body class="min-h-screen" style="background:#F5F0E8">
 
-  <div class="bg-gradient-to-r from-teal-700 via-emerald-500 to-teal-600 h-1"></div>
+  <!-- SA flag accent stripe -->
+  <div style="height:4px;background:linear-gradient(90deg,#F07A1A 0%,#F07A1A 33%,#EDB810 33%,#EDB810 66%,#2D8B3A 66%,#2D8B3A 100%)"></div>
 
-  <!-- Nav -->
-  <header class="bg-white border-b border-stone-200 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="bg-teal-800 text-white font-black text-xs px-3 py-2 rounded-xl shadow-lg">MGSN</div>
+  <!-- Sticky Header -->
+  <header style="background:#072C2C;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.3)">
+    <div style="max-width:960px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:44px;background:#fff;border-radius:8px;padding:4px 7px;box-shadow:0 2px 10px rgba(0,0,0,0.2)"/>
         <div>
-          <div class="text-teal-900 font-black text-sm leading-tight">Mabopane Green Space Network</div>
-          <div class="text-stone-400 text-[9px] tracking-wider font-semibold">NPC 2025/422818/08</div>
+          <div class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#EDB810;line-height:1.2">Mabopane Green Space Network</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.38);letter-spacing:1px;margin-top:2px;text-transform:uppercase">NPC Reg. 2025/422818/08 · Kgosi ya lefatshe ke morafe</div>
         </div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="/volunteer" class="bg-teal-700 hover:bg-teal-800 text-white text-xs font-black px-5 py-2.5 rounded-full transition-colors shadow-sm">Volunteer</a>
-        <a href="#learn" class="text-stone-500 text-xs font-bold uppercase tracking-widest hover:text-teal-700 transition-colors">Learn More</a>
+      <nav style="display:flex;gap:8px" class="hidden-mobile">
+        <a href="noticeboard.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">📋 Notice Board</a>
+        <a href="volunteer.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">🌿 Our Story</a>
+        <a href="register.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">🤝 Register</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:5px 11px">
+        <div style="width:7px;height:7px;background:#4CAF50;border-radius:50%;animation:pulse-green"></div>
+        <span class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.65);text-transform:uppercase">Live</span>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative bg-teal-950 text-white overflow-hidden">
-    <div class="absolute inset-0">
-      <img src="images/workshop-03.jpg" alt="" class="w-full h-full object-cover opacity-15"/>
-      <div class="absolute inset-0 bg-gradient-to-b from-teal-950 via-teal-950/97 to-teal-950"></div>
-    </div>
-    <div class="relative max-w-6xl mx-auto px-5 py-20 md:py-28 text-center">
-      <div class="inline-flex items-center gap-2 bg-yellow-400/20 border border-yellow-400/30 text-yellow-400 text-[10px] font-black tracking-[0.2em] uppercase px-4 py-2 rounded-full mb-8">
-        <span class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
-        Volunteer Campaign · May 2026
+  <!-- HERO — GIF background -->
+  <section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center">
+    <img src="images/block-m-waterfall-hero.gif" alt="Block M Waterfall Park" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0"/>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(7,44,44,0.82) 0%, rgba(7,44,44,0.55) 100%);z-index:1"></div>
+    <div style="position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;border:50px solid rgba(255,255,255,0.04);pointer-events:none;z-index:1"></div>
+    <div style="position:absolute;left:-60px;bottom:-60px;width:200px;height:200px;border-radius:50%;border:40px solid rgba(255,255,255,0.03);pointer-events:none;z-index:1"></div>
+    <div style="max-width:960px;width:100%;margin:0 auto;padding:52px 20px 48px;position:relative;z-index:2">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px">
+        <div style="width:6px;height:6px;background:#EDB810;border-radius:50%"></div>
+        <span class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#EDB810">Block M Waterfall Park · Mabopane</span>
       </div>
-      <h1 class="text-5xl md:text-7xl font-black text-white mb-4 leading-[1.0] tracking-tight">
-        This land remembers<br/>who tends it.
+      <h1 class="font-display" style="font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.04;margin-bottom:10px;letter-spacing:-0.5px;text-shadow:0 2px 12px rgba(0,0,0,0.3)">
+        The land remembers<br><span style="color:#EDB810;font-style:italic">who tends it.</span>
       </h1>
-      <p class="text-teal-300 text-lg mb-3 max-w-xl mx-auto">"Nna ke ya hae." — I belong here. This is mine to tend.</p>
-      <p class="text-teal-200 text-sm mb-10 max-w-lg mx-auto leading-relaxed">
-        A community-led restoration project in Mabopane Unit B. Invasive species removed. Indigenous plants returned. Water courses reclaimed. Join the next session.
+      <p style="font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6;max-width:520px;margin-bottom:22px;text-shadow:0 1px 6px rgba(0,0,0,0.25)">
+        A community-owned green space network. Restoring native species, clearing invasives, and building something that lasts.
       </p>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/volunteer" class="bg-yellow-400 text-teal-950 font-black text-sm px-10 py-4 rounded-full hover:bg-yellow-300 transition-all shadow-xl shadow-yellow-400/25 hover:-translate-y-0.5">Join the Campaign →</a>
-        <a href="#learn" class="border-2 border-white/30 text-white font-bold text-sm px-8 py-4 rounded-full hover:bg-white/10 transition-colors">See What We Did</a>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="register.html" style="display:inline-flex;align-items:center;gap:8px;background:#F07A1A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:14px 24px;border-radius:100px;text-decoration:none;box-shadow:0 4px 18px rgba(240,122,26,0.35)">
+          Join Us — Re a leboga
+        </a>
+        <a href="noticeboard.html" style="display:inline-flex;align-items:center;gap:6px;border:2px solid rgba(255,255,255,0.3);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:12px 20px;border-radius:100px;text-decoration:none">
+          📋 Notice Board
+        </a>
       </div>
-      <div class="mt-8 flex items-center justify-center gap-3">
-        <div class="flex -space-x-2">
-          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">B</div>
-          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">K</div>
-          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">T</div>
-          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">M</div>
-          <div class="w-8 h-8 rounded-full bg-teal-700 border-2 border-teal-950 flex items-center justify-center text-white text-[10px] font-black">D</div>
-        </div>
-        <p class="text-teal-300 text-xs"><span class="text-white font-black">60+ Mabopane residents</span> already registered</p>
+      <div style="display:flex;gap:14px;margin-top:22px;flex-wrap:wrap">
+        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.8);text-transform:uppercase">Block M · Fortnightly</div>
+        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.8);text-transform:uppercase">60+ Volunteers</div>
+        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.8);text-transform:uppercase">NPC 2025/422818/08</div>
       </div>
     </div>
+  </section>
+
+  <!-- MAY 9TH EVENT POSTER -->
+  <section style="background:linear-gradient(135deg,#072C2C 0%,#0D5050 100%);padding:32px 20px;position:relative;overflow:hidden">
+    <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap">
+      <div style="flex-shrink:0;position:relative">
+        <img src="images/event-poster-9th.png" alt="May 9th Event" style="width:140px;height:180px;object-fit:cover;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4)"/>
+        <div style="position:absolute;top:-10px;left:-10px;background:#F07A1A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:100px">Next Session</div>
+      </div>
+      <div style="flex:1">
+        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px">📅 Saturday, 9 May 2026</div>
+        <h2 class="font-display" style="font-size:clamp(20px,3vw,30px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px">
+          Session 2 — May Clean-Up<br><span style="color:#EDB810">Block M Waterfall Park</span>
+        </h2>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">🕗 08:00–11:00</span>
+          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">📍 Timber Shelter</span>
+          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">🌿 All ages welcome</span>
+          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">🧤 Gloves provided</span>
+        </div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.55;margin-bottom:16px">Invasive species removal, indigenous planting, stream bank restoration and a plant ID workshop with the UP team. Refreshments sponsored.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="register.html" style="display:inline-flex;align-items:center;gap:6px;background:#F07A1A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 20px;border-radius:100px;text-decoration:none">Register Now →</a>
+          <a href="noticeboard.html" style="display:inline-flex;align-items:center;gap:6px;border:2px solid rgba(255,255,255,0.2);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 18px;border-radius:100px;text-decoration:none">View Details</a>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;border-radius:50%;border:45px solid rgba(255,255,255,0.03)"></div>
   </section>
 
   <!-- Stats -->
-  <section class="bg-white border-b border-stone-200 py-8">
-    <div class="max-w-6xl mx-auto px-5">
-      <div class="grid grid-cols-4 divide-x divide-stone-100 text-center">
-        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">60+</p><p class="text-stone-800 text-xs font-bold mt-1">Community members</p><p class="text-stone-400 text-[10px] mt-0.5">Blocks A through L</p></div>
-        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">3</p><p class="text-stone-800 text-xs font-bold mt-1">Partner institutions</p><p class="text-stone-400 text-[10px] mt-0.5">UP · CoT · MGSN</p></div>
-        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">9</p><p class="text-stone-800 text-xs font-bold mt-1">Invasive species</p><p class="text-stone-400 text-[10px] mt-0.5">Identified + removed</p></div>
-        <div class="px-5 py-2"><p class="text-4xl font-black text-teal-800">2 km</p><p class="text-stone-800 text-xs font-bold mt-1">Stream course</p><p class="text-stone-400 text-[10px] mt-0.5">Surveyed and mapped</p></div>
+  <section style="background:#fff;border-bottom:1px solid rgba(26,61,74,0.08);padding:20px">
+    <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center">
+      <div style="padding:8px 16px;border-right:1px solid rgba(26,61,74,0.08)">
+        <p style="font-size:28px;font-weight:900;color:#0D5050">60+</p>
+        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Community Members</p>
+        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">Blocks A through L</p>
+      </div>
+      <div style="padding:8px 16px;border-right:1px solid rgba(26,61,74,0.08)">
+        <p style="font-size:28px;font-weight:900;color:#0D5050">3</p>
+        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Partner Institutions</p>
+        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">UP · CoT · MGSN</p>
+      </div>
+      <div style="padding:8px 16px;border-right:1px solid rgba(26,61,74,0.08)">
+        <p style="font-size:28px;font-weight:900;color:#0D5050">9</p>
+        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Species Identified</p>
+        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">Invasive + Indigenous</p>
+      </div>
+      <div style="padding:8px 16px">
+        <p style="font-size:28px;font-weight:900;color:#0D5050">2 km</p>
+        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Stream Surveyed</p>
+        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">Block M Watercourse</p>
       </div>
     </div>
   </section>
 
-  <!-- Story section -->
-  <section class="max-w-6xl mx-auto px-5 py-14" id="learn">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-      <div>
-        <p class="text-yellow-600 text-[10px] font-black tracking-widest uppercase mb-3">April 30 · Block M · Mabopane</p>
-        <h2 class="text-3xl font-black text-stone-900 mb-4 leading-tight">
-          Re tshwanela go nna moo.<br/>
-          <span class="text-teal-700">We are the rightful people of this place.</span>
-        </h2>
-        <p class="text-stone-500 text-sm leading-relaxed mb-6">
-          That's what one elder said before the workshop began. Not as a statement — as a fact. Sixty people gathered, field guides came out, and the stream course was mapped and surveyed. By the end of the day, 9 invasive species had been identified, labelled, and removed.
-        </p>
-        <div class="space-y-3 mb-6">
-          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-stone-100">
-            <span class="text-lg">🌱</span><p class="text-stone-700 text-sm font-medium">Clear invasive species from the stream course</p>
+  <!-- Latest Notices -->
+  <section style="max-width:960px;margin:0 auto;padding:40px 20px 60px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:20px">📋</span>
+        <h2 class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(26,61,74,0.45)">Latest Notices</h2>
+      </div>
+      <a href="noticeboard.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Full Notice Board →</a>
+    </div>
+    <div style="display:grid;gap:12px">
+      <!-- Urgent -->
+      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06);border:1px solid rgba(26,61,74,0.08)">
+        <div style="height:3.5px;background:linear-gradient(90deg,#C0392B,#8B1C14)"></div>
+        <div style="padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#FDECEA;color:#C0392B">Urgent</span>
+            <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">26 April 2026</span>
           </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-stone-100">
-            <span class="text-lg">🌿</span><p class="text-stone-700 text-sm font-medium">Plant indigenous species — learn which is which</p>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-stone-100">
-            <span class="text-lg">📣</span><p class="text-stone-700 text-sm font-medium">Spread the word — door-to-door, community group</p>
+          <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Freedom Day Launch — Monday 27 April 2026</h3>
+          <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6;margin-bottom:12px">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C. Meet at the timber shelter at 08:00.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(26,61,74,0.08)">
+            <span style="font-size:11px;font-weight:600;color:rgba(26,61,74,0.6)">MGSN Management</span>
+            <a href="noticeboard.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Read more →</a>
           </div>
         </div>
-        <div class="bg-yellow-50 border border-yellow-200 rounded-xl px-5 py-4 mb-6">
-          <p class="text-teal-800 text-xs font-black mb-1">Earn while you learn</p>
-          <p class="text-stone-600 text-sm">R50–R100 per session · Certificate on completion</p>
+      </div>
+      <!-- News -->
+      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06);border:1px solid rgba(26,61,74,0.08)">
+        <div style="height:3.5px;background:linear-gradient(90deg,#1B7A7A,#0D5050)"></div>
+        <div style="padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E6F4F4;color:#0D5050">News</span>
+            <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">25 April 2026</span>
+          </div>
+          <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Solar Floodlights Installed at Block M Waterfall Park</h3>
+          <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6;margin-bottom:12px">Two 12-metre timber poles with solar-powered floodlights installed. Park now lit after dark.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(26,61,74,0.08)">
+            <span style="font-size:11px;font-weight:600;color:rgba(26,61,74,0.6)">Bra Tshego — MGSN</span>
+            <a href="noticeboard.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Read more →</a>
+          </div>
         </div>
-        <a href="/volunteer" class="inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white font-black text-sm px-8 py-4 rounded-full transition-colors shadow">Register for Next Session →</a>
       </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div class="col-span-2 relative rounded-2xl overflow-hidden"><img src="images/workshop-02.jpg" alt="" class="w-full object-cover" style="height:280px"/></div>
-        <div class="relative rounded-2xl overflow-hidden"><img src="images/workshop-04.jpg" alt="" class="w-full object-cover" style="height:180px"/></div>
-        <div class="relative rounded-2xl overflow-hidden"><img src="images/workshop-13.jpg" alt="" class="w-full object-cover" style="height:180px"/></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Partners -->
-  <section class="bg-white border-t border-stone-200 py-10">
-    <div class="max-w-6xl mx-auto px-5 text-center">
-      <p class="text-stone-400 text-[10px] font-black tracking-widest uppercase mb-6">Supported by</p>
-      <div class="flex flex-wrap gap-8 justify-center items-center">
-        <div class="text-center"><p class="text-stone-800 font-black text-sm">University of Pretoria</p><p class="text-stone-400 text-[10px]">Environmental Sciences</p></div>
-        <div class="text-center"><p class="text-stone-800 font-black text-sm">City of Tshwane</p><p class="text-stone-400 text-[10px]">Dept. Environmental Compliance</p></div>
-        <div class="text-center"><p class="text-stone-800 font-black text-sm">MGSN</p><p class="text-stone-400 text-[10px]">NPC 2025/422818/08</p></div>
+      <!-- Notice -->
+      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06);border:1px solid rgba(26,61,74,0.08)">
+        <div style="height:3.5px;background:linear-gradient(90deg,#2D8B3A,#1E6028)"></div>
+        <div style="padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E8F5EA;color:#1E6028">Notice</span>
+            <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">24 April 2026</span>
+          </div>
+          <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Volunteer Registration Now Open — Earn Rewards</h3>
+          <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6;margin-bottom:12px">Register to join the Clean-Up Team-Up group. Volunteers earn vouchers from Shoprite, Cashbuild and local food vendors.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(26,61,74,0.08)">
+            <span style="font-size:11px;font-weight:600;color:rgba(26,61,74,0.6)">MGSN Management</span>
+            <a href="register.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Register now →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Gratitude -->
-  <section class="bg-teal-950 py-12">
-    <div class="max-w-6xl mx-auto px-5 text-center">
-      <p class="text-yellow-400 text-[10px] font-black uppercase tracking-widest mb-4">Re a leboga · Ke a leboga · Tilwamarwa</p>
-      <p class="text-white font-black text-xl leading-tight mb-6">We did not come to save Mabopane.<br/><span class="text-yellow-400">Mabopane saved itself.</span></p>
-      <div class="flex flex-wrap gap-3 justify-center mb-6">
-        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">City of Tshwane</span>
-        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">UP · Dr. N. Mkhize</span>
-        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">UP Team (Ida, Ketla, Tania, Siegwalt)</span>
-        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">MGSN Volunteers</span>
-        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">Danish Contingent</span>
-        <span class="bg-white/10 text-white/70 text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">CONSUS</span>
+  <!-- What would you like to do -->
+  <section style="background:#fff;border-top:1px solid rgba(26,61,74,0.08);border-bottom:1px solid rgba(26,61,74,0.08);padding:40px 20px">
+    <div style="max-width:960px;margin:0 auto">
+      <h2 class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(26,61,74,0.45);margin-bottom:16px">What would you like to do?</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <a href="noticeboard.html" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <span style="font-size:28px">📋</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#1B7A7A">Notice Board</div>
+            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">News, events, announcements. Stay informed.</div>
+          </div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1B7A7A;margin-top:auto">Open →</div>
+        </a>
+        <a href="register.html" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <span style="font-size:28px">🤝</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#F07A1A">Register to Volunteer</div>
+            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">Join the green team. Earn rewards for your time.</div>
+          </div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#F07A1A;margin-top:auto">Open →</div>
+        </a>
+        <a href="volunteer.html" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <span style="font-size:28px">🌿</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#2D8B3A">Our Story</div>
+            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">What happened on 30 April 2026 at Block M.</div>
+          </div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2D8B3A;margin-top:auto">Open →</div>
+        </a>
+        <a href="mailto:tshegofatso@duck.com" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <span style="font-size:28px">💬</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#1565C0">Chat with MGSN</div>
+            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">Questions? Email the team directly.</div>
+          </div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1565C0;margin-top:auto">Open →</div>
+        </a>
       </div>
-      <p class="text-teal-300 text-xs italic">["Tilwamarwa" — Pitori Setswana: 'The kind of gratitude that closes your throat.']</p>
     </div>
+  </section>
+
+  <!-- WhatsApp QR -->
+  <section style="background:linear-gradient(135deg,#072C2C,#0D5050);padding:40px 20px;position:relative;overflow:hidden">
+    <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap">
+      <div style="flex-shrink:0;text-align:center">
+        <img src="images/whatsapp-qr-main.png" alt="MGSN WhatsApp QR" style="width:110px;height:110px;border-radius:12px;border:3px solid rgba(255,255,255,0.2);display:block"/>
+        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:6px">Scan to join</div>
+      </div>
+      <div style="flex:1">
+        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px">💬 Join the conversation</div>
+        <h2 class="font-display" style="font-size:clamp(20px,3vw,28px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:8px">MGSN Clean-Up Team-Up<br><span style="color:#EDB810">WhatsApp Group</span></h2>
+        <p style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:14px">Get session updates, volunteer reminders, and community news delivered straight to your phone.</p>
+        <a href="register.html" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;border-radius:100px;text-decoration:none">📱 Register to Join</a>
+      </div>
+    </div>
+    <div style="position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;border-radius:50%;border:45px solid rgba(255,255,255,0.03);pointer-events:none"></div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-stone-950 border-t border-white/10 py-8">
-    <div class="max-w-6xl mx-auto px-5 text-center">
-      <div class="bg-white text-teal-900 font-black text-xs px-5 py-3 rounded-2xl shadow-lg inline-block mb-4">MGSN · Mabopane Green Space Network</div>
-      <p class="text-white/60 text-xs font-semibold">NPC Reg. 2025/422818/08 · Kgosi ya lefatshe ke morafe</p>
-      <p class="text-white/30 text-[10px] mt-1 italic">A community owns its land. Nna ke ya hae.</p>
+  <footer style="background:#072C2C;padding:32px 20px;text-align:center">
+    <div style="max-width:960px;margin:0 auto">
+      <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:40px;background:#fff;border-radius:8px;padding:4px 8px;margin:0 auto 14px;display:block"/>
+      <div style="display:flex;justify-content:center;gap:24px;margin:12px 0 16px;flex-wrap:wrap">
+        <a href="index.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Home</a>
+        <a href="noticeboard.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Notice Board</a>
+        <a href="volunteer.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Our Story</a>
+        <a href="register.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Register</a>
+        <a href="mailto:tshegofatso@duck.com" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Contact</a>
+      </div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.3);line-height:1.7">Mabopane Green Space Network · NPC Reg. 2025/422818/08<br>Block M Waterfall Park · Mabopane, City of Tshwane<br><em>Kgosi ya lefatshe ke morafe — A community owns its land.</em></div>
+      <div style="height:3px;background:linear-gradient(90deg,#F07A1A,#EDB810,#2D8B3A);width:60px;margin:20px auto 0;border-radius:100px"></div>
     </div>
   </footer>
+
+  <style>
+    @media (max-width: 600px) { .hidden-mobile { display: none !important; } }
+  </style>
 </body>
 </html>
