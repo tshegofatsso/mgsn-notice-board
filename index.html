@@ -3,272 +3,306 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mabopane Green Space Network — Community-led ecological restoration. Block M Waterfall Park, Mabopane. NPC Reg. 2025/422818/08"/>
-  <title>MGSN · Mabopane Green Space Network</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>MGSN — Mabopane Green Space Network</title>
   <style>
-    body { font-family: 'Barlow', sans-serif; }
-    .font-display { font-family: 'Playfair Display', serif; }
-    .font-condensed { font-family: 'Barlow Condensed', sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Barlow', sans-serif; background: #F5F0E8; color: #1A3D4A; min-height: 100vh; }
+    a { text-decoration: none; }
+    header { background: #072C2C; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    .top-bar { height: 4px; background: linear-gradient(90deg, #F07A1A, #F07A1A 33%, #EDB810 33%, #EDB810 66%, #2D8B3A 66%, #2D8B3A 100%); }
+    .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-img { height: 44px; background: #fff; border-radius: 8px; padding: 4px 7px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    .logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #EDB810; line-height: 1.2; }
+    .logo-sub { font-size: 9px; color: rgba(255,255,255,0.38); letter-spacing: 1px; margin-top: 2px; text-transform: uppercase; }
+    nav { display: flex; gap: 8px; }
+    nav a, nav button { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.65); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); cursor: pointer; transition: all 0.18s; }
+    .live-pill { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 5px 11px; }
+    .live-dot { width: 7px; height: 7px; background: #4CAF50; border-radius: 50%; animation: pulse 2.4s ease-in-out infinite; }
+    .live-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
     @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); } 50% { box-shadow: 0 0 0 6px rgba(76,175,80,0); } }
-    .animate-pulse-green { animation: pulse 2.4s ease-in-out infinite; }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-    .animate-float { animation: float 4s ease-in-out infinite; }
+    /* Hero */
+    .hero { position: relative; min-height: 420px; display: flex; align-items: center; overflow: hidden; }
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(7,44,44,0.82), rgba(7,44,44,0.55)); z-index: 1; }
+    .hero-deco1 { position: absolute; right: -40px; top: -40px; width: 220px; height: 220px; border-radius: 50%; border: 50px solid rgba(255,255,255,0.04); z-index: 1; }
+    .hero-deco2 { position: absolute; left: -60px; bottom: -60px; width: 200px; height: 200px; border-radius: 50%; border: 40px solid rgba(255,255,255,0.03); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; max-width: 960px; width: 100%; margin: 0 auto; padding: 52px 20px 48px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+    .hero-dot { width: 6px; height: 6px; background: #EDB810; border-radius: 50%; }
+    .hero-eyebrow-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #EDB810; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,56px); font-weight: 900; color: #fff; line-height: 1.04; margin-bottom: 10px; letter-spacing: -0.5px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+    .hero h1 span { color: #EDB810; font-style: italic; }
+    .hero p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; max-width: 520px; margin-bottom: 22px; text-shadow: 0 1px 6px rgba(0,0,0,0.25); }
+    .hero-badges { display: flex; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+    .hero-badge { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 5px 11px; font-size: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+    /* Event banner */
+    .event-banner { background: linear-gradient(135deg, #072C2C, #0D5050); padding: 32px 20px; position: relative; overflow: hidden; }
+    .event-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .event-poster { flex-shrink: 0; position: relative; }
+    .event-poster img { width: 140px; height: 180px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .event-poster-badge { position: absolute; top: -10px; left: -10px; background: #F07A1A; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
+    .event-info { flex: 1; }
+    .event-date-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    .event-title { font-family: 'Playfair Display', serif; font-size: clamp(20px,3vw,30px); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 8px; }
+    .event-title span { color: #EDB810; }
+    .event-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    .event-meta span { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); }
+    .event-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.55; margin-bottom: 16px; }
+    .event-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: #F07A1A; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 20px; border-radius: 100px; }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; border: 2px solid rgba(255,255,255,0.2); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 9px 18px; border-radius: 100px; }
+    /* Stats */
+    .stats { background: #fff; border-bottom: 1px solid rgba(26,61,74,0.08); padding: 20px; }
+    .stats-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 0; text-align: center; }
+    .stat-item { padding: 8px 16px; border-right: 1px solid rgba(26,61,74,0.08); }
+    .stat-item:last-child { border-right: none; }
+    .stat-n { font-size: 28px; font-weight: 900; color: #0D5050; }
+    .stat-label { font-size: 12px; font-weight: 600; color: #1A3D4A; margin-top: 2px; }
+    .stat-sub { font-size: 10px; color: rgba(26,61,74,0.6); margin-top: 2px; }
+    /* Notices */
+    .notices { max-width: 960px; margin: 0 auto; padding: 40px 20px 60px; }
+    .notices-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .notices-heading { display: flex; align-items: center; gap: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(26,61,74,0.45); }
+    .notices-link { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #0D5050; }
+    .notice-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06); border: 1px solid rgba(26,61,74,0.08); margin-bottom: 12px; transition: all 0.3s; }
+    .notice-bar { height: 3.5px; }
+    .notice-body { padding: 16px 18px; }
+    .notice-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .notice-badge { padding: 3px 8px; border-radius: 100px; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .notice-date { font-size: 10px; color: rgba(26,61,74,0.45); margin-left: auto; }
+    .notice-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #1A3D4A; line-height: 1.25; margin-bottom: 6px; }
+    .notice-text { font-size: 13px; color: rgba(26,61,74,0.6); line-height: 1.6; margin-bottom: 12px; }
+    .notice-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(26,61,74,0.08); }
+    .notice-author { font-size: 11px; font-weight: 600; color: rgba(26,61,74,0.6); }
+    /* Actions section */
+    .actions { background: #fff; border-top: 1px solid rgba(26,61,74,0.08); border-bottom: 1px solid rgba(26,61,74,0.08); padding: 40px 20px; }
+    .actions-inner { max-width: 960px; margin: 0 auto; }
+    .actions-heading { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(26,61,74,0.45); margin-bottom: 16px; }
+    .actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .action-card { background: #EDE7D9; border-radius: 14px; padding: 20px 18px; border: 1px solid rgba(26,61,74,0.08); display: flex; flex-direction: column; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; }
+    .action-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .action-icon { font-size: 28px; }
+    .action-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
+    .action-sub { font-size: 12px; color: rgba(26,61,74,0.6); line-height: 1.4; margin-top: 4px; }
+    .action-link { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: auto; }
+    /* WhatsApp */
+    .whatsapp { background: linear-gradient(135deg, #072C2C, #0D5050); padding: 40px 20px; position: relative; overflow: hidden; }
+    .whatsapp-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .whatsapp-deco { position: absolute; right: -50px; bottom: -50px; width: 180px; height: 180px; border-radius: 50%; border: 45px solid rgba(255,255,255,0.03); pointer-events: none; }
+    .qr-wrap { flex-shrink: 0; text-align: center; }
+    .qr-wrap img { width: 110px; height: 110px; border-radius: 12px; border: 3px solid rgba(255,255,255,0.2); display: block; }
+    .qr-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 6px; }
+    .whatsapp-info { flex: 1; }
+    .whatsapp-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+    .whatsapp-title { font-family: 'Playfair Display', serif; font-size: clamp(20px,3vw,28px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 8px; }
+    .whatsapp-title span { color: #EDB810; }
+    .whatsapp-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 14px; }
+    .btn-whatsapp { display: inline-flex; align-items: center; gap: 6px; background: #25D366; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 18px; border-radius: 100px; }
+    /* Footer */
+    footer { background: #072C2C; padding: 32px 20px; text-align: center; }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+    .footer-logo { height: 40px; background: #fff; border-radius: 8px; padding: 4px 8px; margin: 0 auto 14px; display: block; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin: 12px 0 16px; flex-wrap: wrap; }
+    .footer-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-text { font-size: 10px; color: rgba(255,255,255,0.3); line-height: 1.7; }
+    .footer-divider { height: 3px; background: linear-gradient(90deg, #F07A1A, #EDB810, #2D8B3A); width: 60px; margin: 20px auto 0; border-radius: 100px; }
+    @media (max-width: 600px) { .hidden-mobile { display: none !important; } nav { display: none; } .stats-inner { grid-template-columns: repeat(2, 1fr); } .stat-item:nth-child(2) { border-right: none; } }
   </style>
 </head>
-<body class="min-h-screen" style="background:#F5F0E8">
-
-  <!-- SA flag accent stripe -->
-  <div style="height:4px;background:linear-gradient(90deg,#F07A1A 0%,#F07A1A 33%,#EDB810 33%,#EDB810 66%,#2D8B3A 66%,#2D8B3A 100%)"></div>
-
-  <!-- Sticky Header -->
-  <header style="background:#072C2C;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.3)">
-    <div style="max-width:960px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:44px;background:#fff;border-radius:8px;padding:4px 7px;box-shadow:0 2px 10px rgba(0,0,0,0.2)"/>
+<body>
+  <header>
+    <div class="top-bar"></div>
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <img src="images/mgsn-logo-dark.png" alt="MGSN" class="logo-img"/>
         <div>
-          <div class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#EDB810;line-height:1.2">Mabopane Green Space Network</div>
-          <div style="font-size:9px;color:rgba(255,255,255,0.38);letter-spacing:1px;margin-top:2px;text-transform:uppercase">NPC Reg. 2025/422818/08 · Kgosi ya lefatshe ke morafe</div>
+          <div class="logo-text">Mabopane Green Space Network</div>
+          <div class="logo-sub">NPC Reg. 2025/422818/08 &middot; Kgosi ya lefatshe ke morafe</div>
         </div>
       </div>
-      <nav style="display:flex;gap:8px" class="hidden-mobile">
-        <a href="noticeboard.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">📋 Notice Board</a>
-        <a href="volunteer.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">🌿 Our Story</a>
-        <a href="register.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05)">🤝 Register</a>
+      <nav class="hidden-mobile">
+        <a href="/noticeboard">📋 Notice Board</a>
+        <a href="/volunteer">🌿 Our Story</a>
+        <a href="/register">🤝 Register</a>
       </nav>
-      <div style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:5px 11px">
-        <div style="width:7px;height:7px;background:#4CAF50;border-radius:50%;animation:pulse-green"></div>
-        <span class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.65);text-transform:uppercase">Live</span>
+      <div class="live-pill">
+        <div class="live-dot"></div>
+        <span class="live-label">Live</span>
       </div>
     </div>
   </header>
 
-  <!-- HERO — GIF background -->
-  <section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center">
-    <img src="images/block-m-waterfall-hero.gif" alt="Block M Waterfall Park" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0"/>
-    <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(7,44,44,0.82) 0%, rgba(7,44,44,0.55) 100%);z-index:1"></div>
-    <div style="position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;border:50px solid rgba(255,255,255,0.04);pointer-events:none;z-index:1"></div>
-    <div style="position:absolute;left:-60px;bottom:-60px;width:200px;height:200px;border-radius:50%;border:40px solid rgba(255,255,255,0.03);pointer-events:none;z-index:1"></div>
-    <div style="max-width:960px;width:100%;margin:0 auto;padding:52px 20px 48px;position:relative;z-index:2">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px">
-        <div style="width:6px;height:6px;background:#EDB810;border-radius:50%"></div>
-        <span class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#EDB810">Block M Waterfall Park · Mabopane</span>
+  <section class="hero">
+    <img src="images/block-m-waterfall-hero.gif" alt="Block M Waterfall Park" class="hero-img"/>
+    <div class="hero-overlay"></div>
+    <div class="hero-deco1"></div>
+    <div class="hero-deco2"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><div class="hero-dot"></div><span class="hero-eyebrow-text">Block M Waterfall Park &middot; Mabopane</span></div>
+      <h1>The land remembers<br/><span>who tends it.</span></h1>
+      <p>A community-owned green space network. Restoring native species, clearing invasives, and building something that lasts.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="/register" class="btn-primary">Join Us &mdash; Re a leboga</a>
+        <a href="/noticeboard" class="btn-secondary">📋 Notice Board</a>
       </div>
-      <h1 class="font-display" style="font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.04;margin-bottom:10px;letter-spacing:-0.5px;text-shadow:0 2px 12px rgba(0,0,0,0.3)">
-        The land remembers<br><span style="color:#EDB810;font-style:italic">who tends it.</span>
-      </h1>
-      <p style="font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6;max-width:520px;margin-bottom:22px;text-shadow:0 1px 6px rgba(0,0,0,0.25)">
-        A community-owned green space network. Restoring native species, clearing invasives, and building something that lasts.
-      </p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="register.html" style="display:inline-flex;align-items:center;gap:8px;background:#F07A1A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:14px 24px;border-radius:100px;text-decoration:none;box-shadow:0 4px 18px rgba(240,122,26,0.35)">
-          Join Us — Re a leboga
-        </a>
-        <a href="noticeboard.html" style="display:inline-flex;align-items:center;gap:6px;border:2px solid rgba(255,255,255,0.3);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:12px 20px;border-radius:100px;text-decoration:none">
-          📋 Notice Board
-        </a>
-      </div>
-      <div style="display:flex;gap:14px;margin-top:22px;flex-wrap:wrap">
-        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.8);text-transform:uppercase">Block M · Fortnightly</div>
-        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.8);text-transform:uppercase">60+ Volunteers</div>
-        <div class="font-condensed" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.8);text-transform:uppercase">NPC 2025/422818/08</div>
+      <div class="hero-badges">
+        <span class="hero-badge">Block M &middot; Fortnightly</span>
+        <span class="hero-badge">60+ Volunteers</span>
+        <span class="hero-badge">NPC 2025/422818/08</span>
       </div>
     </div>
   </section>
 
-  <!-- MAY 9TH EVENT POSTER -->
-  <section style="background:linear-gradient(135deg,#072C2C 0%,#0D5050 100%);padding:32px 20px;position:relative;overflow:hidden">
-    <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap">
-      <div style="flex-shrink:0;position:relative">
-        <img src="images/event-poster-9th.png" alt="May 9th Event" style="width:140px;height:180px;object-fit:cover;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4)"/>
-        <div style="position:absolute;top:-10px;left:-10px;background:#F07A1A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:100px">Next Session</div>
+  <section class="event-banner">
+    <div class="event-inner">
+      <div class="event-poster">
+        <img src="images/event-poster-9th.png" alt="May 9th Event Poster"/>
+        <div class="event-poster-badge">Next Session</div>
       </div>
-      <div style="flex:1">
-        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px">📅 Saturday, 9 May 2026</div>
-        <h2 class="font-display" style="font-size:clamp(20px,3vw,30px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px">
-          Session 2 — May Clean-Up<br><span style="color:#EDB810">Block M Waterfall Park</span>
-        </h2>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">🕗 08:00–11:00</span>
-          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">📍 Timber Shelter</span>
-          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">🌿 All ages welcome</span>
-          <span class="font-condensed" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8)">🧤 Gloves provided</span>
+      <div class="event-info">
+        <div class="event-date-label">📅 Saturday, 9 May 2026</div>
+        <h2 class="event-title">Session 2 &mdash; May Clean-Up<br/><span>Block M Waterfall Park</span></h2>
+        <div class="event-meta">
+          <span>🕗 08:00&ndash;11:00</span>
+          <span>📍 Timber Shelter</span>
+          <span>🌿 All ages welcome</span>
+          <span>🧤 Gloves provided</span>
         </div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.55;margin-bottom:16px">Invasive species removal, indigenous planting, stream bank restoration and a plant ID workshop with the UP team. Refreshments sponsored.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a href="register.html" style="display:inline-flex;align-items:center;gap:6px;background:#F07A1A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 20px;border-radius:100px;text-decoration:none">Register Now →</a>
-          <a href="noticeboard.html" style="display:inline-flex;align-items:center;gap:6px;border:2px solid rgba(255,255,255,0.2);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 18px;border-radius:100px;text-decoration:none">View Details</a>
+        <p class="event-desc">Invasive species removal, indigenous planting, stream bank restoration and a plant ID workshop with the UP team. Refreshments sponsored.</p>
+        <div class="event-actions">
+          <a href="/register" class="btn-primary">Register Now &rarr;</a>
+          <a href="/noticeboard" class="btn-secondary">View Details</a>
         </div>
-      </div>
-    </div>
-    <div style="position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;border-radius:50%;border:45px solid rgba(255,255,255,0.03)"></div>
-  </section>
-
-  <!-- Stats -->
-  <section style="background:#fff;border-bottom:1px solid rgba(26,61,74,0.08);padding:20px">
-    <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center">
-      <div style="padding:8px 16px;border-right:1px solid rgba(26,61,74,0.08)">
-        <p style="font-size:28px;font-weight:900;color:#0D5050">60+</p>
-        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Community Members</p>
-        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">Blocks A through L</p>
-      </div>
-      <div style="padding:8px 16px;border-right:1px solid rgba(26,61,74,0.08)">
-        <p style="font-size:28px;font-weight:900;color:#0D5050">3</p>
-        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Partner Institutions</p>
-        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">UP · CoT · MGSN</p>
-      </div>
-      <div style="padding:8px 16px;border-right:1px solid rgba(26,61,74,0.08)">
-        <p style="font-size:28px;font-weight:900;color:#0D5050">9</p>
-        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Species Identified</p>
-        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">Invasive + Indigenous</p>
-      </div>
-      <div style="padding:8px 16px">
-        <p style="font-size:28px;font-weight:900;color:#0D5050">2 km</p>
-        <p style="font-size:12px;font-weight:600;color:#1A3D4A;margin-top:2px">Stream Surveyed</p>
-        <p style="font-size:10px;color:rgba(26,61,74,0.6);margin-top:2px">Block M Watercourse</p>
       </div>
     </div>
   </section>
 
-  <!-- Latest Notices -->
-  <section style="max-width:960px;margin:0 auto;padding:40px 20px 60px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:20px">📋</span>
-        <h2 class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(26,61,74,0.45)">Latest Notices</h2>
-      </div>
-      <a href="noticeboard.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Full Notice Board →</a>
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat-item"><p class="stat-n">60+</p><p class="stat-label">Community Members</p><p class="stat-sub">Blocks A through L</p></div>
+      <div class="stat-item"><p class="stat-n">3</p><p class="stat-label">Partner Institutions</p><p class="stat-sub">UP &middot; CoT &middot; MGSN</p></div>
+      <div class="stat-item"><p class="stat-n">9</p><p class="stat-label">Species Identified</p><p class="stat-sub">Invasive + Indigenous</p></div>
+      <div class="stat-item"><p class="stat-n">2 km</p><p class="stat-label">Stream Surveyed</p><p class="stat-sub">Block M Watercourse</p></div>
     </div>
-    <div style="display:grid;gap:12px">
-      <!-- Urgent -->
-      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06);border:1px solid rgba(26,61,74,0.08)">
-        <div style="height:3.5px;background:linear-gradient(90deg,#C0392B,#8B1C14)"></div>
-        <div style="padding:16px 18px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#FDECEA;color:#C0392B">Urgent</span>
-            <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">26 April 2026</span>
+  </section>
+
+  <section class="notices">
+    <div class="notices-header">
+      <div class="notices-heading"><span>📋</span><h2>Latest Notices</h2></div>
+      <a href="/noticeboard" class="notices-link">Full Notice Board &rarr;</a>
+    </div>
+    <div style="display:grid;gap:12px;">
+      <div class="notice-card">
+        <div class="notice-bar" style="background:linear-gradient(90deg,#C0392B,#8B1C14)"></div>
+        <div class="notice-body">
+          <div class="notice-meta">
+            <span class="notice-badge" style="background:#FDECEA;color:#C0392B">Urgent</span>
+            <span class="notice-date">26 April 2026</span>
           </div>
-          <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Freedom Day Launch — Monday 27 April 2026</h3>
-          <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6;margin-bottom:12px">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C. Meet at the timber shelter at 08:00.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(26,61,74,0.08)">
-            <span style="font-size:11px;font-weight:600;color:rgba(26,61,74,0.6)">MGSN Management</span>
-            <a href="noticeboard.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Read more →</a>
-          </div>
-        </div>
-      </div>
-      <!-- News -->
-      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06);border:1px solid rgba(26,61,74,0.08)">
-        <div style="height:3.5px;background:linear-gradient(90deg,#1B7A7A,#0D5050)"></div>
-        <div style="padding:16px 18px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E6F4F4;color:#0D5050">News</span>
-            <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">25 April 2026</span>
-          </div>
-          <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Solar Floodlights Installed at Block M Waterfall Park</h3>
-          <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6;margin-bottom:12px">Two 12-metre timber poles with solar-powered floodlights installed. Park now lit after dark.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(26,61,74,0.08)">
-            <span style="font-size:11px;font-weight:600;color:rgba(26,61,74,0.6)">Bra Tshego — MGSN</span>
-            <a href="noticeboard.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Read more →</a>
+          <h3 class="notice-title">Freedom Day Launch &mdash; Monday 27 April 2026</h3>
+          <p class="notice-text">First clean-up session at Block M Waterfall. Weather confirmed clear &mdash; 24&deg;C. Meet at the timber shelter at 08:00.</p>
+          <div class="notice-footer">
+            <span class="notice-author">MGSN Management</span>
+            <a href="/noticeboard" class="notices-link">Read more &rarr;</a>
           </div>
         </div>
       </div>
-      <!-- Notice -->
-      <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06);border:1px solid rgba(26,61,74,0.08)">
-        <div style="height:3.5px;background:linear-gradient(90deg,#2D8B3A,#1E6028)"></div>
-        <div style="padding:16px 18px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span style="padding:3px 8px;border-radius:100px;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#E8F5EA;color:#1E6028">Notice</span>
-            <span style="font-size:10px;color:rgba(26,61,74,0.45);margin-left:auto">24 April 2026</span>
+      <div class="notice-card">
+        <div class="notice-bar" style="background:linear-gradient(90deg,#1B7A7A,#0D5050)"></div>
+        <div class="notice-body">
+          <div class="notice-meta">
+            <span class="notice-badge" style="background:#E6F4F4;color:#0D5050">News</span>
+            <span class="notice-date">25 April 2026</span>
           </div>
-          <h3 class="font-display" style="font-size:17px;font-weight:700;color:#1A3D4A;line-height:1.25;margin-bottom:6px">Volunteer Registration Now Open — Earn Rewards</h3>
-          <p style="font-size:13px;color:rgba(26,61,74,0.6);line-height:1.6;margin-bottom:12px">Register to join the Clean-Up Team-Up group. Volunteers earn vouchers from Shoprite, Cashbuild and local food vendors.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(26,61,74,0.08)">
-            <span style="font-size:11px;font-weight:600;color:rgba(26,61,74,0.6)">MGSN Management</span>
-            <a href="register.html" class="font-condensed" style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D5050;text-decoration:none">Register now →</a>
+          <h3 class="notice-title">Solar Floodlights Installed at Block M Waterfall Park</h3>
+          <p class="notice-text">Two 12-metre timber poles with solar-powered floodlights installed. Park now lit after dark.</p>
+          <div class="notice-footer">
+            <span class="notice-author">Bra Tshego &mdash; MGSN</span>
+            <a href="/noticeboard" class="notices-link">Read more &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="notice-card">
+        <div class="notice-bar" style="background:linear-gradient(90deg,#2D8B3A,#1E6028)"></div>
+        <div class="notice-body">
+          <div class="notice-meta">
+            <span class="notice-badge" style="background:#E8F5EA;color:#1E6028">Notice</span>
+            <span class="notice-date">24 April 2026</span>
+          </div>
+          <h3 class="notice-title">Volunteer Registration Now Open &mdash; Earn Rewards</h3>
+          <p class="notice-text">Register to join the Clean-Up Team-Up group. Volunteers earn vouchers from Shoprite, Cashbuild and food vendors.</p>
+          <div class="notice-footer">
+            <span class="notice-author">MGSN Management</span>
+            <a href="/register" class="notices-link">Register now &rarr;</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- What would you like to do -->
-  <section style="background:#fff;border-top:1px solid rgba(26,61,74,0.08);border-bottom:1px solid rgba(26,61,74,0.08);padding:40px 20px">
-    <div style="max-width:960px;margin:0 auto">
-      <h2 class="font-condensed" style="font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(26,61,74,0.45);margin-bottom:16px">What would you like to do?</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
-        <a href="noticeboard.html" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-          <span style="font-size:28px">📋</span>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#1B7A7A">Notice Board</div>
-            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">News, events, announcements. Stay informed.</div>
-          </div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1B7A7A;margin-top:auto">Open →</div>
+  <section class="actions">
+    <div class="actions-inner">
+      <h2 class="actions-heading">What would you like to do?</h2>
+      <div class="actions-grid">
+        <a href="/noticeboard" class="action-card">
+          <span class="action-icon">📋</span>
+          <div class="action-title" style="color:#1B7A7A">Notice Board</div>
+          <p class="action-sub">News, events, announcements. Stay informed.</p>
+          <span class="action-link" style="color:#1B7A7A">Open &rarr;</span>
         </a>
-        <a href="register.html" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-          <span style="font-size:28px">🤝</span>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#F07A1A">Register to Volunteer</div>
-            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">Join the green team. Earn rewards for your time.</div>
-          </div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#F07A1A;margin-top:auto">Open →</div>
+        <a href="/register" class="action-card">
+          <span class="action-icon">🤝</span>
+          <div class="action-title" style="color:#F07A1A">Register to Volunteer</div>
+          <p class="action-sub">Join the green team. Earn rewards for your time.</p>
+          <span class="action-link" style="color:#F07A1A">Open &rarr;</span>
         </a>
-        <a href="volunteer.html" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-          <span style="font-size:28px">🌿</span>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#2D8B3A">Our Story</div>
-            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">What happened on 30 April 2026 at Block M.</div>
-          </div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2D8B3A;margin-top:auto">Open →</div>
+        <a href="/volunteer" class="action-card">
+          <span class="action-icon">🌿</span>
+          <div class="action-title" style="color:#2D8B3A">Our Story</div>
+          <p class="action-sub">What happened on 30 April 2026 at Block M.</p>
+          <span class="action-link" style="color:#2D8B3A">Open &rarr;</span>
         </a>
-        <a href="mailto:tshegofatso@duck.com" style="background:#EDE7D9;border-radius:14px;padding:20px 18px;text-decoration:none;border:1px solid rgba(26,61,74,0.08);display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-          <span style="font-size:28px">💬</span>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.5px;color:#1565C0">Chat with MGSN</div>
-            <div style="font-size:12px;color:rgba(26,61,74,0.6);line-height:1.4;margin-top:4px">Questions? Email the team directly.</div>
-          </div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1565C0;margin-top:auto">Open →</div>
+        <a href="mailto:tshegofatso@duck.com" class="action-card">
+          <span class="action-icon">💬</span>
+          <div class="action-title" style="color:#1565C0">Chat with MGSN</div>
+          <p class="action-sub">Questions? Email the team directly.</p>
+          <span class="action-link" style="color:#1565C0">Open &rarr;</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- WhatsApp QR -->
-  <section style="background:linear-gradient(135deg,#072C2C,#0D5050);padding:40px 20px;position:relative;overflow:hidden">
-    <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap">
-      <div style="flex-shrink:0;text-align:center">
-        <img src="images/whatsapp-qr-main.png" alt="MGSN WhatsApp QR" style="width:110px;height:110px;border-radius:12px;border:3px solid rgba(255,255,255,0.2);display:block"/>
-        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:6px">Scan to join</div>
+  <section class="whatsapp">
+    <div class="whatsapp-inner">
+      <div class="qr-wrap">
+        <img src="images/whatsapp-qr-main.png" alt="MGSN WhatsApp QR"/>
+        <div class="qr-label">Scan to join</div>
       </div>
-      <div style="flex:1">
-        <div class="font-condensed" style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px">💬 Join the conversation</div>
-        <h2 class="font-display" style="font-size:clamp(20px,3vw,28px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:8px">MGSN Clean-Up Team-Up<br><span style="color:#EDB810">WhatsApp Group</span></h2>
-        <p style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:14px">Get session updates, volunteer reminders, and community news delivered straight to your phone.</p>
-        <a href="register.html" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 18px;border-radius:100px;text-decoration:none">📱 Register to Join</a>
+      <div class="whatsapp-info">
+        <div class="whatsapp-eyebrow">💬 Join the conversation</div>
+        <h2 class="whatsapp-title">MGSN Clean-Up Team-Up<br/><span>WhatsApp Group</span></h2>
+        <p class="whatsapp-text">Get session updates, volunteer reminders, and community news delivered straight to your phone.</p>
+        <a href="/register" class="btn-whatsapp">📱 Register to Join</a>
       </div>
     </div>
-    <div style="position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;border-radius:50%;border:45px solid rgba(255,255,255,0.03);pointer-events:none"></div>
+    <div class="whatsapp-deco"></div>
   </section>
 
-  <!-- Footer -->
-  <footer style="background:#072C2C;padding:32px 20px;text-align:center">
-    <div style="max-width:960px;margin:0 auto">
-      <img src="images/mgsn-logo-dark.png" alt="MGSN" style="height:40px;background:#fff;border-radius:8px;padding:4px 8px;margin:0 auto 14px;display:block"/>
-      <div style="display:flex;justify-content:center;gap:24px;margin:12px 0 16px;flex-wrap:wrap">
-        <a href="index.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Home</a>
-        <a href="noticeboard.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Notice Board</a>
-        <a href="volunteer.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Our Story</a>
-        <a href="register.html" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Register</a>
-        <a href="mailto:tshegofatso@duck.com" class="font-condensed" style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none">Contact</a>
+  <footer>
+    <div class="footer-inner">
+      <img src="images/mgsn-logo-dark.png" alt="MGSN" class="footer-logo"/>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/noticeboard">Notice Board</a>
+        <a href="/volunteer">Our Story</a>
+        <a href="/register">Register</a>
+        <a href="mailto:tshegofatso@duck.com">Contact</a>
       </div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.3);line-height:1.7">Mabopane Green Space Network · NPC Reg. 2025/422818/08<br>Block M Waterfall Park · Mabopane, City of Tshwane<br><em>Kgosi ya lefatshe ke morafe — A community owns its land.</em></div>
-      <div style="height:3px;background:linear-gradient(90deg,#F07A1A,#EDB810,#2D8B3A);width:60px;margin:20px auto 0;border-radius:100px"></div>
+      <p class="footer-text">Mabopane Green Space Network &middot; NPC Reg. 2025/422818/08<br/>Block M Waterfall Park &middot; Mabopane, City of Tshwane<br/><em>Kgosi ya lefatshe ke morafe &mdash; A community owns its land.</em></p>
+      <div class="footer-divider"></div>
     </div>
   </footer>
-
-  <style>
-    @media (max-width: 600px) { .hidden-mobile { display: none !important; } }
-  </style>
 </body>
 </html>
