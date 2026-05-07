@@ -4,305 +4,403 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MGSN — Mabopane Green Space Network</title>
+  <meta name="description" content="A community-owned green space network in Mabopane. Restoring native species, clearing invasives, and building something that lasts."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
   <style>
+    :root {
+      --bg: #F5F0E8; --surface: #ffffff; --surface2: #EDE7D9;
+      --text: #1A3D4A; --muted: rgba(26,61,74,0.6); --dim: rgba(26,61,74,0.45);
+      --border: rgba(26,61,74,0.08); --border2: rgba(26,61,74,0.15);
+      --headerBg: #072C2C; --cardShadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+      --teal: #1B7A7A; --orange: #F07A1A; --yellow: #EDB810; --green: #2D8B3A;
+      --amber: #F07A1A; --tealDark: #0D5050;
+    }
+    [data-theme="dark"] {
+      --bg: #041f1f; --surface: #072C2C; --surface2: #0a3535;
+      --text: #ffffff; --muted: rgba(237,184,16,0.75); --dim: rgba(237,184,16,0.5);
+      --border: rgba(237,184,16,0.1); --border2: rgba(237,184,16,0.2);
+      --headerBg: #020f0f; --cardShadow: 0 2px 8px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.4);
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Barlow', sans-serif; background: #F5F0E8; color: #1A3D4A; min-height: 100vh; }
-    a { text-decoration: none; }
-    header { background: #072C2C; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
-    .top-bar { height: 4px; background: linear-gradient(90deg, #F07A1A, #F07A1A 33%, #EDB810 33%, #EDB810 66%, #2D8B3A 66%, #2D8B3A 100%); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ── Header ── */
+    header { background: var(--headerBg); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.3); transition: background 0.3s; }
+    .ribbon { height: 4px; background: linear-gradient(90deg, var(--orange) 0%, var(--orange) 33%, var(--yellow) 33%, var(--yellow) 66%, var(--green) 66%, var(--green) 100%); }
     .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .logo-wrap { display: flex; align-items: center; gap: 12px; }
-    .logo-img { height: 44px; background: #fff; border-radius: 8px; padding: 4px 7px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-    .logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #EDB810; line-height: 1.2; }
-    .logo-sub { font-size: 9px; color: rgba(255,255,255,0.38); letter-spacing: 1px; margin-top: 2px; text-transform: uppercase; }
-    nav { display: flex; gap: 8px; }
-    nav a, nav button { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.65); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); cursor: pointer; transition: all 0.18s; }
-    .live-pill { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 5px 11px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-img { height: 44px; width: auto; border-radius: 8px; background: #fff; padding: 4px 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    .logo-text { display: flex; flex-direction: column; gap: 2px; }
+    .logo-name { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); line-height: 1.2; }
+    .logo-sub { font-size: 9px; color: rgba(255,255,255,0.38); letter-spacing: 1px; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.65); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); transition: all 0.18s; }
+    .nav-links a:hover { color: var(--yellow); border-color: rgba(237,184,16,0.4); background: rgba(237,184,16,0.08); }
+    .theme-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--yellow); background: rgba(237,184,16,0.1); border: 1px solid rgba(237,184,16,0.3); border-radius: 8px; padding: 8px 14px; cursor: pointer; transition: all 0.18s; }
+    .theme-btn:hover { background: rgba(237,184,16,0.2); }
+    .live-badge { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 5px 11px; }
     .live-dot { width: 7px; height: 7px; background: #4CAF50; border-radius: 50%; animation: pulse 2.4s ease-in-out infinite; }
-    .live-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
-    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); } 50% { box-shadow: 0 0 0 6px rgba(76,175,80,0); } }
-    /* Hero */
-    .hero { position: relative; min-height: 420px; display: flex; align-items: center; overflow: hidden; }
-    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(7,44,44,0.82), rgba(7,44,44,0.55)); z-index: 1; }
-    .hero-deco1 { position: absolute; right: -40px; top: -40px; width: 220px; height: 220px; border-radius: 50%; border: 50px solid rgba(255,255,255,0.04); z-index: 1; }
-    .hero-deco2 { position: absolute; left: -60px; bottom: -60px; width: 200px; height: 200px; border-radius: 50%; border: 40px solid rgba(255,255,255,0.03); z-index: 1; }
-    .hero-content { position: relative; z-index: 2; max-width: 960px; width: 100%; margin: 0 auto; padding: 52px 20px 48px; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
-    .hero-dot { width: 6px; height: 6px; background: #EDB810; border-radius: 50%; }
-    .hero-eyebrow-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #EDB810; }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,56px); font-weight: 900; color: #fff; line-height: 1.04; margin-bottom: 10px; letter-spacing: -0.5px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
-    .hero h1 span { color: #EDB810; font-style: italic; }
-    .hero p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; max-width: 520px; margin-bottom: 22px; text-shadow: 0 1px 6px rgba(0,0,0,0.25); }
-    .hero-badges { display: flex; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
-    .hero-badge { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 5px 11px; font-size: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.8); text-transform: uppercase; }
-    /* Event banner */
-    .event-banner { background: linear-gradient(135deg, #072C2C, #0D5050); padding: 32px 20px; position: relative; overflow: hidden; }
-    .event-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-    .event-poster { flex-shrink: 0; position: relative; }
-    .event-poster img { width: 140px; height: 180px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-    .event-poster-badge { position: absolute; top: -10px; left: -10px; background: #F07A1A; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
-    .event-info { flex: 1; }
-    .event-date-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
-    .event-title { font-family: 'Playfair Display', serif; font-size: clamp(20px,3vw,30px); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 8px; }
-    .event-title span { color: #EDB810; }
-    .event-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
-    .event-meta span { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); }
-    .event-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.55; margin-bottom: 16px; }
-    .event-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: #F07A1A; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 20px; border-radius: 100px; }
-    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; border: 2px solid rgba(255,255,255,0.2); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 9px 18px; border-radius: 100px; }
-    /* Stats */
-    .stats { background: #fff; border-bottom: 1px solid rgba(26,61,74,0.08); padding: 20px; }
-    .stats-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 0; text-align: center; }
-    .stat-item { padding: 8px 16px; border-right: 1px solid rgba(26,61,74,0.08); }
+    .live-text { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
+
+    /* ── Hero ── */
+    .hero { background: var(--tealDark); padding: 48px 20px 40px; position: relative; overflow: hidden; }
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(7,44,44,0.85) 0%, rgba(13,80,80,0.75) 100%); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,54px); font-weight: 900; color: #fff; line-height: 1.05; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .hero-title em { color: var(--yellow); font-style: italic; }
+    .hero-body { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.55; max-width: 520px; margin-bottom: 20px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 14px 24px; border-radius: 100px; box-shadow: 0 4px 18px rgba(240,122,26,0.3); transition: all 0.18s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(240,122,26,0.4); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; border: 2px solid rgba(255,255,255,0.25); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 20px; border-radius: 100px; transition: all 0.18s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.5); }
+    .hero-tags { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-tag { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 5px 11px; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+
+    /* ── Event Banner ── */
+    .event-banner { max-width: 960px; margin: -20px auto 0; padding: 0 20px; position: relative; z-index: 2; }
+    .event-card { background: var(--surface); border-radius: 16px; overflow: hidden; box-shadow: var(--cardShadow); border: 1px solid var(--border); display: grid; grid-template-columns: auto 1fr; transition: all 0.3s; }
+    .event-poster { width: 220px; object-fit: cover; align-self: stretch; }
+    .event-body { padding: 24px; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+    .event-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); }
+    .event-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--text); line-height: 1.2; }
+    .event-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .event-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+    .event-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+    .btn-event-primary { background: var(--orange); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.18s; }
+    .btn-event-primary:hover { background: #d8681a; transform: translateY(-1px); }
+    .btn-event-secondary { background: var(--teal); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.18s; }
+
+    /* ── Stats ── */
+    .stats-bar { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .stats-grid { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); }
+    .stat-item { padding: 20px 16px; text-align: center; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
-    .stat-n { font-size: 28px; font-weight: 900; color: #0D5050; }
-    .stat-label { font-size: 12px; font-weight: 600; color: #1A3D4A; margin-top: 2px; }
-    .stat-sub { font-size: 10px; color: rgba(26,61,74,0.6); margin-top: 2px; }
-    /* Notices */
-    .notices { max-width: 960px; margin: 0 auto; padding: 40px 20px 60px; }
-    .notices-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .notices-heading { display: flex; align-items: center; gap: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(26,61,74,0.45); }
-    .notices-link { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #0D5050; }
-    .notice-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06); border: 1px solid rgba(26,61,74,0.08); margin-bottom: 12px; transition: all 0.3s; }
+    .stat-num { font-size: 32px; font-weight: 900; color: var(--teal); }
+    [data-theme="dark"] .stat-num { color: var(--yellow); }
+    .stat-label { font-size: 12px; font-weight: 600; color: var(--text); margin-top: 2px; }
+    .stat-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Notices ── */
+    .notices-section { max-width: 960px; margin: 0 auto; padding: 40px 20px 60px; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .section-label { display: flex; align-items: center; gap: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dim); }
+    .section-link { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); text-decoration: none; }
+    [data-theme="dark"] .section-link { color: var(--yellow); }
+    .notice-grid { display: grid; gap: 12px; }
+    .notice-card { background: var(--surface); border-radius: 14px; overflow: hidden; box-shadow: var(--cardShadow); border: 1px solid var(--border); transition: all 0.3s; }
     .notice-bar { height: 3.5px; }
     .notice-body { padding: 16px 18px; }
     .notice-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .notice-badge { padding: 3px 8px; border-radius: 100px; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-    .notice-date { font-size: 10px; color: rgba(26,61,74,0.45); margin-left: auto; }
-    .notice-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #1A3D4A; line-height: 1.25; margin-bottom: 6px; }
-    .notice-text { font-size: 13px; color: rgba(26,61,74,0.6); line-height: 1.6; margin-bottom: 12px; }
-    .notice-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(26,61,74,0.08); }
-    .notice-author { font-size: 11px; font-weight: 600; color: rgba(26,61,74,0.6); }
-    /* Actions section */
-    .actions { background: #fff; border-top: 1px solid rgba(26,61,74,0.08); border-bottom: 1px solid rgba(26,61,74,0.08); padding: 40px 20px; }
+    .badge { padding: 3px 8px; border-radius: 100px; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .badge-urgent { background: #FDEPFA; color: #C0392B; }
+    .badge-news { background: #E6F4F4; color: var(--teal); }
+    [data-theme="dark"] .badge-news { background: rgba(27,122,122,0.15); color: var(--yellow); }
+    .badge-notice { background: #E8F5EA; color: #1E6028; }
+    [data-theme="dark"] .badge-notice { background: rgba(45,139,58,0.15); color: var(--yellow); }
+    .notice-date { font-size: 10px; color: var(--dim); margin-left: auto; }
+    .notice-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 6px; }
+    .notice-body-text { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+    .notice-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); }
+    .notice-author { font-size: 11px; font-weight: 600; color: var(--muted); }
+    .notice-link { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); }
+    [data-theme="dark"] .notice-link { color: var(--yellow); }
+
+    /* ── Action Cards ── */
+    .actions-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 40px 20px; transition: background 0.3s; }
     .actions-inner { max-width: 960px; margin: 0 auto; }
-    .actions-heading { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(26,61,74,0.45); margin-bottom: 16px; }
-    .actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .action-card { background: #EDE7D9; border-radius: 14px; padding: 20px 18px; border: 1px solid rgba(26,61,74,0.08); display: flex; flex-direction: column; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; }
-    .action-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-    .action-icon { font-size: 28px; }
-    .action-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
-    .action-sub { font-size: 12px; color: rgba(26,61,74,0.6); line-height: 1.4; margin-top: 4px; }
-    .action-link { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: auto; }
-    /* WhatsApp */
-    .whatsapp { background: linear-gradient(135deg, #072C2C, #0D5050); padding: 40px 20px; position: relative; overflow: hidden; }
-    .whatsapp-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-    .whatsapp-deco { position: absolute; right: -50px; bottom: -50px; width: 180px; height: 180px; border-radius: 50%; border: 45px solid rgba(255,255,255,0.03); pointer-events: none; }
-    .qr-wrap { flex-shrink: 0; text-align: center; }
-    .qr-wrap img { width: 110px; height: 110px; border-radius: 12px; border: 3px solid rgba(255,255,255,0.2); display: block; }
-    .qr-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 6px; }
-    .whatsapp-info { flex: 1; }
-    .whatsapp-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
-    .whatsapp-title { font-family: 'Playfair Display', serif; font-size: clamp(20px,3vw,28px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 8px; }
-    .whatsapp-title span { color: #EDB810; }
-    .whatsapp-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 14px; }
-    .btn-whatsapp { display: inline-flex; align-items: center; gap: 6px; background: #25D366; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 18px; border-radius: 100px; }
-    /* Footer */
-    footer { background: #072C2C; padding: 32px 20px; text-align: center; }
+    .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .action-card { background: var(--surface2); border-radius: 14px; padding: 20px 18px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; box-shadow: var(--cardShadow); text-decoration: none; transition: all 0.3s; }
+    .action-card:hover { border-color: var(--teal); transform: translateY(-2px); }
+    .action-emoji { font-size: 28px; }
+    .action-card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
+    .action-card-sub { font-size: 12px; color: var(--muted); line-height: 1.4; margin-top: 4px; }
+    .action-card-arrow { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: auto; }
+
+    /* ── WhatsApp ── */
+    .whatsapp-section { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
+    .whatsapp-card { background: var(--surface); border-radius: 16px; padding: 28px; border: 1px solid var(--border); display: flex; gap: 28px; align-items: center; box-shadow: var(--cardShadow); }
+    .whatsapp-qr { width: 110px; border-radius: 10px; flex-shrink: 0; }
+    .whatsapp-body { flex: 1; }
+    .whatsapp-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+    .whatsapp-heading { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .whatsapp-body-text { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+    .btn-whatsapp { background: #25D366; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.18s; }
+    .btn-whatsapp:hover { background: #1da851; transform: translateY(-1px); }
+
+    /* ── Footer ── */
+    footer { background: var(--headerBg); padding: 32px 20px; text-align: center; transition: background 0.3s; }
     .footer-inner { max-width: 960px; margin: 0 auto; }
     .footer-logo { height: 40px; background: #fff; border-radius: 8px; padding: 4px 8px; margin: 0 auto 14px; display: block; }
-    .footer-links { display: flex; justify-content: center; gap: 24px; margin: 12px 0 16px; flex-wrap: wrap; }
-    .footer-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.2s; }
-    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-nav { display: flex; justify-content: center; gap: 24px; margin: 12px 0 16px; flex-wrap: wrap; }
+    .footer-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.18s; }
+    .footer-nav a:hover { color: var(--yellow); }
     .footer-text { font-size: 10px; color: rgba(255,255,255,0.3); line-height: 1.7; }
-    .footer-divider { height: 3px; background: linear-gradient(90deg, #F07A1A, #EDB810, #2D8B3A); width: 60px; margin: 20px auto 0; border-radius: 100px; }
-    @media (max-width: 600px) { .hidden-mobile { display: none !important; } nav { display: none; } .stats-inner { grid-template-columns: repeat(2, 1fr); } .stat-item:nth-child(2) { border-right: none; } }
+    .footer-text em { font-style: italic; }
+    .footer-rule { height: 3px; background: linear-gradient(90deg, var(--orange), var(--yellow), var(--green)); width: 60px; margin: 20px auto 0; border-radius: 100px; }
+
+    /* ── Animations ── */
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); } 50% { box-shadow: 0 0 0 6px rgba(76,175,80,0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .notice-card { animation: fadeIn 0.4s ease-out forwards; }
+    .notice-card:nth-child(2) { animation-delay: 0.08s; }
+    .notice-card:nth-child(3) { animation-delay: 0.16s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .event-card { grid-template-columns: 1fr; }
+      .event-poster { width: 100%; height: 180px; object-fit: cover; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .whatsapp-card { flex-direction: column; text-align: center; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero-btns { flex-direction: column; }
+      .hero-tags { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="top-bar"></div>
-    <div class="header-inner">
-      <div class="logo-wrap">
-        <img src="images/mgsn-logo-dark.png" alt="MGSN" class="logo-img"/>
+
+<header>
+  <div class="ribbon"></div>
+  <div class="header-inner">
+    <div class="logo-area">
+      <img src="images/mgsn-logo-dark.png" alt="MGSN" class="logo-img"/>
+      <div class="logo-text">
+        <div class="logo-name">Mabopane Green Space Network</div>
+        <div class="logo-sub">NPC Reg. 2025/422818/08 · Kgosi ya lefatshe ke morafe</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="noticeboard.html">📋 Notice Board</a>
+      <a href="volunteer.html">🌿 Our Story</a>
+      <a href="register.html">🤝 Register</a>
+      <button class="theme-btn" onclick="toggleTheme()">◐ Dark</button>
+    </div>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      <span class="live-text">Live</span>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="images/block-m-waterfall-hero.gif" alt="Block M Waterfall Park" class="hero-img"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Block M Waterfall Park · Mabopane</p>
+    <h1 class="hero-title">The land remembers<br/><em>who tends it.</em></h1>
+    <p class="hero-body">A community-owned green space network in Mabopane. Restoring native species, clearing invasives, and building something that lasts.</p>
+    <div class="hero-btns">
+      <a href="register.html" class="btn-primary">Join Us — Re a leboga</a>
+      <a href="noticeboard.html" class="btn-secondary">📋 Notice Board</a>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">📍 Block M · Fortnightly</span>
+      <span class="hero-tag">👥 60+ Volunteers</span>
+      <span class="hero-tag">🏛 NPC 2025/422818/08</span>
+    </div>
+  </div>
+</section>
+
+<div class="event-banner">
+  <div class="event-card">
+    <img src="images/event-poster-9th.png" alt="May 9th Volunteer Clean-Up" class="event-poster"/>
+    <div class="event-body">
+      <p class="event-eyebrow">Next Session</p>
+      <h2 class="event-title">📅 Saturday, 9 May 2026</h2>
+      <div class="event-meta">
+        <span class="event-meta-item">🕗 08:00–11:00</span>
+        <span class="event-meta-item">📍 Timber Shelter</span>
+        <span class="event-meta-item">🌿 All ages welcome</span>
+        <span class="event-meta-item">🧤 Gloves provided</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.5;">Invasive species removal, indigenous planting, stream bank restoration and a plant ID workshop with the UP team. Refreshments sponsored.</p>
+      <div class="event-actions">
+        <a href="register.html" class="btn-event-primary">Register Now →</a>
+        <a href="noticeboard.html" class="btn-event-secondary">📋 View Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">60+</div>
+      <div class="stat-label">Community Members</div>
+      <div class="stat-sub">Blocks A through L</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Partner Institutions</div>
+      <div class="stat-sub">UP · CoT · MGSN</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">Species Identified</div>
+      <div class="stat-sub">Invasive + Indigenous</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2 km</div>
+      <div class="stat-label">Stream Surveyed</div>
+      <div class="stat-sub">Block M Watercourse</div>
+    </div>
+  </div>
+</section>
+
+<section class="notices-section">
+  <div class="section-header">
+    <div class="section-label">📋 Latest Notices</div>
+    <a href="noticeboard.html" class="section-link">Full Notice Board →</a>
+  </div>
+  <div class="notice-grid">
+
+    <div class="notice-card">
+      <div class="notice-bar" style="background:linear-gradient(90deg,#C0392B,#8B1C14)"></div>
+      <div class="notice-body">
+        <div class="notice-meta">
+          <span class="badge badge-urgent">Urgent</span>
+          <span class="notice-date">26 April 2026</span>
+        </div>
+        <h3 class="notice-title">Freedom Day Launch — Monday 27 April 2026</h3>
+        <p class="notice-body-text">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C. Meet at the timber shelter at 08:00.</p>
+        <div class="notice-footer">
+          <span class="notice-author">MGSN Management</span>
+          <a href="noticeboard.html" class="notice-link">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice-card">
+      <div class="notice-bar" style="background:linear-gradient(90deg,#1B7A7A,#0D5050)"></div>
+      <div class="notice-body">
+        <div class="notice-meta">
+          <span class="badge badge-news">News</span>
+          <span class="notice-date">25 April 2026</span>
+        </div>
+        <h3 class="notice-title">Solar Floodlights Installed at Block M Waterfall Park</h3>
+        <p class="notice-body-text">Two 12-metre timber poles with solar-powered IK10-rated floodlights installed. Park now lit after dark.</p>
+        <div class="notice-footer">
+          <span class="notice-author">Bra Tshego — MGSN</span>
+          <a href="noticeboard.html" class="notice-link">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice-card">
+      <div class="notice-bar" style="background:linear-gradient(90deg,#2D8B3A,#1E6028)"></div>
+      <div class="notice-body">
+        <div class="notice-meta">
+          <span class="badge badge-notice">Notice</span>
+          <span class="notice-date">24 April 2026</span>
+        </div>
+        <h3 class="notice-title">Volunteer Registration Now Open — Earn Rewards</h3>
+        <p class="notice-body-text">Register to join the Clean-Up Team-Up group. Volunteers earn points redeemable for vouchers from Shoprite, Cashbuild and food vendors.</p>
+        <div class="notice-footer">
+          <span class="notice-author">MGSN Management</span>
+          <a href="register.html" class="notice-link">Register now →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="actions-section">
+  <div class="actions-inner">
+    <div class="section-header">
+      <div class="section-label" style="margin-bottom:0">What would you like to do?</div>
+    </div>
+    <div class="action-grid" style="margin-top:16px">
+      <a href="noticeboard.html" class="action-card" style="color:var(--teal)">
+        <span class="action-emoji">📋</span>
         <div>
-          <div class="logo-text">Mabopane Green Space Network</div>
-          <div class="logo-sub">NPC Reg. 2025/422818/08 &middot; Kgosi ya lefatshe ke morafe</div>
+          <div class="action-card-title">Notice Board</div>
+          <div class="action-card-sub">News, events, announcements. Stay informed.</div>
         </div>
-      </div>
-      <nav class="hidden-mobile">
-        <a href="/noticeboard">📋 Notice Board</a>
-        <a href="/volunteer">🌿 Our Story</a>
-        <a href="/register">🤝 Register</a>
-      </nav>
-      <div class="live-pill">
-        <div class="live-dot"></div>
-        <span class="live-label">Live</span>
-      </div>
-    </div>
-  </header>
-
-  <section class="hero">
-    <img src="images/block-m-waterfall-hero.gif" alt="Block M Waterfall Park" class="hero-img"/>
-    <div class="hero-overlay"></div>
-    <div class="hero-deco1"></div>
-    <div class="hero-deco2"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow"><div class="hero-dot"></div><span class="hero-eyebrow-text">Block M Waterfall Park &middot; Mabopane</span></div>
-      <h1>The land remembers<br/><span>who tends it.</span></h1>
-      <p>A community-owned green space network. Restoring native species, clearing invasives, and building something that lasts.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="/register" class="btn-primary">Join Us &mdash; Re a leboga</a>
-        <a href="/noticeboard" class="btn-secondary">📋 Notice Board</a>
-      </div>
-      <div class="hero-badges">
-        <span class="hero-badge">Block M &middot; Fortnightly</span>
-        <span class="hero-badge">60+ Volunteers</span>
-        <span class="hero-badge">NPC 2025/422818/08</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="event-banner">
-    <div class="event-inner">
-      <div class="event-poster">
-        <img src="images/event-poster-9th.png" alt="May 9th Event Poster"/>
-        <div class="event-poster-badge">Next Session</div>
-      </div>
-      <div class="event-info">
-        <div class="event-date-label">📅 Saturday, 9 May 2026</div>
-        <h2 class="event-title">Session 2 &mdash; May Clean-Up<br/><span>Block M Waterfall Park</span></h2>
-        <div class="event-meta">
-          <span>🕗 08:00&ndash;11:00</span>
-          <span>📍 Timber Shelter</span>
-          <span>🌿 All ages welcome</span>
-          <span>🧤 Gloves provided</span>
+        <div class="action-card-arrow" style="color:var(--teal)">Open →</div>
+      </a>
+      <a href="register.html" class="action-card" style="color:var(--orange)">
+        <span class="action-emoji">🤝</span>
+        <div>
+          <div class="action-card-title">Register to Volunteer</div>
+          <div class="action-card-sub">Join the green team. Earn rewards for your time.</div>
         </div>
-        <p class="event-desc">Invasive species removal, indigenous planting, stream bank restoration and a plant ID workshop with the UP team. Refreshments sponsored.</p>
-        <div class="event-actions">
-          <a href="/register" class="btn-primary">Register Now &rarr;</a>
-          <a href="/noticeboard" class="btn-secondary">View Details</a>
+        <div class="action-card-arrow" style="color:var(--orange)">Open →</div>
+      </a>
+      <a href="volunteer.html" class="action-card" style="color:var(--green)">
+        <span class="action-emoji">🌿</span>
+        <div>
+          <div class="action-card-title">Our Story</div>
+          <div class="action-card-sub">What happened on 30 April 2026 at Block M.</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="stats">
-    <div class="stats-inner">
-      <div class="stat-item"><p class="stat-n">60+</p><p class="stat-label">Community Members</p><p class="stat-sub">Blocks A through L</p></div>
-      <div class="stat-item"><p class="stat-n">3</p><p class="stat-label">Partner Institutions</p><p class="stat-sub">UP &middot; CoT &middot; MGSN</p></div>
-      <div class="stat-item"><p class="stat-n">9</p><p class="stat-label">Species Identified</p><p class="stat-sub">Invasive + Indigenous</p></div>
-      <div class="stat-item"><p class="stat-n">2 km</p><p class="stat-label">Stream Surveyed</p><p class="stat-sub">Block M Watercourse</p></div>
-    </div>
-  </section>
-
-  <section class="notices">
-    <div class="notices-header">
-      <div class="notices-heading"><span>📋</span><h2>Latest Notices</h2></div>
-      <a href="/noticeboard" class="notices-link">Full Notice Board &rarr;</a>
-    </div>
-    <div style="display:grid;gap:12px;">
-      <div class="notice-card">
-        <div class="notice-bar" style="background:linear-gradient(90deg,#C0392B,#8B1C14)"></div>
-        <div class="notice-body">
-          <div class="notice-meta">
-            <span class="notice-badge" style="background:#FDECEA;color:#C0392B">Urgent</span>
-            <span class="notice-date">26 April 2026</span>
-          </div>
-          <h3 class="notice-title">Freedom Day Launch &mdash; Monday 27 April 2026</h3>
-          <p class="notice-text">First clean-up session at Block M Waterfall. Weather confirmed clear &mdash; 24&deg;C. Meet at the timber shelter at 08:00.</p>
-          <div class="notice-footer">
-            <span class="notice-author">MGSN Management</span>
-            <a href="/noticeboard" class="notices-link">Read more &rarr;</a>
-          </div>
+        <div class="action-card-arrow" style="color:var(--green)">Open →</div>
+      </a>
+      <a href="mailto:tshegofatso@duck.com" class="action-card" style="color:#1565C0">
+        <span class="action-emoji">💬</span>
+        <div>
+          <div class="action-card-sub">Questions? Email the team directly.</div>
         </div>
-      </div>
-      <div class="notice-card">
-        <div class="notice-bar" style="background:linear-gradient(90deg,#1B7A7A,#0D5050)"></div>
-        <div class="notice-body">
-          <div class="notice-meta">
-            <span class="notice-badge" style="background:#E6F4F4;color:#0D5050">News</span>
-            <span class="notice-date">25 April 2026</span>
-          </div>
-          <h3 class="notice-title">Solar Floodlights Installed at Block M Waterfall Park</h3>
-          <p class="notice-text">Two 12-metre timber poles with solar-powered floodlights installed. Park now lit after dark.</p>
-          <div class="notice-footer">
-            <span class="notice-author">Bra Tshego &mdash; MGSN</span>
-            <a href="/noticeboard" class="notices-link">Read more &rarr;</a>
-          </div>
-        </div>
-      </div>
-      <div class="notice-card">
-        <div class="notice-bar" style="background:linear-gradient(90deg,#2D8B3A,#1E6028)"></div>
-        <div class="notice-body">
-          <div class="notice-meta">
-            <span class="notice-badge" style="background:#E8F5EA;color:#1E6028">Notice</span>
-            <span class="notice-date">24 April 2026</span>
-          </div>
-          <h3 class="notice-title">Volunteer Registration Now Open &mdash; Earn Rewards</h3>
-          <p class="notice-text">Register to join the Clean-Up Team-Up group. Volunteers earn vouchers from Shoprite, Cashbuild and food vendors.</p>
-          <div class="notice-footer">
-            <span class="notice-author">MGSN Management</span>
-            <a href="/register" class="notices-link">Register now &rarr;</a>
-          </div>
-        </div>
-      </div>
+        <div class="action-card-arrow" style="color:#1565C0">Open →</div>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="actions">
-    <div class="actions-inner">
-      <h2 class="actions-heading">What would you like to do?</h2>
-      <div class="actions-grid">
-        <a href="/noticeboard" class="action-card">
-          <span class="action-icon">📋</span>
-          <div class="action-title" style="color:#1B7A7A">Notice Board</div>
-          <p class="action-sub">News, events, announcements. Stay informed.</p>
-          <span class="action-link" style="color:#1B7A7A">Open &rarr;</span>
-        </a>
-        <a href="/register" class="action-card">
-          <span class="action-icon">🤝</span>
-          <div class="action-title" style="color:#F07A1A">Register to Volunteer</div>
-          <p class="action-sub">Join the green team. Earn rewards for your time.</p>
-          <span class="action-link" style="color:#F07A1A">Open &rarr;</span>
-        </a>
-        <a href="/volunteer" class="action-card">
-          <span class="action-icon">🌿</span>
-          <div class="action-title" style="color:#2D8B3A">Our Story</div>
-          <p class="action-sub">What happened on 30 April 2026 at Block M.</p>
-          <span class="action-link" style="color:#2D8B3A">Open &rarr;</span>
-        </a>
-        <a href="mailto:tshegofatso@duck.com" class="action-card">
-          <span class="action-icon">💬</span>
-          <div class="action-title" style="color:#1565C0">Chat with MGSN</div>
-          <p class="action-sub">Questions? Email the team directly.</p>
-          <span class="action-link" style="color:#1565C0">Open &rarr;</span>
-        </a>
-      </div>
+<section class="whatsapp-section">
+  <div class="whatsapp-card">
+    <img src="images/whatsapp-qr-main.png" alt="MGSN WhatsApp QR" class="whatsapp-qr"/>
+    <div class="whatsapp-body">
+      <p class="whatsapp-title">💬 Join the conversation</p>
+      <h3 class="whatsapp-heading">MGSN Clean-Up Team-Up WhatsApp Group</h3>
+      <p class="whatsapp-body-text">Get session updates, volunteer reminders, and community news delivered straight to your phone.</p>
+      <a href="register.html" class="btn-whatsapp">📱 Register to Join</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="whatsapp">
-    <div class="whatsapp-inner">
-      <div class="qr-wrap">
-        <img src="images/whatsapp-qr-main.png" alt="MGSN WhatsApp QR"/>
-        <div class="qr-label">Scan to join</div>
-      </div>
-      <div class="whatsapp-info">
-        <div class="whatsapp-eyebrow">💬 Join the conversation</div>
-        <h2 class="whatsapp-title">MGSN Clean-Up Team-Up<br/><span>WhatsApp Group</span></h2>
-        <p class="whatsapp-text">Get session updates, volunteer reminders, and community news delivered straight to your phone.</p>
-        <a href="/register" class="btn-whatsapp">📱 Register to Join</a>
-      </div>
+<footer>
+  <div class="footer-inner">
+    <img src="images/mgsn-logo-dark.png" alt="MGSN" class="footer-logo"/>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="noticeboard.html">Notice Board</a>
+      <a href="volunteer.html">Our Story</a>
+      <a href="register.html">Register</a>
+      <a href="mailto:tshegofatso@duck.com">Contact</a>
+    </nav>
+    <div class="footer-text">
+      Mabopane Green Space Network · NPC Reg. 2025/422818/08<br/>
+      Block M Waterfall Park · Mabopane, City of Tshwane<br/>
+      <em>Kgosi ya lefatshe ke morafe — A community owns its land.</em>
     </div>
-    <div class="whatsapp-deco"></div>
-  </section>
+    <div class="footer-rule"></div>
+  </div>
+</footer>
 
-  <footer>
-    <div class="footer-inner">
-      <img src="images/mgsn-logo-dark.png" alt="MGSN" class="footer-logo"/>
-      <div class="footer-links">
-        <a href="/">Home</a>
-        <a href="/noticeboard">Notice Board</a>
-        <a href="/volunteer">Our Story</a>
-        <a href="/register">Register</a>
-        <a href="mailto:tshegofatso@duck.com">Contact</a>
-      </div>
-      <p class="footer-text">Mabopane Green Space Network &middot; NPC Reg. 2025/422818/08<br/>Block M Waterfall Park &middot; Mabopane, City of Tshwane<br/><em>Kgosi ya lefatshe ke morafe &mdash; A community owns its land.</em></p>
-      <div class="footer-divider"></div>
-    </div>
-  </footer>
+<script>
+  // ── Dark/Light theme ──
+  const stored = localStorage.getItem('mgsn-theme');
+  if (stored === 'dark') { document.documentElement.setAttribute('data-theme','dark'); }
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('mgsn-theme','light');
+    } else {
+      document.documentElement.setAttribute('data-theme','dark');
+      localStorage.setItem('mgsn-theme','dark');
+    }
+  }
+</script>
 </body>
 </html>
