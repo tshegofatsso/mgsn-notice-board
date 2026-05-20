@@ -75,6 +75,243 @@
     </div>
   </section>
 
+  <!-- Plant Care Widget -->
+  <section id="plant-care" class="max-w-6xl mx-auto px-5 py-10">
+    <div class="bg-white rounded-2xl shadow-lg border border-stone-200 overflow-hidden">
+      <div class="bg-gradient-to-r from-teal-700 via-emerald-500 to-teal-600 px-6 py-4 flex items-center gap-3">
+        <span class="text-2xl">🪴</span>
+        <div>
+          <h2 class="text-white font-bold text-lg">Plant Care Guide</h2>
+          <p class="text-emerald-100 text-xs">Select a plant to get started</p>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="mb-5">
+          <label for="plant-select" class="block text-stone-700 font-semibold text-sm mb-2">Choose your plant:</label>
+          <select id="plant-select" onchange="showPlantCare(this.value)" class="w-full border border-stone-300 rounded-xl px-4 py-3 text-stone-800 bg-stone-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent cursor-pointer">
+            <option value="">— Select a plant —</option>
+            <option value="snake-plant">Snake Plant (Sansevieria)</option>
+            <option value="pothos">Pothos (Epipremnum aureum)</option>
+            <option value="monstera">Monstera Deliciosa</option>
+            <option value="succulent">Succulent (General)</option>
+            <option value="orchid">Orchid (Phalaenopsis)</option>
+            <option value="lavender">Lavender</option>
+            <option value="rosemary">Rosemary</option>
+            <option value="tomato">Tomato</option>
+            <option value="marigold">Marigold (Tagetes)</option>
+          </select>
+        </div>
+        <div id="plant-result" class="hidden">
+          <div id="plant-card" class="space-y-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .care-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--teal-light, #e6f4f4); color: var(--teal-dark, #0D5050); padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+    .care-tag.orange { background: #fff3e6; color: #c45c00; }
+    .care-tag.green { background: #e6f7ec; color: #2D8B3A; }
+    .care-tag.yellow { background: #fffbe6; color: #a07800; }
+    .care-icon { font-size: 16px; }
+    .care-section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #1B7A7A; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 2px solid #EDB810; }
+  </style>
+
+  <script>
+    const plants = {
+      "snake-plant": {
+        name: "Snake Plant", emoji: "🐍🌿",
+        water: "Every 2–3 weeks; allow soil to dry completely between waterings. Reduce to monthly in winter.",
+        waterSigns: "Slight leaf droop, dry potting mix. Wrinkled leaves = too dry.",
+        overwaterSigns: "Yellowing leaves, mushy base, root rot. Remove from pot and dry out immediately.",
+        light: "Low to bright indirect light. Tolerates shade. Thrives in indirect light but survives in low light.",
+        soil: "Well-draining cactus/succulent mix. Add perlite or sand for extra drainage.",
+        temp: "15–27°C. Tolerates down to 10°C. Keep away from frost.",
+        humidity: "30–50%. Very drought-tolerant. Avoid high humidity — prone to fungal issues.",
+        feed: "Every 2–3 months in growing season (spring/summer). None in winter.",
+        toxicity: "Mildly toxic to pets (vomiting, nausea). Keep out of reach of cats and dogs.",
+        issues: ["Root rot from overwatering", "Brown tips from fluoride in tap water", "Fungal infections in humid conditions"],
+        tips: ["Perfect for beginners — very hard to kill", "Wipe leaves monthly to remove dust", "Repot only every 3–5 years"]
+      },
+      "pothos": {
+        name: "Pothos", emoji: "🍃",
+        water: "Every 1–2 weeks. Allow top 2–3cm of soil to dry out between waterings.",
+        waterSigns: "Drooping leaves, pale or yellowing foliage, dry potting mix.",
+        overwaterSigns: "Yellow leaves, dark spots on leaves, musty smell from soil, wilting despite wet soil.",
+        light: "Low to bright indirect light. Avoid direct afternoon sun — burns leaves. Variegated varieties need more light.",
+        soil: "Standard potting mix with perlite added for drainage. Tolerates a range of soils.",
+        temp: "18–30°C. Minimum 10°C. Keep away from cold drafts.",
+        humidity: "40–60%. Adapts to average home humidity. Mist occasionally for best growth.",
+        feed: "Monthly in spring/summer with balanced liquid fertilizer. Reduce in winter.",
+        toxicity: "Toxic to pets and humans if ingested (calcium oxalate crystals cause irritation). Keep away from animals and children.",
+        issues: ["Yellow leaves from overwatering", "Brown spots from direct sun", "Leggy growth from low light"],
+        tips: ["One of the easiest houseplants to propagate — just cut a node and root in water", "Leaves can be variegated (golden, marble, neon)", "Trailing vines can grow 1–2 metres long"]
+      },
+      "monstera": {
+        name: "Monstera Deliciosa", emoji: "🌿🧀",
+        water: "Every 1–2 weeks. Allow top 3–5cm of soil to dry out. More often in summer, less in winter.",
+        waterSigns: "Drooping leaves, slightly curling leaf edges, lighter green leaves than usual.",
+        overwaterSigns: "Yellow lower leaves, brown mushy stems, soil stays wet for weeks.",
+        light: "Bright indirect light. Tolerates medium light. Direct sun burns leaves. More light = bigger fenestrated leaves.",
+        soil: "Well-draining potting mix with perlite and bark added. Aeration is key.",
+        temp: "18–30°C. Minimum 10°C. Resents cold drafts and air conditioning.",
+        humidity: "60–80%. High humidity produces bigger leaves with more fenestrations. Mist leaves regularly.",
+        feed: "Every 2–4 weeks in spring/summer with balanced or nitrogen-rich fertilizer.",
+        toxicity: "Toxic to pets (oral irritation, vomiting, difficulty swallowing). Calcium oxalate crystals.",
+        issues: ["Yellow leaves from overwatering", "Brown leaf edges from low humidity", "No fenestrations = not enough light", "Leggy growth from insufficient light"],
+        tips: ["Support with a moss pole for larger leaves", "Fenestrations (holes) develop with age, light and maturity", "Clean leaves monthly for optimal photosynthesis"]
+      },
+      "succulent": {
+        name: "Succulent (General)", emoji: "🌵",
+        water: "Soak and dry method: water thoroughly then let soil dry completely. Every 1–3 weeks depending on climate.",
+        waterSigns: "Wrinkled or shrivelled leaves, dry compacted soil, slightly drooping leaves.",
+        overwaterSigns: "Transparent or mushy leaves, blackened stems, leaf drop, rot spreading from base upward.",
+        light: "Bright light, 4–6 hours of sunlight daily. Some species tolerate partial shade. Rotate pots for even growth.",
+        soil: "Very well-draining cactus mix. Add up to 50% grit, pumice or coarse sand.",
+        temp: "15–30°C. Most tolerate 5–35°C. Protect from frost — bring indoors below 5°C.",
+        humidity: "Low humidity preferred (30–40%). Good air circulation prevents fungal problems.",
+        feed: "Every 2–4 weeks in spring/summer with diluted succulent fertilizer. None in winter.",
+        toxicity: "Most succulents are non-toxic to pets, but some varieties may cause mild irritation.",
+        issues: ["Etiolation (stretched growth) from insufficient light", "Root rot from overwatering", "Scorch marks from direct afternoon sun"],
+        tips: ["Use terracotta pots for better drainage", "Never water on a schedule — check soil first", "Propagate from leaves by laying on dry soil"]
+      },
+      "orchid": {
+        name: "Phalaenopsis Orchid", emoji: "🌸",
+        water: "Once a week. Soak roots for 10–15 minutes, then drain completely. Do not let roots sit in water.",
+        waterSigns: "Silver-grey roots, dry potting mix, slightly wrinkled pseudobulbs.",
+        overwaterSigns: "Dark green roots (overwatered), brown root tips, yellow leaves, musty smell, moss staying wet for weeks.",
+        light: "Bright indirect light. East-facing windows are ideal. Direct sun burns leaves — filtered light only.",
+        soil: "Specialist orchid bark mix (not regular potting soil). Pine bark, perlite and charcoal mix.",
+        temp: "18–27°C day, 15–21°C night. Minimum 10°C. Cool night temperatures can trigger blooming.",
+        humidity: "50–70%. Use a humidity tray (pebble tray with water) or mist twice daily. Good ventilation essential.",
+        feed: "Use orchid fertilizer at half strength with every watering, or every 2nd watering.",
+        toxicity: "Generally non-toxic to pets and humans, but ingestion may cause mild stomach upset.",
+        issues: ["Root rot from overwatering", "Bud blast from low humidity or sudden temperature changes", "Yellow leaves from overwatering or direct sun"],
+        tips: ["Ice cube watering method: 3 ice cubes weekly is a safe beginner approach", "Transparent pots help monitor root health", "Dead spike: cut at base after flowering"]
+      },
+      "lavender": {
+        name: "Lavender", emoji: "💜",
+        water: "Every 1–2 weeks. Allow soil to dry between waterings. Drought-tolerant once established.",
+        waterSigns: "Wilting, grey-green leaves, very dry soil. Drooping leaves perk up quickly after watering.",
+        overwaterSigns: "Woody stems, fungal disease, leaf drop,根部 rot. Leaves turn yellow.",
+        light: "Full sun — 6–8 hours of direct sunlight daily. Essential for flowering and oil production.",
+        soil: "Sandy, well-draining, slightly alkaline soil. Add grit or sand to improve drainage. Avoid clay.",
+        temp: "15–30°C. Hardy to -5°C depending on variety. Most varieties need winter protection from frost.",
+        humidity: "Low humidity preferred. Avoid humid bathrooms. Good air circulation prevents fungal problems.",
+        feed: "Light feeding only in spring with diluted balanced fertilizer. Over-feeding reduces fragrance.",
+        toxicity: "Non-toxic to pets and humans. Generally safe. Large amounts may cause nausea.",
+        issues: ["Root rot in heavy/wet soil", "Leggy growth from insufficient sun", "Woody or short-lived plants from lack of pruning"],
+        tips: ["Prune after flowering to maintain shape and prevent woodiness", "Harvest when buds show colour but before fully opening", "Dries beautifully — hang upside down in dark, cool space"]
+      },
+      "rosemary": {
+        name: "Rosemary", emoji: "🌿🦶",
+        water: "Every 1–2 weeks. Allow top 3–5cm of soil to dry. More drought-tolerant than most herbs.",
+        waterSigns: "Drooping, slightly grey-green leaves, very dry soil. Leaves curl inward when thirsty.",
+        overwaterSigns: "Yellow leaves, soft dark stems, root rot, fungal growth on soil surface.",
+        light: "Full sun — 6–8 hours daily. South-facing windows are ideal. Insufficient light causes leggy growth.",
+        soil: "Well-draining sandy soil with perlite or grit added. Rosemary hates sitting in wet soil.",
+        temp: "15–27°C. Hardy to -5°C. Bring indoors in winter or protect from frost.",
+        humidity: "Low to average. Tolerates dry air. Avoid长时间 high humidity — prone to powdery mildew.",
+        feed: "Monthly with diluted balanced fertilizer in spring/summer. No feed in winter.",
+        toxicity: "Non-toxic to pets and humans. Safe for cats, dogs and children.",
+        issues: ["Root rot from overwatering", "Powdery mildew in humid conditions", "Leggy sparse growth from low light", "Spider mites in dry indoor conditions"],
+        tips: ["Excellent culinary herb — snip as needed", "Let soil dry between waterings", "Mist occasionally to prevent spider mites in winter"]
+      },
+      "tomato": {
+        name: "Tomato", emoji: "🍅",
+        water: "Daily in hot weather. Keep soil consistently moist but not waterlogged. Never let plants wilt.",
+        waterSigns: "Wilting leaves in hot weather, dry cracked soil, blossom end rot (calcium deficiency from irregular watering).",
+        overwaterSigns: "Yellow lower leaves, cracked fruit, blight, fungal disease on stems or leaves.",
+        light: "Full sun — 8+ hours daily. Minimum 6 hours. More sun = more fruit.",
+        soil: "Rich, well-draining loamy soil with compost added. Slightly acidic (pH 6.0–6.8).",
+        temp: "18–29°C during day, 13–21°C at night. Below 10°C or above 35°C inhibits fruiting.",
+        humidity: "Moderate 40–70%. High humidity promotes fungal diseases (blight).",
+        feed: "High potassium fertilizer when flowering and fruiting. Weekly liquid feed. Avoid high nitrogen — too much leaf, no fruit.",
+        toxicity: "Leaves and stems are mildly toxic (solanine). Fruit is safe and delicious.",
+        issues: ["Blossom end rot — irregular watering or calcium deficiency", "Aphids and whitefly", "Late blight in wet humid conditions", "Split fruit from irregular watering"],
+        tips: ["Stake or cage early for support", "Remove suckers (side shoots) for larger fruit", "Water at base — wet leaves encourage blight", "Mulch to retain moisture"]
+      },
+      "marigold": {
+        name: "Marigold (Tagetes)", emoji: "🌼🌻",
+        water: "1–2 times per week. Allow top 2–3cm of soil to dry between waterings. Drought-tolerant.",
+        waterSigns: "Slight wilting in afternoon heat, dry soil. Leaves perk up after watering.",
+        overwaterSigns: "Yellow leaves, root rot, mushy stems, flower buds failing to open, fungal issues.",
+        light: "Full sun — 6+ hours direct sunlight. Thrives in hot conditions. Less flowers in shade.",
+        soil: "Average well-draining soil. Not fussy — tolerates poor soil. Add compost for more blooms.",
+        temp: "18–30°C. Thrives in heat. Hardy to light frost. Dies back below -2°C.",
+        humidity: "Low to moderate. Tolerates dry conditions. Avoid overhead watering — prone to fungal leaf spots.",
+        feed: "Light feeding only. Too much nitrogen = leafy, no flowers. One dose of balanced fertilizer at planting is enough.",
+        toxicity: "Non-toxic to pets. Strong scent deters many pests. Excellent companion plant in vegetable gardens.",
+        issues: ["Slugs and snails — use beer traps or diatomaceous earth", "Aphids", "Powdery mildew in humid conditions"],
+        tips: ["Deadhead regularly to extend blooming", "Plant near tomatoes to repel whitefly and nematodes", "French marigolds (Tagetes patula) are best for pest control"]
+      }
+    };
+
+    function showPlantCare(key) {
+      const result = document.getElementById('plant-result');
+      const card = document.getElementById('plant-card');
+      if (!key) { result.classList.add('hidden'); return; }
+      const p = plants[key];
+      const escape = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const tags = {
+        water: `<span class="care-tag orange"><span class="care-icon">💧</span> Water</span>`,
+        light: `<span class="care-tag yellow"><span class="care-icon">☀️</span> Light</span>`,
+        soil: `<span class="care-tag green"><span class="care-icon">🪴</span> Soil</span>`,
+        temp: `<span class="care-tag"><span class="care-icon">🌡️</span> Temp</span>`,
+        humidity: `<span class="care-tag"><span class="care-icon">💨</span> Humidity</span>`,
+        feed: `<span class="care-tag"><span class="care-icon">🧪</span> Feed</span>`,
+        toxicity: `<span class="care-tag orange"><span class="care-icon">⚠️</span> Caution</span>`,
+        issues: `<span class="care-tag"><span class="care-icon">🔍</span> Watch for</span>`,
+        tips: `<span class="care-tag green"><span class="care-icon">💡</span> Pro tip</span>`
+      };
+
+      card.innerHTML = `
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">${p.emoji}</span>
+          <h3 class="text-xl font-bold text-stone-800">${p.name} Care Guide</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div class="bg-stone-50 rounded-xl p-4 border border-stone-200">
+            <div class="care-section-title">💧 Watering</div>
+            <p class="text-stone-700 text-sm leading-relaxed">${escape(p.water)}</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-4 border border-stone-200">
+            <div class="care-section-title">☀️ Light</div>
+            <p class="text-stone-700 text-sm leading-relaxed">${escape(p.light)}</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-4 border border-stone-200">
+            <div class="care-section-title">🪴 Soil & Drainage</div>
+            <p class="text-stone-700 text-sm leading-relaxed">${escape(p.soil)}</p>
+          </div>
+          <div class="bg-stone-50 rounded-xl p-4 border border-stone-200">
+            <div class="care-section-title">🌡️ Temperature</div>
+            <p class="text-stone-700 text-sm leading-relaxed">${escape(p.temp)}</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-2"><span class="text-base">🚰 When to water</span></div>
+            <p class="text-stone-700 text-sm">${escape(p.waterSigns)}</p>
+          </div>
+          <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-2"><span class="text-base">⚠️ Overwatering signs</span></div>
+            <p class="text-stone-700 text-sm">${escape(p.overwaterSigns)}</p>
+          </div>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-2"><span class="text-base">🔍 Common issues</span></div>
+            <p class="text-stone-700 text-sm">${p.issues.map(i => `<span class="inline-block bg-stone-200 text-stone-700 text-xs px-2 py-1 rounded-full mr-1 mb-1">${escape(i)}</span>`).join('')}</p>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-2"><span class="text-base">💡 Care tips</span></div>
+            <p class="text-stone-700 text-sm">${p.tips.map(t => `<span class="inline-block bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-full mr-1 mb-1">${escape(t)}</span>`).join('')}</p>
+          </div>
+          ${p.toxicity ? `<div class="bg-orange-50 border border-orange-200 rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span class="text-base">⚠️ Pet & human safety</span></div><p class="text-stone-700 text-sm">${escape(p.toxicity)}</p></div>` : ''}
+        </div>
+      `;
+      result.classList.remove('hidden');
+    }
+  </script>
+
   <!-- Story section -->
   <section class="max-w-6xl mx-auto px-5 py-14" id="learn">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
