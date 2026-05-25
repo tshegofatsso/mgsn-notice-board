@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer · MGSN</title>
+  <meta name="description" content="Register to volunteer with MGSN. Join the next restoration session in Block M, Mabopane."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            teal: { 50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4', 400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e' },
+            stone: { 50: '#fafaf9', 100: '#f5f5f4', 200: '#e7e5e4', 300: '#d6d3d1', 400: '#a8a29e', 500: '#78716c', 600: '#57534e', 700: '#44403c', 800: '#292524', 900: '#1c1917', 950: '#0c0a09' },
+            yellow: { 400: '#facc15' },
+            emerald: { 500: '#10b981' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes float { 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; } 50% { transform: translateY(-18px) scale(1.1); opacity: 0.6; } }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-100 font-sans">
+  <!-- STICKY NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-white shadow-sm">
+    <div class="h-1 bg-gradient-to-r from-teal-700 via-emerald-500 to-teal-600"></div>
+    <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="images/mgsn-logo-main.png" alt="MGSN" class="h-9 w-auto"/>
+        <div>
+          <div class="text-teal-900 font-black text-sm tracking-widest uppercase leading-tight">Mabopane Green Space Network</div>
+          <div class="text-stone-400 text-[9px] tracking-wider font-semibold">NPC 2025/422818/08 · Kgosi ya lefatshe ke morafe</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#register" class="bg-teal-700 hover:bg-teal-800 text-white text-xs font-black px-5 py-2.5 rounded-full transition-colors shadow-md">Join Us</a>
+        <a href="index.html" class="text-teal-700 text-xs font-bold uppercase tracking-widest hover:text-teal-900 transition-colors border border-teal-200 px-3 py-2 rounded-lg hover:bg-teal-50">Board</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative bg-teal-950 text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="images/workshop-10.jpg" alt="" class="w-full h-full object-cover opacity-20"/>
+      <div class="absolute inset-0 bg-gradient-to-b from-teal-950 via-teal-950/97 to-teal-950/98"></div>
+    </div>
+    <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div class="absolute top-12 left-[8%] w-3 h-3 rounded-full bg-emerald-400 opacity-40" style="animation: float 6s ease-in-out infinite"></div>
+      <div class="absolute top-24 left-[25%] w-2 h-2 rounded-full bg-yellow-400 opacity-30" style="animation: float 8s ease-in-out infinite 1s"></div>
+      <div class="absolute top-8 left-[60%] w-2.5 h-2.5 rounded-full bg-teal-400 opacity-35" style="animation: float 7s ease-in-out infinite 2s"></div>
+      <div class="absolute top-32 left-[80%] w-2 h-2 rounded-full bg-green-400 opacity-30" style="animation: float 9s ease-in-out infinite 0.5s"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-5 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-yellow-400 text-teal-950 text-[10px] font-black tracking-[0.2em] uppercase px-4 py-2 rounded-full mb-6 shadow-lg">
+          <span class="w-2 h-2 bg-teal-950 rounded-full animate-pulse"></span>
+          Volunteer Recruitment Campaign · May 2026
+        </div>
+        <h1 class="text-5xl md:text-6xl font-black leading-[1.0] text-white mb-3 tracking-tight">Join Us.</h1>
+        <p class="text-xl font-black text-yellow-400 mb-2">Re a leema.</p>
+        <p class="text-teal-300 text-[11px] italic mb-8 font-semibold tracking-wide">["Re a leema" — Pitori Setswana: "We are ready." / "We are standing by."]</p>
+        <p class="text-teal-100 text-sm leading-relaxed mb-3 max-w-md">The next restoration session starts soon. We need hands in the field, voices in the community, and people who know these streets.</p>
+        <p class="text-teal-100 text-sm leading-relaxed mb-8 max-w-md">No experience needed. Just the willingness to show up and do the work — alongside your neighbours, under the same trees, for the same water.</p>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="#register" class="group relative inline-flex items-center gap-3 bg-yellow-400 text-teal-950 font-black text-sm px-8 py-4 rounded-full hover:bg-yellow-300 transition-all shadow-xl shadow-yellow-400/20 hover:-translate-y-0.5 active:translate-y-0">
+            <span>Register Now — Re a leboga</span>
+            <span class="text-lg group-hover:translate-x-1 transition-transform">→</span>
+          </a>
+          <a href="#story" class="inline-flex items-center gap-2 border-2 border-white/30 text-white text-sm font-bold px-6 py-4 rounded-full hover:bg-white/10 transition-colors">See what we did on 30 April</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex -space-x-2">
+            <div class="w-7 h-7 rounded-full bg-teal-600 border-2 border-teal-950 flex items-center justify-center text-white text-[9px] font-black">B</div>
+            <div class="w-7 h-7 rounded-full bg-teal-600 border-2 border-teal-950 flex items-center justify-center text-white text-[9px] font-black">K</div>
+            <div class="w-7 h-7 rounded-full bg-teal-600 border-2 border-teal-950 flex items-center justify-center text-white text-[9px] font-black">T</div>
+            <div class="w-7 h-7 rounded-full bg-teal-600 border-2 border-teal-950 flex items-center justify-center text-white text-[9px] font-black">M</div>
+            <div class="w-7 h-7 rounded-full bg-teal-600 border-2 border-teal-950 flex items-center justify-center text-white text-[9px] font-black">D</div>
+          </div>
+          <p class="text-teal-300 text-[11px]"><span class="font-black text-white">60+ Mabopane residents</span> already registered for the next session</p>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="relative bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 shadow-2xl">
+          <div class="relative rounded-2xl overflow-hidden mb-5 bg-teal-900">
+            <img src="images/workshop-02.jpg" alt="MGSN community at work" class="w-full object-cover" style="height: 240px"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-teal-950/90 via-teal-950/30 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4">
+              <p class="text-yellow-400 text-[10px] font-black uppercase tracking-widest mb-1">MGSN Volunteer Clean-up Campaign</p>
+              <p class="text-white font-black text-lg leading-tight">Together, we restore.<br/>We thrive.</p>
+            </div>
+          </div>
+          <div class="space-y-2 mb-5">
+            <div class="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-2.5">
+              <span class="text-lg">🌱</span>
+              <p class="text-white text-xs font-medium">Clear invasive species from the stream course</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-2.5">
+              <span class="text-lg">🌿</span>
+              <p class="text-white text-xs font-medium">Plant indigenous species — learn which is which</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-2.5">
+              <span class="text-lg">📣</span>
+              <p class="text-white text-xs font-medium">Spread the word — door-to-door, community group</p>
+            </div>
+          </div>
+          <div class="bg-yellow-400 text-teal-950 rounded-xl px-4 py-3 text-center">
+            <p class="text-xs font-black">Earn R50–R100 per session · Certificate on completion</p>
+          </div>
+        </div>
+        <div class="absolute -top-3 -right-3 bg-emerald-500 text-white text-[9px] font-black tracking-wider uppercase px-3 py-1.5 rounded-full shadow-lg animate-bounce">Now Open</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="bg-white border-b border-stone-200 py-6">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="grid grid-cols-4 divide-x divide-stone-100 text-center">
+        <div class="px-5 py-2"><p class="text-3xl font-black text-teal-800">60+</p><p class="text-stone-800 text-xs font-bold mt-1">Community members</p><p class="text-stone-400 text-[10px] mt-0.5">Blocks A through L</p></div>
+        <div class="px-5 py-2"><p class="text-3xl font-black text-teal-800">3</p><p class="text-stone-800 text-xs font-bold mt-1">Partner institutions</p><p class="text-stone-400 text-[10px] mt-0.5">UP · CoT · MGSN</p></div>
+        <div class="px-5 py-2"><p class="text-3xl font-black text-teal-800">9</p><p class="text-stone-800 text-xs font-bold mt-1">Invasive species</p><p class="text-stone-400 text-[10px] mt-0.5">Identified + removed</p></div>
+        <div class="px-5 py-2"><p class="text-3xl font-black text-teal-800">2 km</p><p class="text-stone-800 text-xs font-bold mt-1">Stream course</p><p class="text-stone-400 text-[10px] mt-0.5">Surveyed and mapped</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE STORY -->
+  <section class="max-w-6xl mx-auto px-5 py-14" id="story">
+    <div class="mb-10">
+      <p class="text-yellow-600 text-[10px] font-black tracking-widest uppercase mb-3">30 April 2026 · Block M, Mabopane</p>
+      <h2 class="text-3xl md:text-4xl font-black text-stone-900 leading-tight mb-4">Re tshwanela go nna moo.<br/><span class="text-teal-700">We are the rightful people of this place.</span></h2>
+      <p class="text-stone-500 text-sm leading-relaxed max-w-2xl">That's what one elder said before the workshop began. Not as a statement — as a fact. As if the land had already confirmed it. And maybe it had.</p>
+    </div>
+    <div class="relative rounded-2xl overflow-hidden mb-8">
+      <img src="images/workshop-03.jpg" alt="MGSN banner at Block M" class="w-full object-cover" style="height: 420px"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-teal-950/80 via-transparent to-transparent"></div>
+      <div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+        <div>
+          <p class="text-yellow-400 text-[10px] font-black uppercase tracking-widest mb-1">Block M · Under the trees</p>
+          <p class="text-white font-black text-lg">The community gathered before the field guides came out. Before the specimens. Before the work.</p>
+        </div>
+        <a href="#register" class="bg-yellow-400 text-teal-950 font-black text-xs px-5 py-2.5 rounded-full shadow-lg hover:bg-yellow-300 transition-colors whitespace-nowrap ml-4">Join the next one</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE WORK -->
+  <section class="bg-stone-50 border-t border-stone-200 py-14">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="mb-10">
+        <p class="text-yellow-600 text-[10px] font-black tracking-widest uppercase mb-3">30 April 2026 · After the boards</p>
+        <h2 class="text-3xl font-black text-stone-900 leading-tight mb-3">And then the work started.</h2>
+        <p class="text-stone-500 text-sm leading-relaxed max-w-xl">Not because someone told them to. Because once you know which plant is stealing your water, you cannot unknow it. The hands follow the knowledge.</p>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden mb-6">
+        <img src="images/workshop-01.jpg" alt="Block M concrete basin" class="w-full object-cover" style="height: 380px"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-teal-950/90 via-teal-950/30 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6">
+          <p class="text-yellow-400 text-[9px] font-black uppercase tracking-widest mb-2">Block M · The concrete basin</p>
+          <p class="text-white text-xl font-black">This was once a rainwater harvesting basin. The alien invasives took the water.</p>
+          <p class="text-white/80 text-sm mt-1">We are taking it back.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="relative rounded-2xl overflow-hidden">
+          <img src="images/workshop-13.jpg" alt="Volunteer clearing vegetation" class="w-full object-cover" style="height: 220px"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><p class="text-white text-xs font-bold">Orange vest. Blue gloves. Work boots.</p><p class="text-white/70 text-[10px]">The uniform of people who showed up.</p></div>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden">
+          <img src="images/workshop-14.jpg" alt="Three people working in thicket" class="w-full object-cover" style="height: 220px"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><p class="text-white text-xs font-bold">Three people. One thicket.</p><p class="text-white/70 text-[10px]">Nobody waiting for someone else to start.</p></div>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden">
+          <img src="images/workshop-15.jpg" alt="Community member working among trees" class="w-full object-cover" style="height: 220px"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><p class="text-white text-xs font-bold">Trees with blue paint on the stumps.</p><p class="text-white/70 text-[10px]">Marked for removal. The community did it themselves.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="max-w-6xl mx-auto px-5 py-14" id="register">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-teal-100 text-teal-800 text-[10px] font-black tracking-[0.15em] uppercase px-3 py-1.5 rounded-full mb-5">
+          <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+          Registration Open
+        </div>
+        <h2 class="text-4xl font-black text-stone-900 leading-tight mb-4">Register once.<br/><span class="text-teal-700">Show up when you can.</span></h2>
+        <p class="text-stone-500 text-sm leading-relaxed mb-6">Sessions run every Saturday. No commitment — we know things come up. But when you can make it, your hands will be useful. And you'll learn something that stays with you.</p>
+        <div class="bg-teal-50 border border-teal-200 rounded-xl p-4 mb-6">
+          <p class="text-teal-800 text-xs font-bold mb-2">What happened to the people who registered last time?</p>
+          <p class="text-stone-600 text-[11px] leading-relaxed">They learned which plants were stealing their water. They identified 9 invasive species. They took specimens home to show their neighbours. And on the following Saturday, more came back.</p>
+        </div>
+        <div class="space-y-3 mb-8">
+          <div class="flex items-center gap-4"><span class="text-yellow-500 font-black text-lg w-8">01</span><p class="text-stone-700 text-sm font-medium">Fill in the form — takes 90 seconds</p></div>
+          <div class="flex items-center gap-4"><span class="text-yellow-500 font-black text-lg w-8">02</span><p class="text-stone-700 text-sm font-medium">We send you the WhatsApp group link</p></div>
+          <div class="flex items-center gap-4"><span class="text-yellow-500 font-black text-lg w-8">03</span><p class="text-stone-700 text-sm font-medium">Session dates land in the group first</p></div>
+          <div class="flex items-center gap-4"><span class="text-yellow-500 font-black text-lg w-8">04</span><p class="text-stone-700 text-sm font-medium">Show up. That's all we ask.</p></div>
+        </div>
+        <p class="text-stone-400 text-[11px] italic">"Nna ke ya hae." — Ke a leboga. This land remembers who tends it.</p>
+        <div class="mt-6 pt-6 border-t border-stone-200">
+          <p class="text-stone-400 text-xs mb-3">No access to this form? Join directly on WhatsApp:</p>
+          <a href="https://chat.whatsapp.com/Kfw4KEr9V1C6XX5gMEgAG7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-green-600 text-white text-xs font-bold px-6 py-3 rounded-full hover:bg-green-700 transition-colors shadow">Join WhatsApp Group</a>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xl">
+        <div class="flex items-center gap-3 mb-5">
+          <img src="images/mgsn-logo-main.png" alt="MGSN" class="h-8 w-auto"/>
+          <div>
+            <p class="text-stone-900 font-black text-sm">Volunteer Registration</p>
+            <p class="text-stone-400 text-[10px]">May 2026 session · Block M, Mabopane</p>
+          </div>
+        </div>
+        <form id="volunteer-form" class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-stone-600 text-[10px] font-bold mb-1 tracking-wider uppercase">Given name *</label>
+              <input required type="text" name="fullName" placeholder="e.g. Tshego" class="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"/>
+            </div>
+            <div>
+              <label class="block text-stone-600 text-[10px] font-bold mb-1 tracking-wider uppercase">Surname *</label>
+              <input required type="text" name="surname" placeholder="e.g. Mokgotho" class="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-stone-600 text-[10px] font-bold mb-1 tracking-wider uppercase">Email address *</label>
+            <input required type="email" name="email" placeholder="you@example.com" class="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-stone-600 text-[10px] font-bold mb-1 tracking-wider uppercase">WhatsApp number *</label>
+            <input required type="tel" name="phone" placeholder="+27 82 000 0000" class="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-stone-600 text-[10px] font-bold mb-1 tracking-wider uppercase">Preferred role *</label>
+            <select required name="role" class="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+              <option value="">Choose...</option>
+              <option value="field">Field work — clearing, planting, surveying</option>
+              <option value="awareness">Community awareness — door-to-door, flyers</option>
+              <option value="logistics">Logistics — trailer, equipment, transport</option>
+              <option value="admin">Admin — coordination, data, photos</option>
+              <option value="all">Anything available — I am flexible</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-stone-600 text-[10px] font-bold mb-1 tracking-wider uppercase">Closest Block / Area *</label>
+            <select required name="location" class="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
+              <option value="">Choose...</option>
+              <option value="Block A">Block A</option>
+              <option value="Block B">Block B</option>
+              <option value="Block C">Block C</option>
+              <option value="Block D">Block D</option>
+              <option value="Block E">Block E</option>
+              <option value="Block F">Block F</option>
+              <option value="Block G">Block G</option>
+              <option value="Block H">Block H</option>
+              <option value="Block J">Block J</option>
+              <option value="Block K">Block K</option>
+              <option value="Block L">Block L</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <button type="submit" id="submit-btn" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-black py-4 rounded-xl transition-all text-sm tracking-wide shadow">Register — Re a leboga →</button>
+          <p class="text-stone-400 text-[10px] text-center leading-relaxed">Your data stays with MGSN. Used only for session coordination. No spam. No selling.</p>
+        </form>
+        <div id="success-message" class="hidden text-center py-10">
+          <div class="text-6xl mb-5">🌿</div>
+          <h2 class="text-3xl font-black text-stone-900 mb-3 tracking-tight">O tla iswa mooeng.</h2>
+          <p class="text-stone-500 text-sm leading-relaxed mb-6">You are on the list. Keep your WhatsApp on — session dates land in the group first.</p>
+          <p class="text-teal-700 text-sm font-bold mb-8 bg-teal-50 border border-teal-200 rounded-lg px-4 py-3 text-center">Each session is capped at 20 volunteers. Once it fills, it fills.</p>
+          <a href="https://chat.whatsapp.com/Kfw4KEr9V1C6XX5gMEgAG7" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-600 text-white font-bold px-8 py-3.5 rounded-full hover:bg-green-700 transition-colors text-sm tracking-wide mb-4">Join WhatsApp Group</a>
+          <a href="index.html" class="block mt-4 text-stone-400 text-xs hover:text-teal-600 transition-colors">Back to the Notice Board</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRATTUDE -->
+  <section class="bg-teal-950 py-14">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="max-w-2xl mx-auto text-center mb-10">
+        <p class="text-yellow-400 text-[10px] font-black uppercase tracking-widest mb-4">Re a leboga · Ke a leboga · Tilwamarwa</p>
+        <h2 class="text-3xl font-black text-white leading-tight mb-4">We did not come to save Mabopane.<br/><span class="text-yellow-400">Mabopane saved itself.</span></h2>
+        <p class="text-teal-200 text-sm leading-relaxed">We just brought the field guides. The people were already there. The will was already there. The land knew what it needed.</p>
+      </div>
+      <div class="text-center border-t border-white/10 pt-8">
+        <p class="text-yellow-400 text-base font-black italic mb-2">Re a leboga. Tilwamarwa.</p>
+        <p class="text-teal-300 text-xs">["Tilwamarwa" — Pitori Setswana: 'The kind of gratitude that closes your throat.']</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-950 text-center px-6 py-10">
+    <div class="bg-white text-teal-900 font-black text-xs px-5 py-3 rounded-2xl shadow-lg inline-block mb-5">MGSN · Mabopane Green Space Network</div>
+    <p class="text-white/60 text-xs font-semibold leading-relaxed">NPC Reg. 2025/422818/08</p>
+    <p class="text-white/40 text-[10px] mt-1 italic">Kgosi ya lefatshe ke morafe — A community owns its land.</p>
+  </footer>
+
+  <script>
+    document.getElementById('volunteer-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Registering...';
+      const form = e.target;
+      const data = {
+        fullName: form.fullName.value,
+        surname: form.surname.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        role: form.role.value,
+        location: form.location.value,
+        timestamp: new Date().toISOString()
+      };
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbzLJXKmU8P7zLFiatanPV2F7E8Y9kCLCG2nJ5Kgd/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      } catch (err) {}
+      form.classList.add('hidden');
+      document.getElementById('success-message').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
