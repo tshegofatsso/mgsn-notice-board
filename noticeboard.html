@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notice Board · MGSN</title>
+  <meta name="description" content="Community Notice Board — News, events, meetings and announcements for Block M Waterfall Park."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --bg:#F5F0E8; --surface:#ffffff; --surface2:#EDE7D9; --text:#1A3D4A; --muted:rgba(26,61,74,0.6); --dim:rgba(26,61,74,0.45); --border:rgba(26,61,74,0.08); --border2:rgba(26,61,74,0.15); --headerBg:#072C2C; --cardShadow:0 2px 8px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.06); --teal:#1B7A7A; --orange:#F07A1A; --yellow:#EDB810; --green:#2D8B3A; --amber:#F07A1A; --tealDark:#0D5050; }
+    [data-theme="dark"] { --bg:#041f1f; --surface:#072C2C; --surface2:#0a3535; --text:#ffffff; --muted:rgba(237,184,16,0.75); --dim:rgba(237,184,16,0.5); --border:rgba(237,184,16,0.1); --border2:rgba(237,184,16,0.2); --headerBg:#020f0f; --cardShadow:0 2px 8px rgba(0,0,0,0.5),0 8px 24px rgba(0,0,0,0.4); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+    header { background: var(--headerBg); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.3); transition: background 0.3s; }
+    .ribbon { height: 4px; background: linear-gradient(90deg, var(--orange) 0%, var(--orange) 33%, var(--yellow) 33%, var(--yellow) 66%, var(--green) 66%, var(--green) 100%); }
+    .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-img { height: 44px; width: auto; border-radius: 8px; background: #fff; padding: 4px 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    .logo-name { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); line-height: 1.2; }
+    .logo-sub { font-size: 9px; color: rgba(255,255,255,0.38); letter-spacing: 1px; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.65); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); transition: all 0.18s; }
+    .nav-links a:hover { color: var(--yellow); border-color: rgba(237,184,16,0.4); background: rgba(237,184,16,0.08); }
+    .nav-links a.active { color: var(--yellow); border-color: rgba(237,184,16,0.4); background: rgba(237,184,16,0.1); }
+    .theme-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--yellow); background: rgba(237,184,16,0.1); border: 1px solid rgba(237,184,16,0.3); border-radius: 8px; padding: 8px 14px; cursor: pointer; transition: all 0.18s; }
+    .live-badge { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 5px 11px; }
+    .live-dot { width: 7px; height: 7px; background: #4CAF50; border-radius: 50%; animation: pulse 2.4s ease-in-out infinite; }
+    .live-text { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
+    .page-hero { background: var(--tealDark); padding: 32px 20px; position: relative; overflow: hidden; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(7,44,44,0.9) 0%, rgba(13,80,80,0.8) 100%); }
+    .page-hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    .page-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(26px,4vw,42px); font-weight: 900; color: #fff; line-height: 1.05; margin-bottom: 6px; }
+    .page-hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); }
+    .top-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 20px; }
+    .top-bar-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .top-bar-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .events-row { max-width: 960px; margin: 24px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .event-card { background: var(--surface); border-radius: 12px; padding: 16px; border: 1px solid var(--border); box-shadow: var(--cardShadow); text-align: center; transition: all 0.3s; }
+    .event-card.past { opacity: 0.6; }
+    .event-day { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; color: var(--teal); line-height: 1; }
+    [data-theme="dark"] .event-day { color: var(--yellow); }
+    .event-card.past .event-day { color: var(--muted); }
+    .event-mo { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+    .event-name { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .event-time { font-size: 10px; color: var(--muted); margin-bottom: 8px; }
+    .event-status { display: inline-block; padding: 2px 8px; border-radius: 100px; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .status-today { background: #FDEPFA; color: #C0392B; }
+    .status-open { background: #E6F4F4; color: var(--teal); }
+    [data-theme="dark"] .status-open { background: rgba(27,122,122,0.2); color: var(--yellow); }
+    .status-meeting { background: #EDE7D9; color: #6B4E31; }
+    [data-theme="dark"] .status-meeting { background: rgba(237,184,16,0.1); color: var(--yellow); }
+    .status-past { background: var(--surface2); color: var(--muted); }
+    .posts-section { max-width: 960px; margin: 0 auto; padding: 20px 20px 60px; }
+    .posts-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .posts-title { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dim); }
+    .posts-grid { display: grid; gap: 14px; }
+    .post-card { background: var(--surface); border-radius: 14px; overflow: hidden; box-shadow: var(--cardShadow); border: 1px solid var(--border); transition: all 0.3s; }
+    .post-bar { height: 3.5px; }
+    .post-body { padding: 16px 18px; }
+    .post-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+    .badge { padding: 3px 8px; border-radius: 100px; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .badge-urgent { background: #FDEPFA; color: #C0392B; }
+    .badge-news { background: #E6F4F4; color: var(--teal); }
+    [data-theme="dark"] .badge-news { background: rgba(27,122,122,0.15); color: var(--yellow); }
+    .badge-notice { background: #E8F5EA; color: #1E6028; }
+    [data-theme="dark"] .badge-notice { background: rgba(45,139,58,0.15); color: var(--yellow); }
+    .badge-meeting { background: #EDE7D9; color: #6B4E31; }
+    [data-theme="dark"] .badge-meeting { background: rgba(237,184,16,0.1); color: var(--yellow); }
+    .post-date { font-size: 10px; color: var(--dim); margin-left: auto; }
+    .post-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 6px; }
+    .post-body-text { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+    .post-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 8px; }
+    .post-author { font-size: 11px; font-weight: 600; color: var(--muted); }
+    .post-action { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); background: var(--surface2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; display: inline-flex; align-items: center; gap: 5px; transition: all 0.18s; }
+    [data-theme="dark"] .post-action { color: var(--yellow); }
+    .post-action:hover { border-color: var(--teal); }
+    .whatsapp-section { max-width: 960px; margin: 0 auto; padding: 20px 20px 40px; }
+    .whatsapp-card { background: var(--surface); border-radius: 16px; padding: 24px; border: 1px solid var(--border); display: flex; gap: 24px; align-items: center; box-shadow: var(--cardShadow); }
+    .whatsapp-qr { width: 100px; border-radius: 8px; flex-shrink: 0; }
+    .whatsapp-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+    .whatsapp-heading { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .whatsapp-text { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 12px; }
+    .btn-whatsapp { background: #25D366; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.18s; }
+    footer { background: var(--headerBg); padding: 32px 20px; text-align: center; transition: background 0.3s; }
+    .footer-logo { height: 40px; background: #fff; border-radius: 8px; padding: 4px 8px; margin: 0 auto 14px; display: block; }
+    .footer-nav { display: flex; justify-content: center; gap: 24px; margin: 12px 0 16px; flex-wrap: wrap; }
+    .footer-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.18s; }
+    .footer-nav a:hover { color: var(--yellow); }
+    .footer-text { font-size: 10px; color: rgba(255,255,255,0.3); line-height: 1.7; }
+    .footer-text em { font-style: italic; }
+    .footer-rule { height: 3px; background: linear-gradient(90deg,var(--orange),var(--yellow),var(--green)); width: 60px; margin: 20px auto 0; border-radius: 100px; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.5); } 50% { box-shadow: 0 0 0 6px rgba(76,175,80,0); } }
+    @media (max-width: 700px) { .events-row { grid-template-columns: 1fr; } .nav-links { display: none; } .whatsapp-card { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="ribbon"></div>
+  <div class="header-inner">
+    <div class="logo-area">
+      <img src="images/mgsn-logo-dark.png" alt="MGSN" class="logo-img"/>
+      <div>
+        <div class="logo-name">Mabopane Green Space Network</div>
+        <div class="logo-sub">NPC Reg. 2025/422818/08 · City of Tshwane</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">🏠 Home</a>
+      <a href="noticeboard.html" class="active">📋 Notice Board</a>
+      <a href="volunteer.html">🌿 Our Story</a>
+      <a href="register.html">🤝 Register</a>
+      <button class="theme-btn" onclick="toggleTheme()">◐ Dark</button>
+    </nav>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      <span class="live-text">Live</span>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-inner">
+    <p class="page-hero-eyebrow">📍 Block M Waterfall Park · Mabopane</p>
+    <h1 class="page-hero-title">Community Notice Board</h1>
+    <p class="page-hero-sub">News · Events · Meetings · Announcements — Stay informed, stay connected.</p>
+  </div>
+</section>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-bar-item">📍 Block M</div>
+    <div class="top-bar-item">🌿 Fortnightly Sessions</div>
+    <div class="top-bar-item">💬 WhatsApp Group active</div>
+  </div>
+</div>
+
+<section class="events-row">
+  <div class="event-card past">
+    <div class="event-day">27</div>
+    <div class="event-mo">April · Past</div>
+    <div class="event-name">Freedom Day Launch — Trial Run</div>
+    <div class="event-time">08:00–11:00 · Block M Waterfall</div>
+    <span class="event-status status-past">Past</span>
+  </div>
+  <div class="event-card">
+    <div class="event-day">09</div>
+    <div class="event-mo">May · Upcoming</div>
+    <div class="event-name">Session 2 — May Clean-Up</div>
+    <div class="event-time">08:00–11:00 · Block M Waterfall</div>
+    <span class="event-status status-open">Open</span>
+  </div>
+  <div class="event-card">
+    <div class="event-day">14</div>
+    <div class="event-mo">May · Meeting</div>
+    <div class="event-name">MGSN Committee Meeting</div>
+    <div class="event-time">18:00 · TBC · Thomas Mathiba</div>
+    <span class="event-status status-meeting">Meeting</span>
+  </div>
+</section>
+
+<!-- Plant Care Widget -->
+<section class="plant-care-section" style="max-width:960px;margin:0 auto;padding:30px 20px;">
+  <div class="plant-care-card" style="background:var(--surface);border-radius:16px;border:1px solid var(--border);box-shadow:var(--cardShadow);overflow:hidden;">
+    <div style="background:linear-gradient(90deg,#1B7A7A,#0D5050);padding:20px 24px;display:flex;align-items:center;gap:12px;">
+      <span style="font-size:24px;">🪴</span>
+      <div>
+        <div style="color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;">Plant Care Guide</div>
+        <div style="color:#a8e6e6;font-size:11px;">Select a plant to get an instant care guide</div>
+      </div>
+    </div>
+    <div style="padding:24px;">
+      <div style="margin-bottom:16px;">
+        <label for="plant-select-nb" style="display:block;color:var(--text);font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;margin-bottom:8px;">Choose your plant:</label>
+        <select id="plant-select-nb" onchange="showPlantCareNb(this.value)" style="width:100%;border:1px solid var(--border2);border-radius:10px;padding:10px 14px;color:var(--text);background:var(--surface2);font-family:'Barlow',sans-serif;font-size:14px;outline:none;cursor:pointer;">
+          <option value="">— Select a plant —</option>
+          <option value="snake-plant">Snake Plant (Sansevieria)</option>
+          <option value="pothos">Pothos (Epipremnum aureum)</option>
+          <option value="monstera">Monstera Deliciosa</option>
+          <option value="succulent">Succulent (General)</option>
+          <option value="orchid">Orchid (Phalaenopsis)</option>
+          <option value="lavender">Lavender</option>
+          <option value="rosemary">Rosemary</option>
+          <option value="tomato">Tomato</option>
+          <option value="marigold">Marigold (Tagetes)</option>
+        </select>
+      </div>
+      <div id="plant-result-nb" class="hidden">
+        <div id="plant-card-nb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hidden { display:none !important; }
+  .care-tag { display:inline-flex;align-items:center;gap:4px;background:#e6f4f4;color:#0D5050;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;white-space:nowrap; }
+  .care-tag.orange { background:#fff3e6;color:#c45c00; }
+  .care-tag.green { background:#e6f7ec;color:#2D8B3A; }
+  .care-tag.yellow { background:#fffbe6;color:#a07800; }
+  .care-section-title { font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1B7A7A;margin-bottom:8px;padding-bottom:5px;border-bottom:2px solid #EDB810; }
+</style>
+
+<script>
+  var plantsNb = {
+    "snake-plant":{name:"Snake Plant",emoji:"🐍🌿",water:"Every 2–3 weeks. Allow soil to dry completely between waterings. Reduce to monthly in winter.",waterSigns:"Slight leaf droop, dry potting mix. Wrinkled leaves = too dry.",overwaterSigns:"Yellowing leaves, mushy base, root rot. Remove from pot and dry out immediately.",light:"Low to bright indirect light. Tolerates shade. Thrives in indirect light but survives in low light.",soil:"Well-draining cactus/succulent mix. Add perlite or sand for extra drainage.",temp:"15–27°C. Tolerates down to 10°C. Keep away from frost.",humidity:"30–50%. Very drought-tolerant. Avoid high humidity — prone to fungal issues.",feed:"Every 2–3 months in growing season (spring/summer). None in winter.",toxicity:"Mildly toxic to pets (vomiting, nausea). Keep out of reach of cats and dogs.",issues:["Root rot from overwatering","Brown tips from fluoride in tap water","Fungal infections in humid conditions"],tips:["Perfect for beginners — very hard to kill","Wipe leaves monthly to remove dust","Repot only every 3–5 years"]},
+    "pothos":{name:"Pothos",emoji:"🍃",water:"Every 1–2 weeks. Allow top 2–3cm of soil to dry out between waterings.",waterSigns:"Drooping leaves, pale or yellowing foliage, dry potting mix.",overwaterSigns:"Yellow leaves, dark spots on leaves, musty smell from soil, wilting despite wet soil.",light:"Low to bright indirect light. Avoid direct afternoon sun — burns leaves. Variegated varieties need more light.",soil:"Standard potting mix with perlite added for drainage. Tolerates a range of soils.",temp:"18–30°C. Minimum 10°C. Keep away from cold drafts.",humidity:"40–60%. Adapts to average home humidity. Mist occasionally for best growth.",feed:"Monthly in spring/summer with balanced liquid fertilizer. Reduce in winter.",toxicity:"Toxic to pets and humans if ingested (calcium oxalate crystals cause irritation). Keep away from animals and children.",issues:["Yellow leaves from overwatering","Brown spots from direct sun","Leggy growth from low light"],tips:["One of the easiest houseplants to propagate — just cut a node and root in water","Leaves can be variegated (golden, marble, neon)","Trailing vines can grow 1–2 metres long"]},
+    "monstera":{name:"Monstera Deliciosa",emoji:"🌿🧀",water:"Every 1–2 weeks. Allow top 3–5cm of soil to dry out. More often in summer, less in winter.",waterSigns:"Drooping leaves, slightly curling leaf edges, lighter green leaves than usual.",overwaterSigns:"Yellow lower leaves, brown mushy stems, soil stays wet for weeks.",light:"Bright indirect light. Tolerates medium light. Direct sun burns leaves. More light = bigger fenestrated leaves.",soil:"Well-draining potting mix with perlite and bark added. Aeration is key.",temp:"18–30°C. Minimum 10°C. Resents cold drafts and air conditioning.",humidity:"60–80%. High humidity produces bigger leaves with more fenestrations. Mist leaves regularly.",feed:"Every 2–4 weeks in spring/summer with balanced or nitrogen-rich fertilizer.",toxicity:"Toxic to pets (oral irritation, vomiting, difficulty swallowing). Calcium oxalate crystals.",issues:["Yellow leaves from overwatering","Brown leaf edges from low humidity","No fenestrations = not enough light","Leggy growth from insufficient light"],tips:["Support with a moss pole for larger leaves","Fenestrations develop with age, light and maturity","Clean leaves monthly for optimal photosynthesis"]},
+    "succulent":{name:"Succulent (General)",emoji:"🌵",water:"Soak and dry method: water thoroughly then let soil dry completely. Every 1–3 weeks depending on climate.",waterSigns:"Wrinkled or shrivelled leaves, dry compacted soil, slightly drooping leaves.",overwaterSigns:"Transparent or mushy leaves, blackened stems, leaf drop, rot spreading from base upward.",light:"Bright light, 4–6 hours of sunlight daily. Some species tolerate partial shade. Rotate pots for even growth.",soil:"Very well-draining cactus mix. Add up to 50% grit, pumice or coarse sand.",temp:"15–30°C. Most tolerate 5–35°C. Protect from frost — bring indoors below 5°C.",humidity:"Low humidity preferred (30–40%). Good air circulation prevents fungal problems.",feed:"Every 2–4 weeks in spring/summer with diluted succulent fertilizer. None in winter.",toxicity:"Most succulents are non-toxic to pets, but some varieties may cause mild irritation.",issues:["Etiolation (stretched growth) from insufficient light","Root rot from overwatering","Scorch marks from direct afternoon sun"],tips:["Use terracotta pots for better drainage","Never water on a schedule — check soil first","Propagate from leaves by laying on dry soil"]},
+    "orchid":{name:"Phalaenopsis Orchid",emoji:"🌸",water:"Once a week. Soak roots for 10–15 minutes, then drain completely. Do not let roots sit in water.",waterSigns:"Silver-grey roots, dry potting mix, slightly wrinkled pseudobulbs.",overwaterSigns:"Dark green roots (overwatered), brown root tips, yellow leaves, musty smell, moss staying wet for weeks.",light:"Bright indirect light. East-facing windows are ideal. Direct sun burns leaves — filtered light only.",soil:"Specialist orchid bark mix (not regular potting soil). Pine bark, perlite and charcoal mix.",temp:"18–27°C day, 15–21°C night. Minimum 10°C. Cool night temperatures can trigger blooming.",humidity:"50–70%. Use a humidity tray (pebble tray with water) or mist twice daily. Good ventilation essential.",feed:"Use orchid fertilizer at half strength with every watering, or every 2nd watering.",toxicity:"Generally non-toxic to pets and humans, but ingestion may cause mild stomach upset.",issues:["Root rot from overwatering","Bud blast from low humidity or sudden temperature changes","Yellow leaves from overwatering or direct sun"],tips:["Ice cube watering method: 3 ice cubes weekly is a safe beginner approach","Transparent pots help monitor root health","Dead spike: cut at base after flowering"]},
+    "lavender":{name:"Lavender",emoji:"💜",water:"Every 1–2 weeks. Allow soil to dry between waterings. Drought-tolerant once established.",waterSigns:"Wilting, grey-green leaves, very dry soil. Drooping leaves perk up quickly after watering.",overwaterSigns:"Woody stems, fungal disease, leaf drop, root rot. Leaves turn yellow.",light:"Full sun — 6–8 hours of direct sunlight daily. Essential for flowering and oil production.",soil:"Sandy, well-draining, slightly alkaline soil. Add grit or sand to improve drainage. Avoid clay.",temp:"15–30°C. Hardy to -5°C depending on variety. Most varieties need winter protection from frost.",humidity:"Low humidity preferred. Avoid humid bathrooms. Good air circulation prevents fungal problems.",feed:"Light feeding only in spring with diluted balanced fertilizer. Over-feeding reduces fragrance.",toxicity:"Non-toxic to pets and humans. Generally safe. Large amounts may cause nausea.",issues:["Root rot in heavy/wet soil","Leggy growth from insufficient sun","Woody or short-lived plants from lack of pruning"],tips:["Prune after flowering to maintain shape and prevent woodiness","Harvest when buds show colour but before fully opening","Dries beautifully — hang upside down in dark, cool space"]},
+    "rosemary":{name:"Rosemary",emoji:"🌿🦶",water:"Every 1–2 weeks. Allow top 3–5cm of soil to dry. More drought-tolerant than most herbs.",waterSigns:"Drooping, slightly grey-green leaves, very dry soil. Leaves curl inward when thirsty.",overwaterSigns:"Yellow leaves, soft dark stems, root rot, fungal growth on soil surface.",light:"Full sun — 6–8 hours daily. South-facing windows are ideal. Insufficient light causes leggy growth.",soil:"Well-draining sandy soil with perlite or grit added. Rosemary hates sitting in wet soil.",temp:"15–27°C. Hardy to -5°C. Bring indoors in winter or protect from frost.",humidity:"Low to average. Tolerates dry air. Avoid prolonged high humidity — prone to powdery mildew.",feed:"Monthly with diluted balanced fertilizer in spring/summer. No feed in winter.",toxicity:"Non-toxic to pets and humans. Safe for cats, dogs and children.",issues:["Root rot from overwatering","Powdery mildew in humid conditions","Leggy sparse growth from low light","Spider mites in dry indoor conditions"],tips:["Excellent culinary herb — snip as needed","Let soil dry between waterings","Mist occasionally to prevent spider mites in winter"]},
+    "tomato":{name:"Tomato",emoji:"🍅",water:"Daily in hot weather. Keep soil consistently moist but not waterlogged. Never let plants wilt.",waterSigns:"Wilting leaves in hot weather, dry cracked soil, blossom end rot (calcium deficiency from irregular watering).",overwaterSigns:"Yellow lower leaves, cracked fruit, blight, fungal disease on stems or leaves.",light:"Full sun — 8+ hours daily. Minimum 6 hours. More sun = more fruit.",soil:"Rich, well-draining loamy soil with compost added. Slightly acidic (pH 6.0–6.8).",temp:"18–29°C during day, 13–21°C at night. Below 10°C or above 35°C inhibits fruiting.",humidity:"Moderate 40–70%. High humidity promotes fungal diseases (blight).",feed:"High potassium fertilizer when flowering and fruiting. Weekly liquid feed. Avoid high nitrogen — too much leaf, no fruit.",toxicity:"Leaves and stems are mildly toxic (solanine). Fruit is safe and delicious.",issues:["Blossom end rot — irregular watering or calcium deficiency","Aphids and whitefly","Late blight in wet humid conditions","Split fruit from irregular watering"],tips:["Stake or cage early for support","Remove suckers (side shoots) for larger fruit","Water at base — wet leaves encourage blight","Mulch to retain moisture"]},
+    "marigold":{name:"Marigold (Tagetes)",emoji:"🌼🌻",water:"1–2 times per week. Allow top 2–3cm of soil to dry between waterings. Drought-tolerant.",waterSigns:"Slight wilting in afternoon heat, dry soil. Leaves perk up after watering.",overwaterSigns:"Yellow leaves, root rot, mushy stems, flower buds failing to open, fungal issues.",light:"Full sun — 6+ hours direct sunlight. Thrives in hot conditions. Less flowers in shade.",soil:"Average well-draining soil. Not fussy — tolerates poor soil. Add compost for more blooms.",temp:"18–30°C. Thrives in heat. Hardy to light frost. Dies back below -2°C.",humidity:"Low to moderate. Tolerates dry conditions. Avoid overhead watering — prone to fungal leaf spots.",feed:"Light feeding only. Too much nitrogen = leafy, no flowers. One dose of balanced fertilizer at planting is enough.",toxicity:"Non-toxic to pets. Strong scent deters many pests. Excellent companion plant in vegetable gardens.",issues:["Slugs and snails — use beer traps or diatomaceous earth","Aphids","Powdery mildew in humid conditions"],tips:["Deadhead regularly to extend blooming","Plant near tomatoes to repel whitefly and nematodes","French marigolds (Tagetes patula) are best for pest control"]}
+  };
+  function showPlantCareNb(key) {
+    var result = document.getElementById('plant-result-nb');
+    var card = document.getElementById('plant-card-nb');
+    if (!key) { result.classList.add('hidden'); return; }
+    var p = plantsNb[key];
+    function e(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    card.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><span style="font-size:28px;">'+p.emoji+'</span><h3 style="color:var(--text);font-family:\'Barlow Condensed\',sans-serif;font-size:20px;font-weight:700;">'+p.name+' Care Guide</h3></div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">'+
+        '<div style="background:var(--surface2);border-radius:12px;padding:14px;border:1px solid var(--border);"><div class="care-section-title">💧 Watering</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+e(p.water)+'</p></div>'+
+        '<div style="background:var(--surface2);border-radius:12px;padding:14px;border:1px solid var(--border);"><div class="care-section-title">☀️ Light</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+e(p.light)+'</p></div>'+
+        '<div style="background:var(--surface2);border-radius:12px;padding:14px;border:1px solid var(--border);"><div class="care-section-title">🪴 Soil & Drainage</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+e(p.soil)+'</p></div>'+
+        '<div style="background:var(--surface2);border-radius:12px;padding:14px;border:1px solid var(--border);"><div class="care-section-title">🌡️ Temperature</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+e(p.temp)+'</p></div>'+
+      '</div>'+
+      '<div style="background:#fff3e6;border:1px solid #ffddb5;border-radius:12px;padding:14px;margin-bottom:10px;"><div style="color:#c45c00;font-size:12px;font-weight:700;margin-bottom:6px;">🚰 When to water</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+e(p.waterSigns)+'</p></div>'+
+      '<div style="background:#fff0f0;border:1px solid #ffcaca;border-radius:12px;padding:14px;margin-bottom:10px;"><div style="color:#c0392b;font-size:12px;font-weight:700;margin-bottom:6px;">⚠️ Overwatering signs</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+e(p.overwaterSigns)+'</p></div>'+
+      '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;"><div style="color:var(--text);font-size:12px;font-weight:700;margin-bottom:6px;">🔍 Common issues</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+p.issues.map(function(i){return '<span style="display:inline-block;background:var(--border);color:var(--text);font-size:11px;padding:2px 8px;border-radius:100px;margin:2px 2px 2px 0;">'+e(i)+'</span>';}).join('')+'</p></div>'+
+      '<div style="background:#e6f7ec;border:1px solid #b8e6c4;border-radius:12px;padding:14px;margin-bottom:10px;"><div style="color:#2D8B3A;font-size:12px;font-weight:700;margin-bottom:6px;">💡 Care tips</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+p.tips.map(function(t){return '<span style="display:inline-block;background:#d4f0e0;color:#1e6028;font-size:11px;padding:2px 8px;border-radius:100px;margin:2px 2px 2px 0;">'+e(t)+'</span>';}).join('')+'</p></div>'+
+      (p.toxicity ? '<div style="background:#fff3e6;border:1px solid #ffb833;border-radius:12px;padding:14px;margin-bottom:10px;"><div style="color:#c0392b;font-size:12px;font-weight:700;margin-bottom:6px;">⚠️ Pet & human safety</div><p style="color:var(--text);font-size:13px;line-height:1.6;">'+e(p.toxicity)+'</p></div>' : '');
+    result.classList.remove('hidden');
+  }
+</script>
+
+<section class="posts-section">
+  <div class="posts-header">
+    <span style="font-size:18px">📋</span>
+    <div class="posts-title">Latest Posts</div>
+  </div>
+  <div class="posts-grid">
+
+    <div class="post-card">
+      <div class="post-bar" style="background:linear-gradient(90deg,#C0392B,#8B1C14)"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="badge badge-urgent">Urgent</span>
+          <span class="post-date">26 April 2026</span>
+        </div>
+        <h2 class="post-title">Freedom Day Launch — Monday 27 April 2026</h2>
+        <p class="post-body-text">First clean-up session at Block M Waterfall. Weather confirmed clear — 24°C. Meet at the timber shelter at 08:00. All welcome. Gloves and bags provided. Refreshments sponsored.</p>
+        <div class="post-footer">
+          <span class="post-author">MGSN Management</span>
+          <a href="register.html" class="post-action">Register Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-bar" style="background:linear-gradient(90deg,#1B7A7A,#0D5050)"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="badge badge-news">News</span>
+          <span class="post-date">25 April 2026</span>
+        </div>
+        <h2 class="post-title">Solar Floodlights Installed at Block M Waterfall Park</h2>
+        <p class="post-body-text">Two 12-metre timber poles with solar-powered IK10-rated floodlights installed this week. Park now lit after dark. Installation supervised by City of Tshwane Environmental Compliance.</p>
+        <div class="post-footer">
+          <span class="post-author">Bra Tshego — MGSN</span>
+          <span class="post-action" style="cursor:default">✅ Installed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-bar" style="background:linear-gradient(90deg,#2D8B3A,#1E6028)"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="badge badge-notice">Notice</span>
+          <span class="post-date">24 April 2026</span>
+        </div>
+        <h2 class="post-title">Volunteer Registration Now Open — Earn Rewards</h2>
+        <p class="post-body-text">Register to join the Clean-Up Team-Up group. Volunteers earn points redeemable for vouchers from Shoprite, Cashbuild and local food vendors. No experience needed. All ages welcome.</p>
+        <div class="post-footer">
+          <span class="post-author">MGSN Management</span>
+          <a href="register.html" class="post-action">Register now →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-bar" style="background:linear-gradient(90deg,#F07A1A,#d8681a)"></div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="badge badge-meeting">Meeting</span>
+          <span class="post-date">14 May 2026</span>
+        </div>
+        <h2 class="post-title">MGSN Committee Meeting — 14 May 2026</h2>
+        <p class="post-body-text">Monthly committee meeting. Agenda: Q2 technical memorandum review, 100-steward enrolment drive, annual impact report preparation. Contact Thomas Mathiba for venue details.</p>
+        <div class="post-footer">
+          <span class="post-author">Thomas Mathiba — Secretary</span>
+          <span class="post-action" style="cursor:default">📅 18:00 · TBC</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="whatsapp-section">
+  <div class="whatsapp-card">
+    <img src="images/whatsapp-qr-main.png" alt="MGSN WhatsApp QR" class="whatsapp-qr"/>
+    <div>
+      <p class="whatsapp-title">💬 Join the conversation</p>
+      <h3 class="whatsapp-heading">MGSN Clean-Up Team-Up WhatsApp Group</h3>
+      <p class="whatsapp-text">Get session updates, volunteer reminders, and community news delivered straight to your phone.</p>
+      <a href="register.html" class="btn-whatsapp">📱 Register to Join</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="images/mgsn-logo-dark.png" alt="MGSN" class="footer-logo"/>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="noticeboard.html">Notice Board</a>
+    <a href="volunteer.html">Our Story</a>
+    <a href="register.html">Register</a>
+    <a href="mailto:tshegofatso@duck.com">Contact</a>
+  </nav>
+  <div class="footer-text">
+    Mabopane Green Space Network · NPC Reg. 2025/422818/08<br/>
+    Block M Waterfall Park · Mabopane, City of Tshwane<br/>
+    <em>Kgosi ya lefatshe ke morafe — A community owns its land.</em>
+  </div>
+  <div class="footer-rule"></div>
+</footer>
+
+<script>
+  const stored = localStorage.getItem('mgsn-theme');
+  if (stored === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('mgsn-theme','light'); }
+    else { document.documentElement.setAttribute('data-theme','dark'); localStorage.setItem('mgsn-theme','dark'); }
+  }
+</script>
+</body>
+</html>
